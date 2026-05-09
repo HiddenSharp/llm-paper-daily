@@ -5,12 +5,10 @@
 
 </div>
 
-欢迎来到 **llm-paper-daily**! 这是一个获取最新研究论文的每日更新和分类的平台。希望为爱好者提供 LLM 研究的前沿资讯，让您更轻松地了解该领域的最新发展。
+欢迎来到 **llm-paper-daily**! 这是一个获取 LLM、Agent 相关研究论文的每日更新和分类平台。
 
-📚 **每日更新:** 仓库每天会带来最新的 LLM 研究，并附有arxiv地址、相关 git 仓库和基于 GPT-4 的简单总结
+📚 **每日更新:** 仓库每天会带来最新的 LLM、Agent 相关研究，并附有 arXiv 地址、相关 GitHub 仓库和文章的总结。
 
-## 目录
-- [最新论文(含总结)](#最新论文)
 <!-- paper-daily:readme:updates:start -->
 <details>
   <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月09日 17:06</sub></summary>

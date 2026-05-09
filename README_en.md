@@ -8,7 +8,7 @@
 **Each paper comes with related resources:**
 - arXiv link &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)
 - GitHub link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)
-- Summary of GPT-4  ![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)
+- Paper summary  ![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)
 - Related blogs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Blog](https://img.shields.io/badge/Blog-Posts-yellow?logo=rss)
 
 <!-- paper-daily:readme-en:updates:start -->
