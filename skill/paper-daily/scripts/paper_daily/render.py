@@ -41,7 +41,8 @@ def render_en_row(record: CanonicalPaper) -> str:
 
 
 def render_cn_month_block(records: list[CanonicalPaper], month: str) -> str:
-    month_label = month.split("-")[1] + "月"
+    year, month_number = month.split("-")
+    month_label = f"{year}年{month_number}月"
     rows = "".join(render_cn_row(record) for record in sorted(records, key=lambda record: record.date, reverse=True))
     return (
         f"### {month_label}\n\n"

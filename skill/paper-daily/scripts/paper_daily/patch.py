@@ -137,7 +137,8 @@ def inject_month_block(existing_body: str, month_block: str, month_key: str, *, 
     if not lines:
         return month_block.strip() + "\n"
 
-    header_cn = f"### {month_key.split('-')[1]}月"
+    year, month_number = month_key.split("-")
+    header_cn = f"### {year}年{month_number}月"
     header_en = f"## {month_key}"
 
     if header_cn in lines:

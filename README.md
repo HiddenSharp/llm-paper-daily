@@ -21,7 +21,7 @@
 ## 最新论文
 
 <!-- paper-daily:readme:months:start -->
-### 05月
+### 2026年05月
 
 | &nbsp;Date&nbsp;&nbsp; | Paper | Links & Summary |
 | --- | --- | --- |
@@ -35,7 +35,7 @@
 
 ---
 
-### 04月
+### 2026年04月
 
 | &nbsp;Date&nbsp;&nbsp; | Paper | Links & Summary |
 | --- | --- | --- |
