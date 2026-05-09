@@ -102,8 +102,9 @@ def write_feed_outputs(
     canonical_output.write_text(json.dumps(canonical_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     feed_output.write_text(json.dumps(feed_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    root_canonical = repo_root / "canonical-papers.json"
+    root_canonical = repo_root / "data" / "canonical-papers.json"
     root_feed = repo_root / "feed-papers.json"
+    root_canonical.parent.mkdir(parents=True, exist_ok=True)
     root_canonical.write_text(canonical_output.read_text(encoding="utf-8"), encoding="utf-8")
     root_feed.write_text(feed_output.read_text(encoding="utf-8"), encoding="utf-8")
     return root_canonical, root_feed, state_output
