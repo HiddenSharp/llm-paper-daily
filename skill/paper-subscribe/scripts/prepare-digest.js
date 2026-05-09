@@ -25,9 +25,7 @@ async function main() {
   const statePath = expandHome(config.state_path);
   const stateDir = path.dirname(statePath);
   fs.mkdirSync(stateDir, { recursive: true });
-  const state = fs.existsSync(statePath)
-    ? JSON.parse(fs.readFileSync(statePath, "utf-8"))
-    : { delivered_item_ids: [] };
+  const state = readState(statePath);
 
   let feed;
   try {
@@ -80,3 +78,14 @@ main().catch(err => {
   console.log(JSON.stringify({ status: "error_prepare_digest", message: String(err) }));
   process.exit(12);
 });
+
+function readState(statePath) {
+  if (!fs.existsSync(statePath)) {
+    return { delivered_item_ids: [] };
+  }
+  const raw = fs.readFileSync(statePath, "utf-8").trim();
+  if (!raw) {
+    return { delivered_item_ids: [] };
+  }
+  return JSON.parse(raw);
+}

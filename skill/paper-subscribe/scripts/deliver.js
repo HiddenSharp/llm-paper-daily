@@ -26,9 +26,7 @@ async function main() {
   const statePath = expandHome(config.state_path);
   const stateDir = path.dirname(statePath);
   fs.mkdirSync(stateDir, { recursive: true });
-  const state = fs.existsSync(statePath)
-    ? JSON.parse(fs.readFileSync(statePath, "utf-8"))
-    : { delivered_item_ids: [] };
+  const state = readState(statePath);
   if (payload.status === "skipped_no_new_items") {
     console.log(JSON.stringify({ status: "skipped_no_new_items", message: "No delivery needed" }));
     process.exit(0);
@@ -58,6 +56,17 @@ function persist_state(statePath, state, payload) {
     last_feed_etag: payload.feed_version || null
   };
   fs.writeFileSync(statePath, JSON.stringify(nextState, null, 2) + "\n");
+}
+
+function readState(statePath) {
+  if (!fs.existsSync(statePath)) {
+    return { delivered_item_ids: [] };
+  }
+  const raw = fs.readFileSync(statePath, "utf-8").trim();
+  if (!raw) {
+    return { delivered_item_ids: [] };
+  }
+  return JSON.parse(raw);
 }
 
 main().catch(err => {
