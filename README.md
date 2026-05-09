@@ -18,35 +18,18 @@
 </details>
 <!-- paper-daily:readme:updates:end -->
 
-## 订阅
+<details>
+<summary><strong>订阅</strong></summary>
 
-本仓库提供 `paper-subscribe` skill，用于订阅中央生成的 `feed-papers.json`。订阅端只读取公开 feed，不需要自己运行 arXiv 抓取或论文总结。
+想订阅每日 LLM、Agent 论文更新时，不需要手动配置脚本。把下面这段话发送给本地的 OpenClaw、Codex 或 Claude Code，让 Agent 帮你完成配置：
 
-```bash
-mkdir -p ~/.paper-subscribe
-cp skill/paper-subscribe/templates/config.example.json ~/.paper-subscribe/config.json
+```text
+请帮我配置 llm-paper-daily 的本地订阅。订阅仓库是 https://github.com/xianshang33/llm-paper-daily ，请阅读 docs/SUBSCRIBE_AGENT_SETUP.md，按文档创建本地配置、预览 digest、安装定时任务，并在完成后告诉我配置文件位置、运行时间、语言、每次推送数量和验证结果。
 ```
 
-按需调整 `~/.paper-subscribe/config.json`：
+Agent 会使用仓库里的 `paper-subscribe` skill，只读取公开的 `feed-papers.json`，不会在你的机器上运行论文抓取或总结生产流程。
 
-- `feed_url`: `https://raw.githubusercontent.com/xianshang33/llm-paper-daily/main/feed-papers.json`
-- `timezone`: 例如 `Asia/Shanghai`
-- `schedule`: cron 表达式，例如 `15 9 * * *`
-- `filters.language`: `zh` 或 `en`
-- `filters.max_items`: 每次推送的最大论文数
-
-手动生成并查看一次 digest：
-
-```bash
-node skill/paper-subscribe/scripts/prepare-digest.js --config ~/.paper-subscribe/config.json > /tmp/digest.json
-node skill/paper-subscribe/scripts/deliver.js --config ~/.paper-subscribe/config.json --input /tmp/digest.json
-```
-
-安装本地定时任务：
-
-```bash
-bash skill/paper-subscribe/scripts/install-cron.sh --config ~/.paper-subscribe/config.json
-```
+</details>
 
 ## 最新论文
 

@@ -20,35 +20,18 @@
 </details>
 <!-- paper-daily:readme-en:updates:end -->
 
-## Subscribe
+<details>
+<summary><strong>Subscribe</strong></summary>
 
-This repo includes the `paper-subscribe` skill for subscribing to the centrally generated `feed-papers.json`. Subscribers only read the public feed, so they do not need to run arXiv discovery or paper summarization locally.
+To subscribe to daily LLM and Agent paper updates, you do not need to configure the scripts by hand. Send this prompt to a local OpenClaw, Codex, or Claude Code agent:
 
-```bash
-mkdir -p ~/.paper-subscribe
-cp skill/paper-subscribe/templates/config.example.json ~/.paper-subscribe/config.json
+```text
+Please configure my local subscription for llm-paper-daily. The subscription repository is https://github.com/xianshang33/llm-paper-daily. Read docs/SUBSCRIBE_AGENT_SETUP.md, create the local config, preview the digest, install the scheduled job, and report the config path, schedule, language, max items per digest, and verification result when finished.
 ```
 
-Edit `~/.paper-subscribe/config.json` as needed:
+The agent will use the `paper-subscribe` skill from this repo. It only reads the public `feed-papers.json` and does not run paper discovery or summarization locally.
 
-- `feed_url`: `https://raw.githubusercontent.com/xianshang33/llm-paper-daily/main/feed-papers.json`
-- `timezone`: for example `Asia/Shanghai`
-- `schedule`: cron expression, for example `15 9 * * *`
-- `filters.language`: `zh` or `en`
-- `filters.max_items`: max papers per digest
-
-Prepare and preview a digest manually:
-
-```bash
-node skill/paper-subscribe/scripts/prepare-digest.js --config ~/.paper-subscribe/config.json > /tmp/digest.json
-node skill/paper-subscribe/scripts/deliver.js --config ~/.paper-subscribe/config.json --input /tmp/digest.json
-```
-
-Install the local scheduled job:
-
-```bash
-bash skill/paper-subscribe/scripts/install-cron.sh --config ~/.paper-subscribe/config.json
-```
+</details>
 
 <!-- paper-daily:readme-en:months:start -->
 ## 2026-05
