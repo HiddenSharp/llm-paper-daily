@@ -1,0 +1,171 @@
+from __future__ import annotations
+
+from datetime import datetime, timedelta
+
+from .arxiv_client import ArxivClient
+from .filters import DEFAULT_CATEGORIES, DEFAULT_KEYWORDS, dedupe_by_priority, keep_candidate
+from .institutions import InstitutionCatalog
+from .ranker import rank_candidates
+
+
+def discover_ranked(
+    *,
+    client: ArxivClient,
+    catalog: InstitutionCatalog,
+    date: str,
+    keywords: list[str] | None = None,
+    categories: list[str] | None = None,
+    max_results_per_keyword: int = 50,
+) -> dict:
+    keywords = keywords or list(DEFAULT_KEYWORDS)
+    categories = categories or list(DEFAULT_CATEGORIES)
+
+    raw_candidates = []
+    query_totals: dict[str, int | str] = {}
+    for rank, keyword in enumerate(keywords, start=1):
+        try:
+            candidates, total = client.search_keyword(
+                keyword=keyword,
+                keyword_rank=rank,
+                date=date,
+                categories=categories,
+                max_results=max_results_per_keyword,
+            )
+            raw_candidates.extend(candidates)
+            query_totals[keyword] = total
+        except Exception as exc:
+            query_totals[keyword] = f"ERROR:{type(exc).__name__}:{exc}"
+
+    deduped = dedupe_by_priority(raw_candidates)
+    filtered = [candidate for candidate in deduped if keep_candidate(candidate)]
+    ranked = rank_candidates(filtered, catalog)
+    return {
+        "date": date,
+        "keywords": keywords,
+        "categories": categories,
+        "query_totals": query_totals,
+        "counts": {
+            "raw": len(raw_candidates),
+            "deduped": len(deduped),
+            "filtered": len(filtered),
+        },
+        "ranked": ranked,
+    }
+
+
+def find_next_discovery(
+    *,
+    client: ArxivClient,
+    catalog: InstitutionCatalog,
+    preferred_date: str,
+    analyzed_dates: set[str] | None = None,
+    max_lookback_days: int = 7,
+    keywords: list[str] | None = None,
+    categories: list[str] | None = None,
+    max_results_per_keyword: int = 50,
+) -> dict:
+    analyzed_dates = analyzed_dates or set()
+    attempted_dates: list[str] = []
+    skipped_analyzed_dates: list[str] = []
+    start_date = datetime.strptime(preferred_date, "%Y-%m-%d").date()
+    stage_limits = backfill_stage_limits(max_lookback_days)
+
+    for stage_limit in stage_limits:
+        stage_result = scan_discovery_window(
+            client=client,
+            catalog=catalog,
+            start_date=start_date,
+            stage_limit=stage_limit,
+            attempted_dates=attempted_dates,
+            skipped_analyzed_dates=skipped_analyzed_dates,
+            analyzed_dates=analyzed_dates,
+            keywords=keywords,
+            categories=categories,
+            max_results_per_keyword=max_results_per_keyword,
+        )
+        if stage_result:
+            candidate_date, discovered = stage_result
+            return {
+                "preferred_date": preferred_date,
+                "selected_date": candidate_date,
+                "attempted_dates": attempted_dates,
+                "skipped_analyzed_dates": skipped_analyzed_dates,
+                "used_backfill": candidate_date != preferred_date,
+                "selected_stage_limit": stage_limit,
+                "discovered": discovered,
+            }
+
+    return {
+        "preferred_date": preferred_date,
+        "selected_date": None,
+        "attempted_dates": attempted_dates,
+        "skipped_analyzed_dates": skipped_analyzed_dates,
+        "used_backfill": False,
+        "selected_stage_limit": None,
+        "discovered": None,
+    }
+
+
+def select_ranked_candidates(
+    ranked_candidates: list,
+    *,
+    min_select: int = 3,
+    max_select: int = 5,
+    score_threshold: float = 6.0,
+) -> list:
+    if not ranked_candidates or max_select <= 0:
+        return []
+
+    max_select = max(max_select, 1)
+    min_select = max(0, min(min_select, max_select))
+
+    threshold_hits = [candidate for candidate in ranked_candidates if candidate.score >= score_threshold]
+    if len(threshold_hits) >= min_select:
+        return threshold_hits[:max_select]
+
+    fallback_count = min(len(ranked_candidates), max_select)
+    if min_select > 0 and len(ranked_candidates) >= min_select:
+        fallback_count = max(min_select, min(fallback_count, max_select))
+    return ranked_candidates[:fallback_count]
+
+
+def backfill_stage_limits(max_lookback_days: int) -> list[int]:
+    if max_lookback_days <= 0:
+        return []
+    if max_lookback_days <= 3:
+        return [max_lookback_days]
+    return [3, max_lookback_days]
+
+
+def scan_discovery_window(
+    *,
+    client: ArxivClient,
+    catalog: InstitutionCatalog,
+    start_date,
+    stage_limit: int,
+    attempted_dates: list[str],
+    skipped_analyzed_dates: list[str],
+    analyzed_dates: set[str],
+    keywords: list[str] | None,
+    categories: list[str] | None,
+    max_results_per_keyword: int,
+) -> tuple[str, dict] | None:
+    for offset in range(stage_limit):
+        candidate_date = (start_date - timedelta(days=offset)).strftime("%Y-%m-%d")
+        if candidate_date in attempted_dates:
+            continue
+        attempted_dates.append(candidate_date)
+        if candidate_date in analyzed_dates:
+            skipped_analyzed_dates.append(candidate_date)
+            continue
+        discovered = discover_ranked(
+            client=client,
+            catalog=catalog,
+            date=candidate_date,
+            keywords=keywords,
+            categories=categories,
+            max_results_per_keyword=max_results_per_keyword,
+        )
+        if discovered["ranked"]:
+            return candidate_date, discovered
+    return None

@@ -1,0 +1,58 @@
+{
+  "schema_version": "v1",
+  "feed_id": "paper-daily",
+  "generated_at": "2026-05-09T09:06:35.126351+00:00",
+  "run_date": "2026-05-07",
+  "source_repo": "xianshang33/llm-paper-daily",
+  "items": [
+    {
+      "id": "arxiv:2605.06642",
+      "date": "2026-05-07",
+      "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Xiangyuan Xue",
+        "Yifan Zhou",
+        "Zidong Wang",
+        "Shengji Tang",
+        "Philip Torr",
+        "Wanli Ouyang",
+        "Lei Bai",
+        "Zhenfei Yin"
+      ],
+      "institution": "The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute",
+      "summary": {
+        "zh": "StraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。",
+        "en": "- **Background**: Large language models (LLMs) are increasingly deployed as interactive agents, but optimizing them for long-horizon decision-making remains challenging. Current reinforcement learning (RL) methods are..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.06642v1",
+        "pdf": "https://arxiv.org/pdf/2605.06642v1",
+        "github": "https://github.com/xxyQwQ/StraTA"
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.06642.md",
+        "summary_en_path": "summary_en/2026-05/2605.06642.md",
+        "summary_zh_url": null,
+        "summary_en_url": null
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    }
+  ]
+}

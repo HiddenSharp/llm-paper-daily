@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+from paper_daily.arxiv_client import ArxivClient
+from paper_daily.discovery import find_next_discovery, select_ranked_candidates
+from paper_daily.feed import read_feed_state, write_feed_outputs, write_feed_state
+from paper_daily.institutions import load_catalog
+from paper_daily.patch import (
+    README_END,
+    README_EN_END,
+    README_EN_START,
+    README_START,
+    UPDATES_EN_END,
+    UPDATES_EN_START,
+    UPDATES_END,
+    UPDATES_START,
+    ensure_readme_markers,
+    patch_updates_block,
+    patch_month_block,
+    update_readme_timestamps,
+)
+from paper_daily.render import (
+    render_cn_month_block,
+    render_en_month_block,
+    render_updates_block_en,
+    render_updates_block_zh,
+    write_summary_files,
+)
+from paper_daily.summary import candidate_to_canonical
+
+
+def main() -> int:
+    args = parse_args()
+    publish_enabled = not args.view_only
+    repo_root = Path(args.repo_root).resolve()
+    skill_root = Path(__file__).resolve().parents[1]
+    catalog = load_catalog(skill_root / "references" / "institutions.json")
+    client = ArxivClient(delay_seconds=args.delay_seconds, timeout_seconds=args.timeout_seconds, retries=args.retries)
+    previous_state = read_feed_state(skill_root)
+    analyzed_dates = set(previous_state.get("analyzed_content_dates", []))
+    previous_latest_updates_date = previous_state.get("latest_updates_date")
+
+    selection = find_next_discovery(
+        client=client,
+        catalog=catalog,
+        preferred_date=args.date,
+        analyzed_dates=analyzed_dates,
+        max_lookback_days=args.backfill_days,
+        max_results_per_keyword=args.max_results_per_keyword,
+    )
+    selected_date = selection["selected_date"]
+    discovered = selection["discovered"]
+    attempted_dates = selection["attempted_dates"]
+
+    if not selected_date or not discovered:
+        if publish_enabled:
+            write_feed_state(
+                skill_root,
+                previous_state=previous_state,
+                records=[],
+                preferred_date=args.date,
+                attempted_dates=attempted_dates,
+                updated=False,
+            )
+        print(f"preferred_date={args.date}")
+        print(f"mode={'view-only' if args.view_only else 'publish'}")
+        print("selected=0")
+        print(f"attempted_dates={','.join(attempted_dates)}")
+        print("No new analyzable papers found in the configured fallback window.")
+        if selection["skipped_analyzed_dates"]:
+            print(f"skipped_already_analyzed={','.join(selection['skipped_analyzed_dates'])}")
+        return 0
+
+    selected_candidates = select_ranked_candidates(
+        discovered["ranked"],
+        min_select=args.min_select,
+        max_select=args.select,
+        score_threshold=args.score_threshold,
+    )
+    selected = [candidate.to_dict() for candidate in selected_candidates]
+    canonical = [candidate_to_canonical(candidate, run_date=selected_date) for candidate in selected]
+
+    debug_out_dir = None
+    if args.debug_out:
+        debug_out_dir = Path(args.debug_out).resolve()
+        debug_out_dir.mkdir(parents=True, exist_ok=True)
+        (debug_out_dir / "selected-papers.json").write_text(
+            json.dumps(selected, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (debug_out_dir / "canonical-papers.json").write_text(
+            json.dumps([record.to_dict() for record in canonical], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+    if publish_enabled:
+        write_summary_files(repo_root, canonical)
+        ensure_readme_markers(repo_root)
+        write_feed_outputs(
+            repo_root,
+            skill_root,
+            canonical,
+            selected_date,
+            public_base_url=args.public_base_url,
+            source_repo=args.source_repo,
+        )
+
+        month_key = selected_date[:7]
+        cn_block = render_cn_month_block(canonical, month_key)
+        en_block = render_en_month_block(canonical, month_key)
+        run_now = datetime.now()
+        patch_month_block(repo_root / "README.md", README_START, README_END, cn_block, month_key=month_key, paper_id=canonical[0].paper_id)
+        patch_month_block(repo_root / "README_en.md", README_EN_START, README_EN_END, en_block, month_key=month_key, paper_id=canonical[0].paper_id)
+        should_refresh_updates = (
+            not previous_latest_updates_date or selected_date >= previous_latest_updates_date
+        )
+        if should_refresh_updates:
+            zh_updates = render_updates_block_zh(canonical, now=run_now)
+            en_updates = render_updates_block_en(canonical, now=run_now)
+            patch_updates_block(repo_root / "README.md", UPDATES_START, UPDATES_END, zh_updates)
+            patch_updates_block(repo_root / "README_en.md", UPDATES_EN_START, UPDATES_EN_END, en_updates)
+            update_readme_timestamps(repo_root / "README.md", locale="zh", now=run_now)
+            update_readme_timestamps(repo_root / "README_en.md", locale="en", now=run_now)
+        write_feed_state(
+            skill_root,
+            previous_state=previous_state,
+            records=canonical,
+            preferred_date=args.date,
+            attempted_dates=attempted_dates,
+            updated=True,
+            selected_date=selected_date,
+        )
+
+    print(f"preferred_date={args.date}")
+    print(f"mode={'view-only' if args.view_only else 'publish'}")
+    print(f"selected_date={selected_date}")
+    print(f"selected={len(canonical)}")
+    print(f"attempted_dates={','.join(attempted_dates)}")
+    for record in canonical:
+        print(f"- {record.paper_id} {record.title}")
+    if debug_out_dir:
+        print(f"debug_out: {debug_out_dir}")
+    if publish_enabled:
+        print(f"patched: {repo_root / 'README.md'}")
+        print(f"patched: {repo_root / 'README_en.md'}")
+    return 0
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run the repo-local paper daily pipeline. Use --date for replay mode and --view-only to inspect without publishing.")
+    parser.add_argument("--repo-root", default=".")
+    parser.add_argument("--date", default=default_utc_date())
+    parser.add_argument("--select", type=int, default=5, help="Maximum number of papers to publish.")
+    parser.add_argument("--min-select", type=int, default=3, help="Minimum number of papers to publish when filtered candidates allow it.")
+    parser.add_argument("--score-threshold", type=float, default=6.0, help="Score threshold for preferred selection before falling back to the top-ranked minimum set.")
+    parser.add_argument("--max-results-per-keyword", type=int, default=10)
+    parser.add_argument("--delay-seconds", type=float, default=3.1)
+    parser.add_argument("--timeout-seconds", type=float, default=60.0)
+    parser.add_argument("--retries", type=int, default=1)
+    parser.add_argument("--backfill-days", type=int, default=7)
+    parser.add_argument("--view-only", action="store_true", help="Inspect the selected papers without updating README/feed/state/summary artifacts.")
+    parser.add_argument("--debug-out", help="Optional directory for debug JSON artifacts.")
+    parser.add_argument("--public-base-url", default="", help="Optional public base URL for summary asset links.")
+    parser.add_argument("--source-repo", default="xianshang33/llm-paper-daily", help="Source repository identifier for feed metadata.")
+    return parser.parse_args()
+
+
+def default_utc_date() -> str:
+    return (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

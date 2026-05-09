@@ -1,0 +1,61 @@
+{
+  "schema_version": "v1",
+  "generated_at": "2026-05-09T09:06:35.126351+00:00",
+  "run_date": "2026-05-07",
+  "items": [
+    {
+      "schema_version": "v1",
+      "paper_id": "2605.06642",
+      "date": "2026-05-07",
+      "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+      "authors": [
+        "Xiangyuan Xue",
+        "Yifan Zhou",
+        "Zidong Wang",
+        "Shengji Tang",
+        "Philip Torr",
+        "Wanli Ouyang",
+        "Lei Bai",
+        "Zhenfei Yin"
+      ],
+      "abstract": "Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision making remains difficult because current methods are largely purely reactive, which weakens both exploration and credit assignment over extended trajectories. In this work, we present Strategic Trajectory Abstraction (StraTA), a simple framework that introduces an explicit trajectory-level strategy into agentic reinforcement learning (RL). StraTA samples a compact strategy from the initial task state, conditions subsequent actions on that strategy, and trains strategy generation and action execution jointly with a hierarchical GRPO-style rollout design, further enhanced by diverse strategy rollout and critical self-judgment. Experiments on ALFWorld, WebShop, and SciWorld show that StraTA consistently improves both sample efficiency and final performance over strong baselines. StraTA reaches success rates of 93.1% on ALFWorld and 84.2% on WebShop. On SciWorld, StraTA attains a 63.5% overall score, outperforming frontier closed-source models.",
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.06642v1",
+        "pdf": "https://arxiv.org/pdf/2605.06642v1",
+        "github": "https://github.com/xxyQwQ/StraTA",
+        "blog": null
+      },
+      "institution": "The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute",
+      "category_key": "agent",
+      "category_alias": "Agent",
+      "category_display": {
+        "zh": "Agent",
+        "en": "Agent"
+      },
+      "summary_cn": "## 文章做了什么\n- **背景**：大型语言模型（LLM）正越来越多地被用作交互式智能体，但在优化长视野决策方面仍面临困难。现有的强化学习（RL）方法大多是纯粹反应式的，即仅根据当前状态预测下一步动作。\n- **已有工作的局限性**：纯粹反应式的方法导致探索短视、不必要的回溯以及行为内部不一致。由于奖励稀疏且延迟，这种耦合使得长视野探索变得困难，并严重复杂化了信用分配（credit assignment）问题。\n\n## 文章的核心贡献点\n- **提出了一个名为 StraTA (Strategic Trajectory Abstraction) 的框架**：该框架在智能体强化学习中引入了显式的轨迹级策略抽象。\n- **挑战1：长视野任务中的信用分配与探索效率低**。难点在于每一步决策既要生成token又要选择动作，且奖励仅在 episode 结束时给出，导致难以判断中间步骤的价值。StraTA 通过从初始状态采样紧凑的全局策略，并将后续所有动作条件化于该策略，解耦了高层规划与底层执行，从而提供更一致的指导信号。\n- **挑战2：策略生成的多样性与自我修正能力不足**。难点在于单一策略可能陷入局部最优或错误路径。StraTA 采用分层 GRPO 风格的 rollout 设计，结合多样化策略 rollout 和关键自我评判（critical self-judgment），联合训练策略生成和动作执行，增强了模型的鲁棒性和样本效率。\n\n## 实现与部署，evaluation 结果，要有和相关工作对比\n- **实验设置**：在 ALFWorld、WebShop 和 SciWorld 三个基准数据集上进行评估。\n- **主要结果**：\n  - **ALFWorld**：成功率达到 93.1%。\n  - **WebShop**：成功率达到 84.2%。\n  - **SciWorld**：总体得分为 63.5%。\n- **对比优势**：StraTA 在样本效率和最终性能上均一致优于强大的基线模型。特别是在 SciWorld 上，其表现超过了前沿的闭源模型。相比传统的 PPO 或 GRPO 风格训练，StraTA 通过引入显式策略抽象，显著提升了长视野任务的学习效率和行为一致性。\n\n#### 总结\nStraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。",
+      "summary_en": "## 1. What the Paper Does\n- **Background**: Large language models (LLMs) are increasingly deployed as interactive agents, but optimizing them for long-horizon decision-making remains challenging. Current reinforcement learning (RL) methods are largely purely reactive, predicting actions solely based on the current state.\n- **Limitations of Existing Work**: Purely reactive approaches lead to short-sighted exploration, unnecessary backtracking, and inconsistent behavior. The coupling of immediate action selection with long-term planning, combined with sparse and delayed rewards, complicates credit assignment and hinders effective exploration in long-horizon tasks.\n\n## Core Contributions\n- **Proposed StraTA (Strategic Trajectory Abstraction)**: A simple framework that introduces an explicit trajectory-level strategy into agentic RL.\n- **Challenge 1: Inefficient Credit Assignment and Exploration in Long-Horizon Tasks**. The difficulty lies in the hierarchical nature of decisions and delayed rewards, making it hard to attribute value to intermediate steps. StraTA addresses this by sampling a compact global strategy from the initial state and conditioning all subsequent actions on this strategy, decoupling high-level planning from low-level execution to provide consistent guidance.\n- **Challenge 2: Lack of Strategy Diversity and Self-Correction**. Single strategies may get stuck in local optima. StraTA employs a hierarchical GRPO-style rollout design, enhanced by diverse strategy rollouts and critical self-judgment, jointly training strategy generation and action execution to improve robustness and sample efficiency.\n\n## Implementation and Evaluation\n- **Experimental Setup**: Evaluated on ALFWorld, WebShop, and SciWorld benchmarks.\n- **Key Results**:\n  - **ALFWorld**: Achieved a success rate of 93.1%.\n  - **WebShop**: Achieved a success rate of 84.2%.\n  - **SciWorld**: Attained an overall score of 63.5%.\n- **Comparison**: StraTA consistently improves both sample efficiency and final performance over strong baselines. Notably, on SciWorld, it outperforms frontier closed-source models. Compared to traditional PPO or GRPO methods, StraTA's explicit strategy abstraction significantly enhances learning efficiency and behavioral consistency in long-horizon tasks.\n\n## 4. Conclusion\nStraTA addresses the challenges of short-sighted exploration and difficult credit assignment in reactive agents by introducing explicit trajectory-level strategy abstraction. By leveraging hierarchical training and diverse strategy mechanisms, it significantly boosts the performance and sample efficiency of LLM agents in complex interactive tasks, offering a new paradigm for building reliable long-horizon agents.",
+      "render_excerpt": "机构: The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute<br>StraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。",
+      "render_excerpt_en": "Institution: The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute<br>## 1. What the Paper Does - **Background**: Large language models (LLMs) are increasingly deployed as interactive agents, but optimizing them for long-horizon decision-making remains challenging. Current reinforcement learning (RL) methods are largely purely reactive, predicting actions solely based on the current state.",
+      "source_discovery": {
+        "source": "arxiv",
+        "query": "Agent",
+        "captured_at": "2026-05-07T17:51:16Z"
+      },
+      "source_summary": {
+        "provider": "dashscope-compatible",
+        "model": "qwen3.6-plus",
+        "captured_at": "2026-05-07"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    }
+  ]
+}

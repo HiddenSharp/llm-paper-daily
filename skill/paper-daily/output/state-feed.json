@@ -1,0 +1,32 @@
+{
+  "schema_version": "v2",
+  "feed_id": "paper-daily",
+  "last_run_date": "2026-05-07",
+  "last_preferred_date": "2026-05-07",
+  "last_run_at": "2026-05-09T09:06:35.135717+00:00",
+  "last_attempted_dates": [
+    "2026-05-07"
+  ],
+  "last_update_status": "updated",
+  "last_success_at": "2026-05-09T09:06:35.135717+00:00",
+  "last_success_date": "2026-05-07",
+  "last_content_date": "2026-05-07",
+  "latest_updates_date": "2026-05-07",
+  "last_item_ids": [
+    "2605.06642"
+  ],
+  "analyzed_content_dates": [
+    "2026-05-06",
+    "2026-05-01",
+    "2026-05-02",
+    "2026-05-03",
+    "2026-05-04",
+    "2026-05-05",
+    "2026-04-30",
+    "2026-05-07"
+  ],
+  "watermarks": {
+    "preferred_date": "2026-05-07",
+    "selected_date": "2026-05-07"
+  }
+}
