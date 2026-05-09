@@ -20,6 +20,36 @@
 </details>
 <!-- paper-daily:readme-en:updates:end -->
 
+## Subscribe
+
+This repo includes the `paper-subscribe` skill for subscribing to the centrally generated `feed-papers.json`. Subscribers only read the public feed, so they do not need to run arXiv discovery or paper summarization locally.
+
+```bash
+mkdir -p ~/.paper-subscribe
+cp skill/paper-subscribe/templates/config.example.json ~/.paper-subscribe/config.json
+```
+
+Edit `~/.paper-subscribe/config.json` as needed:
+
+- `feed_url`: `https://raw.githubusercontent.com/xianshang33/llm-paper-daily/main/feed-papers.json`
+- `timezone`: for example `Asia/Shanghai`
+- `schedule`: cron expression, for example `15 9 * * *`
+- `filters.language`: `zh` or `en`
+- `filters.max_items`: max papers per digest
+
+Prepare and preview a digest manually:
+
+```bash
+node skill/paper-subscribe/scripts/prepare-digest.js --config ~/.paper-subscribe/config.json > /tmp/digest.json
+node skill/paper-subscribe/scripts/deliver.js --config ~/.paper-subscribe/config.json --input /tmp/digest.json
+```
+
+Install the local scheduled job:
+
+```bash
+bash skill/paper-subscribe/scripts/install-cron.sh --config ~/.paper-subscribe/config.json
+```
+
 <!-- paper-daily:readme-en:months:start -->
 ## 2026-05
 

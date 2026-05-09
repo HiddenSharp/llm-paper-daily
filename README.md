@@ -18,6 +18,36 @@
 </details>
 <!-- paper-daily:readme:updates:end -->
 
+## 订阅
+
+本仓库提供 `paper-subscribe` skill，用于订阅中央生成的 `feed-papers.json`。订阅端只读取公开 feed，不需要自己运行 arXiv 抓取或论文总结。
+
+```bash
+mkdir -p ~/.paper-subscribe
+cp skill/paper-subscribe/templates/config.example.json ~/.paper-subscribe/config.json
+```
+
+按需调整 `~/.paper-subscribe/config.json`：
+
+- `feed_url`: `https://raw.githubusercontent.com/xianshang33/llm-paper-daily/main/feed-papers.json`
+- `timezone`: 例如 `Asia/Shanghai`
+- `schedule`: cron 表达式，例如 `15 9 * * *`
+- `filters.language`: `zh` 或 `en`
+- `filters.max_items`: 每次推送的最大论文数
+
+手动生成并查看一次 digest：
+
+```bash
+node skill/paper-subscribe/scripts/prepare-digest.js --config ~/.paper-subscribe/config.json > /tmp/digest.json
+node skill/paper-subscribe/scripts/deliver.js --config ~/.paper-subscribe/config.json --input /tmp/digest.json
+```
+
+安装本地定时任务：
+
+```bash
+bash skill/paper-subscribe/scripts/install-cron.sh --config ~/.paper-subscribe/config.json
+```
+
 ## 最新论文
 
 <!-- paper-daily:readme:months:start -->
