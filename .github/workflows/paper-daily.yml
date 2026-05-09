@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
-      RUN_DATE: ${{ inputs.date || '' }}
+      RUN_DATE: ${{ github.event.inputs.date || '' }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
