@@ -168,9 +168,10 @@ def insert_row_into_existing_month(existing_body: str, month_block: str, month_h
         return existing_body
 
     for offset, row_line in enumerate(row_lines, start=1):
+        row_paper_id = row_dedupe_key(row_line)
         replaced = False
         for idx, existing_line in enumerate(existing_lines):
-            if paper_id in existing_line:
+            if row_paper_id in existing_line:
                 existing_lines[idx] = row_line
                 replaced = True
                 break

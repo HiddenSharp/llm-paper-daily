@@ -45,43 +45,49 @@ def main() -> int:
     analyzed_dates = set(previous_state.get("analyzed_content_dates", []))
     previous_latest_updates_date = previous_state.get("latest_updates_date")
 
-    selection = find_next_discovery(
-        client=client,
-        catalog=catalog,
-        preferred_date=args.date,
-        analyzed_dates=analyzed_dates,
-        max_lookback_days=args.backfill_days,
-        max_results_per_keyword=args.max_results_per_keyword,
-    )
-    selected_date = selection["selected_date"]
-    discovered = selection["discovered"]
-    attempted_dates = selection["attempted_dates"]
+    manual_arxiv_ids = parse_arxiv_ids(args.arxiv_id)
+    if manual_arxiv_ids:
+        selected_date = args.date
+        selected_candidates = client.get_by_arxiv_ids(manual_arxiv_ids)
+        attempted_dates = [f"arxiv:{arxiv_id}" for arxiv_id in manual_arxiv_ids]
+    else:
+        selection = find_next_discovery(
+            client=client,
+            catalog=catalog,
+            preferred_date=args.date,
+            analyzed_dates=analyzed_dates,
+            max_lookback_days=args.backfill_days,
+            max_results_per_keyword=args.max_results_per_keyword,
+        )
+        selected_date = selection["selected_date"]
+        discovered = selection["discovered"]
+        attempted_dates = selection["attempted_dates"]
 
-    if not selected_date or not discovered:
-        if publish_enabled:
-            write_feed_state(
-                skill_root,
-                previous_state=previous_state,
-                records=[],
-                preferred_date=args.date,
-                attempted_dates=attempted_dates,
-                updated=False,
-            )
-        print(f"preferred_date={args.date}")
-        print(f"mode={'view-only' if args.view_only else 'publish'}")
-        print("selected=0")
-        print(f"attempted_dates={','.join(attempted_dates)}")
-        print("No new analyzable papers found in the configured fallback window.")
-        if selection["skipped_analyzed_dates"]:
-            print(f"skipped_already_analyzed={','.join(selection['skipped_analyzed_dates'])}")
-        return 0
+        if not selected_date or not discovered:
+            if publish_enabled:
+                write_feed_state(
+                    skill_root,
+                    previous_state=previous_state,
+                    records=[],
+                    preferred_date=args.date,
+                    attempted_dates=attempted_dates,
+                    updated=False,
+                )
+            print(f"preferred_date={args.date}")
+            print(f"mode={'view-only' if args.view_only else 'publish'}")
+            print("selected=0")
+            print(f"attempted_dates={','.join(attempted_dates)}")
+            print("No new analyzable papers found in the configured fallback window.")
+            if selection["skipped_analyzed_dates"]:
+                print(f"skipped_already_analyzed={','.join(selection['skipped_analyzed_dates'])}")
+            return 0
 
-    selected_candidates = select_ranked_candidates(
-        discovered["ranked"],
-        min_select=args.min_select,
-        max_select=args.select,
-        score_threshold=args.score_threshold,
-    )
+        selected_candidates = select_ranked_candidates(
+            discovered["ranked"],
+            min_select=args.min_select,
+            max_select=args.select,
+            score_threshold=args.score_threshold,
+        )
     selected = [candidate.to_dict() for candidate in selected_candidates]
     canonical = [candidate_to_canonical(candidate, run_date=selected_date) for candidate in selected]
 
@@ -138,6 +144,8 @@ def main() -> int:
 
     print(f"preferred_date={args.date}")
     print(f"mode={'view-only' if args.view_only else 'publish'}")
+    if manual_arxiv_ids:
+        print(f"manual_arxiv_ids={','.join(manual_arxiv_ids)}")
     print(f"selected_date={selected_date}")
     print(f"selected={len(canonical)}")
     print(f"attempted_dates={','.join(attempted_dates)}")
@@ -155,6 +163,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run the repo-local paper daily pipeline. Use --date for replay mode and --view-only to inspect without publishing.")
     parser.add_argument("--repo-root", default=".")
     parser.add_argument("--date", default=default_utc_date())
+    parser.add_argument("--arxiv-id", action="append", default=[], help="Manually publish one or more arXiv IDs. May be repeated or comma-separated. When set, --date is used as the display date.")
     parser.add_argument("--select", type=int, default=5, help="Maximum number of papers to publish.")
     parser.add_argument("--min-select", type=int, default=3, help="Minimum number of papers to publish when filtered candidates allow it.")
     parser.add_argument("--score-threshold", type=float, default=6.0, help="Score threshold for preferred selection before falling back to the top-ranked minimum set.")
@@ -168,6 +177,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--public-base-url", default="", help="Optional public base URL for summary asset links.")
     parser.add_argument("--source-repo", default="xianshang33/llm-paper-daily", help="Source repository identifier for feed metadata.")
     return parser.parse_args()
+
+
+def parse_arxiv_ids(values: list[str]) -> list[str]:
+    arxiv_ids: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        for part in value.split(","):
+            arxiv_id = part.strip()
+            if not arxiv_id or arxiv_id in seen:
+                continue
+            seen.add(arxiv_id)
+            arxiv_ids.append(arxiv_id)
+    return arxiv_ids
 
 
 def default_utc_date() -> str:

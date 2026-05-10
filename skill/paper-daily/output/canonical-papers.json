@@ -1,50 +1,164 @@
 {
   "schema_version": "v1",
-  "generated_at": "2026-05-09T09:06:35.126351+00:00",
-  "run_date": "2026-05-07",
+  "generated_at": "2026-05-10T05:34:02.697835+00:00",
+  "run_date": "2026-05-09",
   "items": [
     {
       "schema_version": "v1",
-      "paper_id": "2605.06642",
-      "date": "2026-05-07",
-      "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+      "paper_id": "2505.14359",
+      "date": "2026-05-09",
+      "title": "Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable",
       "authors": [
-        "Xiangyuan Xue",
-        "Yifan Zhou",
-        "Zidong Wang",
-        "Shengji Tang",
-        "Philip Torr",
-        "Wanli Ouyang",
-        "Lei Bai",
-        "Zhenfei Yin"
+        "Ruoxin Chen",
+        "Junwei Xi",
+        "Zhiyuan Yan",
+        "Ke-Yue Zhang",
+        "Shuang Wu",
+        "Jingyi Xie",
+        "Xu Chen",
+        "Lei Xu",
+        "Isabel Guan",
+        "Taiping Yao",
+        "Shouhong Ding"
       ],
-      "abstract": "Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision making remains difficult because current methods are largely purely reactive, which weakens both exploration and credit assignment over extended trajectories. In this work, we present Strategic Trajectory Abstraction (StraTA), a simple framework that introduces an explicit trajectory-level strategy into agentic reinforcement learning (RL). StraTA samples a compact strategy from the initial task state, conditions subsequent actions on that strategy, and trains strategy generation and action execution jointly with a hierarchical GRPO-style rollout design, further enhanced by diverse strategy rollout and critical self-judgment. Experiments on ALFWorld, WebShop, and SciWorld show that StraTA consistently improves both sample efficiency and final performance over strong baselines. StraTA reaches success rates of 93.1% on ALFWorld and 84.2% on WebShop. On SciWorld, StraTA attains a 63.5% overall score, outperforming frontier closed-source models.",
+      "abstract": "Existing detectors are often trained on biased datasets, leading to the possibility of overfitting on non-causal image attributes that are spuriously correlated with real/synthetic labels. While these biased features enhance performance on the training data, they result in substantial performance degradation when applied to unbiased datasets. One common solution is to perform dataset alignment through generative reconstruction, matching the semantic content between real and synthetic images. However, we revisit this approach and show that pixel-level alignment alone is insufficient. The reconstructed images still suffer from frequency-level misalignment, which can perpetuate spurious correlations. To illustrate, we observe that reconstruction models tend to restore the high-frequency details lost in real images (possibly due to JPEG compression), inadvertently creating a frequency-level misalignment, where synthetic images appear to have richer high-frequency content than real ones. This misalignment leads to models associating high-frequency features with synthetic labels, further reinforcing biased cues. To resolve this, we propose Dual Data Alignment (DDA), which aligns both the pixel and frequency domains. Moreover, we introduce two new test sets: DDA-COCO, containing DDA-aligned synthetic images for testing detector performance on the most aligned dataset, and EvalGEN, featuring the latest generative models for assessing detectors under new generative architectures such as visual auto-regressive generators. Finally, our extensive evaluations demonstrate that a detector trained exclusively on DDA-aligned MSCOCO could improve across 8 diverse benchmarks by a non-trivial margin, showing a +7.2% on in-the-wild benchmarks, highlighting the improved generalizability of unbiased detectors. Our code is available at: https://github.com/roy-ch/Dual-Data-Alignment.",
       "links": {
-        "abs": "http://arxiv.org/abs/2605.06642v1",
-        "pdf": "https://arxiv.org/pdf/2605.06642v1",
-        "github": "https://github.com/xxyQwQ/StraTA",
+        "abs": "http://arxiv.org/abs/2505.14359v6",
+        "pdf": "https://arxiv.org/pdf/2505.14359v6",
+        "github": "https://github.com/roy-ch/Dual-Data-Alignment",
         "blog": null
       },
-      "institution": "The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute",
+      "institution": "Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology",
       "category_key": "agent",
-      "category_alias": "Agent",
+      "category_alias": "manual-arxiv-id",
       "category_display": {
         "zh": "Agent",
         "en": "Agent"
       },
-      "summary_cn": "## 文章做了什么\n- **背景**：大型语言模型（LLM）正越来越多地被用作交互式智能体，但在优化长视野决策方面仍面临困难。现有的强化学习（RL）方法大多是纯粹反应式的，即仅根据当前状态预测下一步动作。\n- **已有工作的局限性**：纯粹反应式的方法导致探索短视、不必要的回溯以及行为内部不一致。由于奖励稀疏且延迟，这种耦合使得长视野探索变得困难，并严重复杂化了信用分配（credit assignment）问题。\n\n## 文章的核心贡献点\n- **提出了一个名为 StraTA (Strategic Trajectory Abstraction) 的框架**：该框架在智能体强化学习中引入了显式的轨迹级策略抽象。\n- **挑战1：长视野任务中的信用分配与探索效率低**。难点在于每一步决策既要生成token又要选择动作，且奖励仅在 episode 结束时给出，导致难以判断中间步骤的价值。StraTA 通过从初始状态采样紧凑的全局策略，并将后续所有动作条件化于该策略，解耦了高层规划与底层执行，从而提供更一致的指导信号。\n- **挑战2：策略生成的多样性与自我修正能力不足**。难点在于单一策略可能陷入局部最优或错误路径。StraTA 采用分层 GRPO 风格的 rollout 设计，结合多样化策略 rollout 和关键自我评判（critical self-judgment），联合训练策略生成和动作执行，增强了模型的鲁棒性和样本效率。\n\n## 实现与部署，evaluation 结果，要有和相关工作对比\n- **实验设置**：在 ALFWorld、WebShop 和 SciWorld 三个基准数据集上进行评估。\n- **主要结果**：\n  - **ALFWorld**：成功率达到 93.1%。\n  - **WebShop**：成功率达到 84.2%。\n  - **SciWorld**：总体得分为 63.5%。\n- **对比优势**：StraTA 在样本效率和最终性能上均一致优于强大的基线模型。特别是在 SciWorld 上，其表现超过了前沿的闭源模型。相比传统的 PPO 或 GRPO 风格训练，StraTA 通过引入显式策略抽象，显著提升了长视野任务的学习效率和行为一致性。\n\n#### 总结\nStraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。",
-      "summary_en": "## 1. What the Paper Does\n- **Background**: Large language models (LLMs) are increasingly deployed as interactive agents, but optimizing them for long-horizon decision-making remains challenging. Current reinforcement learning (RL) methods are largely purely reactive, predicting actions solely based on the current state.\n- **Limitations of Existing Work**: Purely reactive approaches lead to short-sighted exploration, unnecessary backtracking, and inconsistent behavior. The coupling of immediate action selection with long-term planning, combined with sparse and delayed rewards, complicates credit assignment and hinders effective exploration in long-horizon tasks.\n\n## Core Contributions\n- **Proposed StraTA (Strategic Trajectory Abstraction)**: A simple framework that introduces an explicit trajectory-level strategy into agentic RL.\n- **Challenge 1: Inefficient Credit Assignment and Exploration in Long-Horizon Tasks**. The difficulty lies in the hierarchical nature of decisions and delayed rewards, making it hard to attribute value to intermediate steps. StraTA addresses this by sampling a compact global strategy from the initial state and conditioning all subsequent actions on this strategy, decoupling high-level planning from low-level execution to provide consistent guidance.\n- **Challenge 2: Lack of Strategy Diversity and Self-Correction**. Single strategies may get stuck in local optima. StraTA employs a hierarchical GRPO-style rollout design, enhanced by diverse strategy rollouts and critical self-judgment, jointly training strategy generation and action execution to improve robustness and sample efficiency.\n\n## Implementation and Evaluation\n- **Experimental Setup**: Evaluated on ALFWorld, WebShop, and SciWorld benchmarks.\n- **Key Results**:\n  - **ALFWorld**: Achieved a success rate of 93.1%.\n  - **WebShop**: Achieved a success rate of 84.2%.\n  - **SciWorld**: Attained an overall score of 63.5%.\n- **Comparison**: StraTA consistently improves both sample efficiency and final performance over strong baselines. Notably, on SciWorld, it outperforms frontier closed-source models. Compared to traditional PPO or GRPO methods, StraTA's explicit strategy abstraction significantly enhances learning efficiency and behavioral consistency in long-horizon tasks.\n\n## 4. Conclusion\nStraTA addresses the challenges of short-sighted exploration and difficult credit assignment in reactive agents by introducing explicit trajectory-level strategy abstraction. By leveraging hierarchical training and diverse strategy mechanisms, it significantly boosts the performance and sample efficiency of LLM agents in complex interactive tasks, offering a new paradigm for building reliable long-horizon agents.",
-      "render_excerpt": "机构: The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute<br>StraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。",
-      "render_excerpt_en": "Institution: The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute<br>## 1. What the Paper Does - **Background**: Large language models (LLMs) are increasingly deployed as interactive agents, but optimizing them for long-horizon decision-making remains challenging. Current reinforcement learning (RL) methods are largely purely reactive, predicting actions solely based on the current state.",
+      "summary_cn": "## 文章做了什么\n- **背景**：随着AI生成图像（AIGI）的激增，检测伪造图像的需求日益迫切。然而，现有的检测器通常在存在偏差的数据集上训练，导致模型过拟合于与真实/合成标签虚假相关的非因果属性（如图像格式、尺寸或语义内容），从而在未见过的无偏数据集上性能大幅下降。\n- **已有工作为什么解决不了**：常见的解决方案是通过生成式重建进行数据集对齐，以匹配真实和合成图像的语义内容。但本文指出，仅靠像素级对齐是不够的。重建模型往往会恢复真实图像中丢失的高频细节（可能由于JPEG压缩造成），导致合成图像在频率域上比真实图像拥有更丰富的高频内容。这种频率级的不对齐会 perpetuate（延续）虚假相关性，使模型错误地将高频特征与合成标签关联。\n\n## 文章的核心贡献点\n- **提出了一个双数据对齐（Dual Data Alignment, DDA）框架**：该框架同时在像素域和频率域对数据进行对齐，旨在消除检测器对偏差特征的依赖。\n- **挑战1：频率域的对齐缺失**。现有的像素级对齐方法忽略了频率域的差异，重建后的合成图像往往包含过多的高频细节，形成新的偏差线索。**解决方法**：DDA通过在频率域融合真实和合成图像对，强制合成图像在频谱分布上与真实图像保持一致，从而消除高频特征的虚假相关性。\n- **挑战2：跨生成架构的泛化能力不足**。面对不断涌现的新生成模型（如视觉自回归生成器），现有检测器难以适应。**解决方法**：除了提出DDA方法，作者还引入了两个新的测试集：DDA-COCO（用于测试最对齐数据下的性能）和EvalGEN（包含最新的生成模型以评估对新架构的鲁棒性），并通过在DDA对齐数据上训练，显著提升了模型在多种基准上的零-shot泛化能力。\n\n## 实现与部署，evaluation 结果，要有和相关工作对比\n- **实验设置**：检测器仅在DDA对齐的MSCOCO数据集上进行训练，未在其它特定生成模型数据上进行微调。\n- **对比结果**：在11个不同的基准测试中进行了评估，包括4个“野外”基准（Chameleon, WildRF, BFree-Online, SynthWildx）和7个人工构建的基准。结果显示，DDA方法在所有基准上均一致优于现有方法。\n- **性能提升**：在野外基准测试中，DDA带来了+7.2%的性能提升，证明了其卓越的泛化能力。特别是在面对EvalGEN中最新的视觉自回归生成器时，DDA训练的检测器依然保持了较高的检测准确率，而传统方法性能下降明显。\n\n#### 总结\n本文揭示了现有AI生成图像检测器泛化能力差的根本原因不仅在于像素级的语义偏差，更在于被忽视的频率级不对齐。通过提出双数据对齐（DDA）方法，同时校正像素和频率域的分布，有效去除了虚假相关性。结合新提出的DDA-COCO和EvalGEN基准， extensive 实验证明该方法能显著提升检测器在多样化、 unseen 生成模型场景下的鲁棒性和泛化性能，为构建更通用的AIGI检测系统提供了新思路。",
+      "summary_en": "## 1. What the Paper Did\n- **Background**: The rapid rise of AI-generated images (AIGIs) necessitates robust detection methods. However, existing detectors are often trained on biased datasets, leading to overfitting on spurious correlations with non-causal attributes (e.g., image format, size, or semantic content). This results in significant performance degradation when applied to unbiased or unseen datasets.\n- **Why Existing Work Fails**: A common mitigation strategy is dataset alignment via generative reconstruction to match semantic content. However, this paper argues that pixel-level alignment alone is insufficient. Reconstruction models tend to restore high-frequency details lost in real images (e.g., due to JPEG compression), creating a frequency-level misalignment where synthetic images exhibit richer high-frequency content. This inadvertently reinforces biased cues, causing models to associate high-frequency features with synthetic labels.\n\n## Core Contributions\n- **Proposed Dual Data Alignment (DDA)**: A novel framework that aligns data in both pixel and frequency domains to eliminate reliance on biased features.\n- **Challenge 1: Frequency Domain Misalignment**. Existing pixel-level alignment ignores spectral discrepancies, where reconstructed synthetic images retain excessive high-frequency details, creating new bias cues. **Solution**: DDA fuses real and synthetic image pairs in the frequency domain, forcing synthetic images to match the spectral distribution of real images, thereby removing spurious high-frequency correlations.\n- **Challenge 2: Poor Generalization Across New Architectures**. Detectors struggle to generalize to emerging generative paradigms (e.g., visual auto-regressive generators). **Solution**: The authors introduce two new benchmarks: DDA-COCO (for testing on highly aligned data) and EvalGEN (featuring latest generative models). By training exclusively on DDA-aligned MSCOCO data, the detector achieves superior zero-shot generalization across diverse and new architectures.\n\n## Implementation and Evaluation\n- **Experimental Setup**: The detector was trained exclusively on DDA-aligned MSCOCO data without fine-tuning on specific generator datasets.\n- **Results**: Evaluated on 11 benchmarks, including 4 in-the-wild datasets (Chameleon, WildRF, BFree-Online, SynthWildx) and 7 manually crafted ones. DDA consistently outperformed state-of-the-art methods across all benchmarks.\n- **Performance Gain**: Achieved a +7.2% improvement on in-the-wild benchmarks, demonstrating significantly improved generalizability. The method showed robust performance against the latest visual auto-regressive generators in the EvalGEN set, where traditional methods failed.\n\n## 4. Conclusion\nThis paper identifies that the poor generalization of AIGI detectors stems not only from pixel-level semantic bias but also from overlooked frequency-level misalignment. By proposing Dual Data Alignment (DDA) to correct distributions in both domains, the method effectively removes spurious correlations. Combined with the new DDA-COCO and EvalGEN benchmarks, extensive experiments prove that DDA significantly enhances detector robustness and generalization in diverse, unseen generative scenarios, offering a new pathway for building universal AIGI detection systems.",
+      "render_excerpt": "机构: Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology<br>本文揭示了现有AI生成图像检测器泛化能力差的根本原因不仅在于像素级的语义偏差，更在于被忽视的频率级不对齐。通过提出双数据对齐（DDA）方法，同时校正像素和频率域的分布，有效去除了虚假相关性。结合新提出的DDA-COCO和EvalGEN基准， extensive 实验证明该方法能显著提升检测器在多样化、 unseen 生成模型场景下的鲁棒性和泛化性能，为构建更通用的AIGI检测系统提供了新思路。",
+      "render_excerpt_en": "Institution: Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology<br>## 1. What the Paper Did - **Background**: The rapid rise of AI-generated images (AIGIs) necessitates robust detection methods. However, existing detectors are often trained on biased datasets, leading to overfitting on spurious correlations with non-causal attributes (e.g., image format, size, or semantic content).",
       "source_discovery": {
         "source": "arxiv",
-        "query": "Agent",
-        "captured_at": "2026-05-07T17:51:16Z"
+        "query": "manual-arxiv-id",
+        "captured_at": "2025-05-20T13:42:38Z"
       },
       "source_summary": {
         "provider": "dashscope-compatible",
         "model": "qwen3.6-plus",
-        "captured_at": "2026-05-07"
+        "captured_at": "2026-05-09"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "schema_version": "v1",
+      "paper_id": "2512.06746",
+      "date": "2026-05-09",
+      "title": "AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment",
+      "authors": [
+        "Ruoxin Chen",
+        "Jiahui Gao",
+        "Kaiqing Lin",
+        "Keyue Zhang",
+        "Yandan Zhao",
+        "Isabel Guan",
+        "Taiping Yao",
+        "Shouhong Ding"
+      ],
+      "abstract": "Vision Language Models (VLMs) are increasingly used for detecting AI-generated images (AIGI). However, converting VLMs into reliable detectors is resource-intensive, and the resulting models often suffer from hallucination and poor generalization. To investigate the root cause, we conduct an empirical analysis and identify two consistent behaviors. First, fine-tuning VLMs with semantic supervision improves semantic discrimination and generalizes well to unseen data. Second, fine-tuning VLMs with pixel-artifact supervision leads to weak generalization. These findings reveal a fundamental task-model misalignment. VLMs are optimized for high-level semantic reasoning and lack inductive bias toward low-level pixel artifacts. In contrast, conventional vision models effectively capture pixel-level artifacts but are less sensitive to semantic inconsistencies. This indicates that different models are naturally suited to different subtasks. Based on this insight, we formulate AIGI detection as two orthogonal subtasks: semantic consistency checking and pixel-artifact detection. Neglecting either subtask leads to systematic detection failures. We further propose the Task-Model Alignment principle and instantiate it in a two-branch detector, AlignGemini. The detector combines a VLM trained with pure semantic supervision and a vision model trained with pure pixel-artifact supervision. By enforcing clear specialization, each branch captures complementary cues. Experiments on in-the-wild benchmarks show that AlignGemini improves average accuracy by 9.5 percent using simplified training data. These results demonstrate that task-model alignment is an effective principle for generalizable AIGI detection.",
+      "links": {
+        "abs": "http://arxiv.org/abs/2512.06746v2",
+        "pdf": "https://arxiv.org/pdf/2512.06746v2",
+        "github": null,
+        "blog": null
+      },
+      "institution": "Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology",
+      "category_key": "agent",
+      "category_alias": "manual-arxiv-id",
+      "category_display": {
+        "zh": "Agent",
+        "en": "Agent"
+      },
+      "summary_cn": "## 文章做了什么\n- **背景**：视觉语言模型（VLMs）正被越来越多地用于检测AI生成图像（AIGI）。然而，将VLM转化为可靠的检测器不仅资源消耗巨大，而且生成的模型往往存在幻觉问题，泛化能力较差。\n- **已有工作为什么解决不了**：现有的方法通常试图让单一模型同时处理语义和像素层面的特征，但这忽略了不同模型架构的固有优势。实证分析表明，用像素伪影监督微调VLM会导致泛化能力弱，因为VLM缺乏对低级像素伪影的归纳偏置；而传统视觉模型虽能捕捉像素伪影，却对语义不一致不敏感。这种“任务-模型”错位导致了系统性检测失败。\n\n## 文章的核心贡献点\n- **提出了一个**：“任务-模型对齐”（Task-Model Alignment）原则及其实例化模型 AlignGemini。\n- **挑战1：VLM在低级像素伪影检测上的归纳偏置缺失。** VLM专为高层语义推理优化，强行让其学习像素级伪影不仅效率低且泛化差。论文通过将AIGI检测分解为两个正交子任务，并仅使用纯语义监督训练VLM分支，使其专注于擅长的语义一致性检查，从而解决了这一错位。\n- **挑战2：单一模型难以兼顾语义与像素线索导致的泛化瓶颈。** 忽略任一子任务都会导致检测盲点。论文引入一个专门的传统视觉模型分支，仅使用纯像素伪影监督进行训练，与VLM分支互补。通过强制专业化，AlignGemini最大化了两个维度的互补判别能力，实现了强泛化。\n\n## 实现与部署，evaluation 结果，要有和相关工作对比\n- **实现与部署**：AlignGemini是一个双分支检测器。一个分支是接受纯语义监督训练的VLM，另一个分支是接受纯像素伪影监督训练的视觉模型专家。该方法不需要复杂的标注、强化学习或精心设计的思维链（CoT）监督，训练数据构建大幅简化。\n- **Evaluation 结果**：在野外（in-the-wild）基准测试中，AlignGemini的平均准确率提高了9.5%。即使使用简化的训练数据，其性能依然强劲。\n- **相关工作对比**：相比现有检测器，AlignGemini在五个数据集上均表现出一致的优势。此外，它在显著降低训练数据复杂度的同时，取得了更好的泛化性能，证明了泛化能力并非必然源于数据规模或多样性的扩展，而是源于监督信号与模型归纳偏置的对齐。\n\n#### 总结\n本文揭示了AIGI检测中根本性的“任务-模型”错位问题，即VLM擅长语义但弱于像素，传统视觉模型反之。通过提出“任务-模型对齐”原则，作者构建了AlignGemini，将检测任务解耦为语义一致性检查和像素伪影检测，并分别由最适合的模型分支处理。这种方法不仅在简化训练数据的前提下显著提升了检测精度和泛化能力，还为设计通用且高效的AIGI检测器提供了新的原则性框架。",
+      "summary_en": "## 1. What the Paper Did\n- **Background**: Vision Language Models (VLMs) are increasingly adopted for AI-generated image (AIGI) detection. However, converting VLMs into reliable detectors is resource-intensive, and the resulting models often suffer from hallucinations and poor generalization.\n- **Why Existing Work Fails**: Current methods often force a single model to handle both semantic and pixel-level features, ignoring the inherent strengths of different architectures. Empirical analysis shows that fine-tuning VLMs with pixel-artifact supervision leads to weak generalization because VLMs lack inductive bias for low-level artifacts. Conversely, conventional vision models capture pixel artifacts well but are insensitive to semantic inconsistencies. This \"task-model misalignment\" causes systematic detection failures.\n\n## Core Contributions\n- **Proposed**: The \"Task-Model Alignment\" principle and its instantiation, AlignGemini.\n- **Challenge 1: Lack of inductive bias in VLMs for low-level pixel artifacts.** VLMs are optimized for high-level semantic reasoning, making them inefficient and poorly generalizing when forced to learn pixel-level artifacts. The paper addresses this by decomposing AIGI detection into two orthogonal subtasks and training the VLM branch with pure semantic supervision, allowing it to focus on its strength: semantic consistency checking.\n- **Challenge 2: Generalization bottlenecks caused by single models failing to balance semantic and pixel cues.** Neglecting either subtask leads to blind spots. The paper introduces a specialized conventional vision model branch trained with pure pixel-artifact supervision to complement the VLM. By enforcing specialization, AlignGemini maximizes complementary discrimination across both dimensions, achieving strong generalization.\n\n## Implementation and Evaluation\n- **Implementation**: AlignGemini is a two-branch detector. One branch is a VLM trained with pure semantic supervision, and the other is a vision model expert trained with pure pixel-artifact supervision. The method avoids complex annotations, reinforcement learning, or carefully designed Chain-of-Thought (CoT) supervision, significantly simplifying training data construction.\n- **Evaluation Results**: On in-the-wild benchmarks, AlignGemini improved average accuracy by 9.5%. It achieved robust performance even with simplified training data.\n- **Comparison with Related Work**: AlignGemini consistently outperforms existing detectors across five datasets. Furthermore, it achieves superior generalization while substantially reducing training data complexity, demonstrating that generalization in AIGI detection stems from aligning supervision with model inductive biases rather than merely scaling data volume or diversity.\n\n## 4. Conclusion\nThis paper reveals the fundamental \"task-model misalignment\" in AIGI detection, where VLMs excel at semantics but struggle with pixels, while traditional vision models show the opposite trend. By proposing the \"Task-Model Alignment\" principle, the authors constructed AlignGemini, which decouples detection into semantic consistency checking and pixel-artifact detection, handled by the most suitable model branches respectively. This approach significantly improves detection accuracy and generalization with simplified training data, providing a new principled framework for designing efficient and generalizable AIGI detectors.",
+      "render_excerpt": "机构: Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology<br>本文揭示了AIGI检测中根本性的“任务-模型”错位问题，即VLM擅长语义但弱于像素，传统视觉模型反之。通过提出“任务-模型对齐”原则，作者构建了AlignGemini，将检测任务解耦为语义一致性检查和像素伪影检测，并分别由最适合的模型分支处理。这种方法不仅在简化训练数据的前提下显著提升了检测精度和泛化能力，还为设计通用且高效的AIGI检测器提供了新的原则性框架。",
+      "render_excerpt_en": "Institution: Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology<br>## 1. What the Paper Did - **Background**: Vision Language Models (VLMs) are increasingly adopted for AI-generated image (AIGI) detection. However, converting VLMs into reliable detectors is resource-intensive, and the resulting models often suffer from hallucinations and poor generalization.",
+      "source_discovery": {
+        "source": "arxiv",
+        "query": "manual-arxiv-id",
+        "captured_at": "2025-12-07T09:19:00Z"
+      },
+      "source_summary": {
+        "provider": "dashscope-compatible",
+        "model": "qwen3.6-plus",
+        "captured_at": "2026-05-09"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "schema_version": "v1",
+      "paper_id": "2504.01396",
+      "date": "2026-05-09",
+      "title": "All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning",
+      "authors": [
+        "Zheng Yang",
+        "Ruoxin Chen",
+        "Zhiyuan Yan",
+        "Ke-Yue Zhang",
+        "Xinghe Fu",
+        "Shuang Wu",
+        "Xiujun Shu",
+        "Taiping Yao",
+        "Shouhong Ding",
+        "Zequn Qin",
+        "Xi Li"
+      ],
+      "abstract": "The exponential growth of AI-generated images (AIGIs) underscores the urgent need for robust and generalizable detection methods. In this paper, we establish two key principles for AIGI detection through systematic analysis: (1) All Patches Matter: Unlike conventional image classification where discriminative features concentrate on object-centric regions, each patch in AIGIs inherently contains synthetic artifacts due to the uniform generation process, suggesting that every patch serves as an important artifact source for detection. (2) More Patches Better: Leveraging distributed artifacts across more patches improves detection robustness by capturing complementary forensic evidence and reducing over-reliance on specific patches, thereby enhancing robustness and generalization. However, our counterfactual analysis reveals an undesirable phenomenon: naively trained detectors often exhibit a Few-Patch Bias, discriminating between real and synthetic images based on minority patches. We identify Lazy Learner as the root cause: detectors preferentially learn conspicuous artifacts in limited patches while neglecting broader artifact distributions. To address this bias, we propose the Panoptic Patch Learning (PPL) framework, involving: (1) Random Patch Replacement that randomly substitutes synthetic patches with real counterparts to compel models to identify artifacts in underutilized regions, encouraging the broader use of more patches; (2) Patch-wise Contrastive Learning that enforces consistent discriminative capability across all patches, ensuring uniform utilization of all patches. Extensive experiments across two different settings on several benchmarks verify the effectiveness of our approach.",
+      "links": {
+        "abs": "http://arxiv.org/abs/2504.01396v3",
+        "pdf": "https://arxiv.org/pdf/2504.01396v3",
+        "github": null,
+        "blog": null
+      },
+      "institution": "Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay",
+      "category_key": "agent",
+      "category_alias": "manual-arxiv-id",
+      "category_display": {
+        "zh": "Agent",
+        "en": "Agent"
+      },
+      "summary_cn": "## 文章做了什么\n- **背景**：随着生成式AI模型的快速发展，AI生成图像（AIGIs）呈指数级增长，对内容真实性和信息安全构成威胁。由于生成模型架构不断更新，检测器需要具备强大的泛化能力以应对未知的生成模型。\n- **已有工作为什么解决不了**：传统的图像分类任务中，判别性特征通常集中在物体中心区域。然而，现有AIGI检测器存在“少补丁偏差”（Few-Patch Bias），即模型倾向于依赖少数几个具有明显伪影的补丁进行分类，而忽略了其他包含合成痕迹的补丁。这种现象被归因于“懒惰学习者”（Lazy Learner）效应，导致模型未能充分利用AIGI中均匀分布的全局伪影信息，从而限制了其鲁棒性和泛化能力。\n\n## 文章的核心贡献点\n- **提出了一个全景补丁学习（Panoptic Patch Learning, PPL）框架**：基于两个核心原则——“所有补丁都很重要”（All Patches Matter）和“越多补丁越好”（More Patches Better），旨在强制模型均匀利用图像中的所有局部区域进行检测。\n- **挑战1：克服“懒惰学习者”导致的少补丁偏差**。难点在于模型容易收敛到最显著的局部伪影而忽略全局分布。PPL通过**随机补丁替换（Random Patch Replacement）**策略，随机用真实补丁替换合成补丁，迫使模型去识别那些原本被忽视区域的细微伪影，从而鼓励模型利用更广泛的补丁信息。\n- **挑战2：确保所有补丁具有一致的判别能力**。难点在于不同补丁间的伪影强度不一，难以保证模型对每个补丁都给予同等重视。PPL引入**补丁级对比学习（Patch-wise Contrastive Learning）**，强制模型在所有补丁上保持一致的判别能力，确保对全图伪影的均匀利用，提升检测的鲁棒性。\n\n## 实现与部署，evaluation 结果，要有和相关工作对比\n- **实验设置**：在多个基准数据集上进行评估，包括GenImage、DRCT-2M、AIGCDetectionBenchmark以及野外数据Chameleon。\n- **结果对比**：PPL在跨数据集和跨生成模型的泛化测试中均优于现有的最先进方法（SOTA）。可视化注意力地图显示，与传统训练方法相比，PPL产生的注意力分布更加均匀，覆盖了整个图像区域，证明了其有效捕捉全面伪影的能力。\n- **鲁棒性**：实验验证了PPL在不同设置下的有效性，表明通过利用更多补丁的分布式伪影，显著提高了检测器的鲁棒性和泛化性能。\n\n#### 总结\n本文揭示了AIGI检测中“所有补丁都包含伪影”的特性，并指出了现有方法因“懒惰学习”而导致的少补丁偏差问题。提出的PPL框架通过随机补丁替换和补丁级对比学习，成功迫使模型均匀利用所有补丁信息。该方法在多个基准测试中展现了卓越的泛化能力和鲁棒性，为提升AI生成图像检测的性能提供了新的视角和技术路径。",
+      "summary_en": "## 1. What the Paper Does\n- **Background**: The exponential growth of AI-generated images (AIGIs) poses significant challenges to content authenticity and information security. Due to the continuous evolution of generative models, detectors require strong generalizability to handle unseen generators.\n- **Why Existing Works Fail**: Traditional image classification relies on object-centric features. However, existing AIGI detectors suffer from \"Few-Patch Bias,\" where models disproportionately rely on a minority of patches with conspicuous artifacts. This \"Lazy Learner\" effect causes detectors to neglect the uniform distribution of synthetic artifacts across all patches, limiting robustness and generalization.\n\n## Core Contributions\n- **Proposed Panoptic Patch Learning (PPL) Framework**: Built on two principles: \"All Patches Matter\" (every patch contains artifacts) and \"More Patches Better\" (leveraging distributed artifacts improves robustness).\n- **Challenge 1: Overcoming Few-Patch Bias caused by Lazy Learning**. The difficulty lies in models converging on obvious local artifacts while ignoring global cues. PPL addresses this via **Random Patch Replacement**, which randomly substitutes synthetic patches with real ones, compelling the model to identify artifacts in underutilized regions and encouraging broader patch usage.\n- **Challenge 2: Ensuring Consistent Discriminative Capability Across All Patches**. The challenge is varying artifact strengths across patches. PPL introduces **Patch-wise Contrastive Learning** to enforce uniform discriminative capability across all patches, ensuring comprehensive utilization of forensic evidence and enhancing robustness.\n\n## Implementation and Evaluation\n- **Experimental Setup**: Evaluated on multiple benchmarks including GenImage, DRCT-2M, AIGCDetectionBenchmark, and the in-the-wild Chameleon dataset.\n- **Results & Comparison**: PPL outperforms state-of-the-art methods in cross-dataset and cross-generator generalization tests. Attention map visualizations demonstrate that PPL achieves a more uniform attention distribution compared to naively trained models, confirming its ability to capture comprehensive artifacts.\n- **Robustness**: Extensive experiments verify that leveraging distributed artifacts through PPL significantly enhances detection robustness and generalization across various settings.\n\n## 4. Conclusion\nThis paper identifies the uniform distribution of artifacts in AIGIs and highlights the \"Few-Patch Bias\" in existing detectors due to lazy learning. The proposed PPL framework, utilizing random patch replacement and patch-wise contrastive learning, successfully forces models to uniformly utilize all patches. The method demonstrates superior generalization and robustness across multiple benchmarks, offering a new perspective and technical pathway for improving AI-generated image detection.",
+      "render_excerpt": "机构: Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay<br>本文揭示了AIGI检测中“所有补丁都包含伪影”的特性，并指出了现有方法因“懒惰学习”而导致的少补丁偏差问题。提出的PPL框架通过随机补丁替换和补丁级对比学习，成功迫使模型均匀利用所有补丁信息。该方法在多个基准测试中展现了卓越的泛化能力和鲁棒性，为提升AI生成图像检测的性能提供了新的视角和技术路径。",
+      "render_excerpt_en": "Institution: Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay<br>## 1. What the Paper Does - **Background**: The exponential growth of AI-generated images (AIGIs) poses significant challenges to content authenticity and information security. Due to the continuous evolution of generative models, detectors require strong generalizability to handle unseen generators.",
+      "source_discovery": {
+        "source": "arxiv",
+        "query": "manual-arxiv-id",
+        "captured_at": "2025-04-02T06:32:09Z"
+      },
+      "source_summary": {
+        "provider": "dashscope-compatible",
+        "model": "qwen3.6-plus",
+        "captured_at": "2026-05-09"
       },
       "provenance": {
         "institution": "dashscope|pdf-first-page-hint",

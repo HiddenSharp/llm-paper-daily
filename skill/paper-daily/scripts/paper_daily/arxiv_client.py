@@ -56,6 +56,23 @@ class ArxivClient:
         ]
         return candidates, total
 
+    def get_by_arxiv_ids(self, arxiv_ids: list[str]) -> list[PaperCandidate]:
+        normalized_ids = [normalize_arxiv_id(arxiv_id) for arxiv_id in arxiv_ids]
+        params = {
+            "id_list": ",".join(normalized_ids),
+            "max_results": len(normalized_ids),
+        }
+        root = self._fetch(params)
+        candidates = [
+            parse_entry(entry, keyword="manual-arxiv-id", keyword_rank=0, query_total=len(normalized_ids))
+            for entry in root.findall("atom:entry", ATOM_NS)
+        ]
+        by_id = {candidate.arxiv_id: candidate for candidate in candidates}
+        missing = [arxiv_id for arxiv_id in normalized_ids if arxiv_id not in by_id]
+        if missing:
+            raise RuntimeError(f"arXiv id not found: {', '.join(missing)}")
+        return [by_id[arxiv_id] for arxiv_id in normalized_ids]
+
     def _fetch(self, params: dict) -> ET.Element:
         wait = self.delay_seconds - (time.monotonic() - self._last_request)
         if wait > 0:
@@ -131,4 +148,3 @@ def parse_entry(entry: ET.Element, *, keyword: str, keyword_rank: int, query_tot
 
 def clean_text(value: str) -> str:
     return " ".join(value.split())
-

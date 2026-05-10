@@ -1,7 +1,7 @@
 <h2 align='center'>llm-paper-daily 日常论文精选</h2>
 <div align='center'>
 
-[![Status](https://img.shields.io/badge/status-Update_05.09_17:06-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
+[![Status](https://img.shields.io/badge/status-Update_05.10_13:34-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
 
 </div>
 
@@ -11,10 +11,12 @@
 
 <!-- paper-daily:readme:updates:start -->
 <details>
-  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月09日 17:06</sub></summary>
+  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月10日 13:34</sub></summary>
 <br>
 
-- StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction 
+- Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable 
+- AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment 
+- All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning 
 </details>
 <!-- paper-daily:readme:updates:end -->
 
@@ -38,6 +40,9 @@ Agent 会使用仓库里的 `paper-subscribe` skill，只读取公开的 `feed-p
 
 | &nbsp;Date&nbsp;&nbsp; | Paper | Links & Summary |
 | --- | --- | --- |
+| <span style='display: inline-block; width: 42px;'>05-09</span> | **Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable**<br><sub>机构: Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology<br>本文揭示了现有AI生成图像检测器泛化能力差的根本原因不仅在于像素级的语义偏差，更在于被忽视的频率级不对齐。通过提出双数据对齐（DDA）方法，同时校正像素和频率域的分布，有效去除了虚假相关性。结合新提出的DDA-COCO和EvalGEN基准， extensive 实验证明该方法能显著提升检测器在多样化、 unseen 生成模型场景下的鲁棒性和泛化性能，为构建更通用的AIGI检测系统提供了新思路。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2505.14359v6)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2505.14359.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/roy-ch/Dual-Data-Alignment)</div> |
+| <span style='display: inline-block; width: 42px;'>05-09</span> | **AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment**<br><sub>机构: Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology<br>本文揭示了AIGI检测中根本性的“任务-模型”错位问题，即VLM擅长语义但弱于像素，传统视觉模型反之。通过提出“任务-模型对齐”原则，作者构建了AlignGemini，将检测任务解耦为语义一致性检查和像素伪影检测，并分别由最适合的模型分支处理。这种方法不仅在简化训练数据的前提下显著提升了检测精度和泛化能力，还为设计通用且高效的AIGI检测器提供了新的原则性框架。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2512.06746v2)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2512.06746.md)  |
+| <span style='display: inline-block; width: 42px;'>05-09</span> | **All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning**<br><sub>机构: Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay<br>本文揭示了AIGI检测中“所有补丁都包含伪影”的特性，并指出了现有方法因“懒惰学习”而导致的少补丁偏差问题。提出的PPL框架通过随机补丁替换和补丁级对比学习，成功迫使模型均匀利用所有补丁信息。该方法在多个基准测试中展现了卓越的泛化能力和鲁棒性，为提升AI生成图像检测的性能提供了新的视角和技术路径。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2504.01396v3)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2504.01396.md)  |
 | <span style='display: inline-block; width: 42px;'>05-07</span> | **StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction**<br><sub>机构: The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute<br>StraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.06642v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.06642.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/xxyQwQ/StraTA)</div> |
 | <span style='display: inline-block; width: 42px;'>05-06</span> | **FoodCHA: Multi-Modal LLM Agent for Fine-Grained Food Analysis**<br><sub>机构: University of California, San Diego<br>FoodCHA 通过引入分层代理机制，有效解决了食物识别中细粒度属性提取难和标签非规范化的问题。它不仅在精度上显著优于现有的大型视觉语言模型，还通过采用轻量化基座模型提升了实际部署的可行性，为实时、准确的个人营养监测提供了新的技术路径。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.05499v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.05499.md)  |
 | <span style='display: inline-block; width: 42px;'>05-05</span> | **Agent Island: A Saturation- and Contamination-Resistant Benchmark from Multiagent Games**<br><sub>机构: Stanford University<br>本文提出了 Agent Island，一个旨在解决静态基准测试饱和与污染问题的动态多代理博弈环境。通过让LLM代理在类似《幸存者》的环境中进行说服与竞争，该方法能够持续评估模型的战略交互能力。实验结果显示 GPT-5.5 具有显著优势，并揭示了模型间存在的提供商偏好偏见。该工作为追踪LLM在复杂多代理场景下的能力演进提供了新的工具和视角。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.04312v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.04312.md)  |

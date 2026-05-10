@@ -1,47 +1,151 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-09T09:06:35.126351+00:00",
-  "run_date": "2026-05-07",
+  "generated_at": "2026-05-10T05:34:02.697835+00:00",
+  "run_date": "2026-05-09",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.06642",
-      "date": "2026-05-07",
-      "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+      "id": "arxiv:2505.14359",
+      "date": "2026-05-09",
+      "title": "Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Xiangyuan Xue",
-        "Yifan Zhou",
-        "Zidong Wang",
-        "Shengji Tang",
-        "Philip Torr",
-        "Wanli Ouyang",
-        "Lei Bai",
-        "Zhenfei Yin"
+        "Ruoxin Chen",
+        "Junwei Xi",
+        "Zhiyuan Yan",
+        "Ke-Yue Zhang",
+        "Shuang Wu",
+        "Jingyi Xie",
+        "Xu Chen",
+        "Lei Xu",
+        "Isabel Guan",
+        "Taiping Yao",
+        "Shouhong Ding"
       ],
-      "institution": "The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, University of Oxford, University of Georgia, Shenzhen Loop Area Institute",
+      "institution": "Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology",
       "summary": {
-        "zh": "StraTA 通过引入显式的轨迹级策略抽象，解决了现有反应式智能体在长视野决策中面临的探索短视和信用分配难题。该方法通过分层训练和多样化策略机制，显著提升了 LLM 智能体在复杂交互任务中的性能和样本效率，为构建更可靠的长视野智能体提供了新的范式。",
-        "en": "- **Background**: Large language models (LLMs) are increasingly deployed as interactive agents, but optimizing them for long-horizon decision-making remains challenging. Current reinforcement learning (RL) methods are..."
+        "zh": "本文揭示了现有AI生成图像检测器泛化能力差的根本原因不仅在于像素级的语义偏差，更在于被忽视的频率级不对齐。通过提出双数据对齐（DDA）方法，同时校正像素和频率域的分布，有效去除了虚假相关性。结合新提出的DDA-COCO和EvalGEN基准， extensive 实验证明该方法能显著提升检测器在多样化、 unseen 生成模型场景下的鲁棒性和泛化性能，为构建更通用的AIGI检测系统提供了新思路。",
+        "en": "- **Background**: The rapid rise of AI-generated images (AIGIs) necessitates robust detection methods. However, existing detectors are often trained on biased datasets, leading to overfitting on spurious correlations..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.06642v1",
-        "pdf": "https://arxiv.org/pdf/2605.06642v1",
-        "github": "https://github.com/xxyQwQ/StraTA"
+        "abs": "http://arxiv.org/abs/2505.14359v6",
+        "pdf": "https://arxiv.org/pdf/2505.14359v6",
+        "github": "https://github.com/roy-ch/Dual-Data-Alignment"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.06642.md",
-        "summary_en_path": "summary_en/2026-05/2605.06642.md",
-        "summary_zh_url": null,
-        "summary_en_url": null
+        "summary_zh_path": "summary/2026-05/2505.14359.md",
+        "summary_en_path": "summary_en/2026-05/2505.14359.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2505.14359.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2505.14359.md"
       },
       "signals": {
-        "priority_keyword": "Agent"
+        "priority_keyword": "manual-arxiv-id"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2512.06746",
+      "date": "2026-05-09",
+      "title": "AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Ruoxin Chen",
+        "Jiahui Gao",
+        "Kaiqing Lin",
+        "Keyue Zhang",
+        "Yandan Zhao",
+        "Isabel Guan",
+        "Taiping Yao",
+        "Shouhong Ding"
+      ],
+      "institution": "Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology",
+      "summary": {
+        "zh": "本文揭示了AIGI检测中根本性的“任务-模型”错位问题，即VLM擅长语义但弱于像素，传统视觉模型反之。通过提出“任务-模型对齐”原则，作者构建了AlignGemini，将检测任务解耦为语义一致性检查和像素伪影检测，并分别由最适合的模型分支处理。这种方法不仅在简化训练数据的前提下显著提升了检测精度和泛化能力，还为设计通用且高效的AIGI检测器提供了新的原则性框架。",
+        "en": "- **Background**: Vision Language Models (VLMs) are increasingly adopted for AI-generated image (AIGI) detection. However, converting VLMs into reliable detectors is resource-intensive, and the resulting models often..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2512.06746v2",
+        "pdf": "https://arxiv.org/pdf/2512.06746v2",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2512.06746.md",
+        "summary_en_path": "summary_en/2026-05/2512.06746.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2512.06746.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2512.06746.md"
+      },
+      "signals": {
+        "priority_keyword": "manual-arxiv-id"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2504.01396",
+      "date": "2026-05-09",
+      "title": "All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Zheng Yang",
+        "Ruoxin Chen",
+        "Zhiyuan Yan",
+        "Ke-Yue Zhang",
+        "Xinghe Fu",
+        "Shuang Wu",
+        "Xiujun Shu",
+        "Taiping Yao",
+        "Shouhong Ding",
+        "Zequn Qin",
+        "Xi Li"
+      ],
+      "institution": "Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay",
+      "summary": {
+        "zh": "本文揭示了AIGI检测中“所有补丁都包含伪影”的特性，并指出了现有方法因“懒惰学习”而导致的少补丁偏差问题。提出的PPL框架通过随机补丁替换和补丁级对比学习，成功迫使模型均匀利用所有补丁信息。该方法在多个基准测试中展现了卓越的泛化能力和鲁棒性，为提升AI生成图像检测的性能提供了新的视角和技术路径。",
+        "en": "- **Background**: The exponential growth of AI-generated images (AIGIs) poses significant challenges to content authenticity and information security. Due to the continuous evolution of generative models, detectors..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2504.01396v3",
+        "pdf": "https://arxiv.org/pdf/2504.01396v3",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2504.01396.md",
+        "summary_en_path": "summary_en/2026-05/2504.01396.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2504.01396.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2504.01396.md"
+      },
+      "signals": {
+        "priority_keyword": "manual-arxiv-id"
       },
       "provenance": {
         "institution": "dashscope|pdf-first-page-hint",
