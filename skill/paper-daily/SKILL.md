@@ -46,6 +46,12 @@ Run the end-to-end local pipeline against the current repo:
 python3 skill/paper-daily/scripts/run_daily.py --repo-root . --date YYYY-MM-DD
 ```
 
+Manually publish specific arXiv IDs with an explicit display date:
+
+```bash
+python3 skill/paper-daily/scripts/run_daily.py --repo-root . --date YYYY-MM-DD --arxiv-id 2505.14359v6 --arxiv-id 2512.06746
+```
+
 Inspect a specific date without changing README/feed/state/summary artifacts:
 
 ```bash
