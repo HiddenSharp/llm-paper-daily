@@ -1,50 +1,49 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-10T05:34:02.697835+00:00",
-  "run_date": "2026-05-09",
+  "generated_at": "2026-05-11T05:13:46.123381+00:00",
+  "run_date": "2026-05-08",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2505.14359",
-      "date": "2026-05-09",
-      "title": "Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable",
+      "id": "arxiv:2605.07926",
+      "date": "2026-05-08",
+      "title": "AgentEscapeBench: Evaluating Out-of-Domain Tool-Grounded Reasoning in LLM Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Ruoxin Chen",
-        "Junwei Xi",
-        "Zhiyuan Yan",
-        "Ke-Yue Zhang",
-        "Shuang Wu",
-        "Jingyi Xie",
-        "Xu Chen",
-        "Lei Xu",
-        "Isabel Guan",
-        "Taiping Yao",
-        "Shouhong Ding"
+        "Zhengkang Guo",
+        "Yiyang Li",
+        "Lin Qiu",
+        "Xiaohua Wang",
+        "Jingwen Xv",
+        "Dongyu Ru",
+        "Xiaoyu Li",
+        "Xiaoqing Zheng",
+        "Xuezhi Cao",
+        "Xunliang Cai"
       ],
-      "institution": "Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology",
+      "institution": "Fudan University, Meituan Longcat Team",
       "summary": {
-        "zh": "本文揭示了现有AI生成图像检测器泛化能力差的根本原因不仅在于像素级的语义偏差，更在于被忽视的频率级不对齐。通过提出双数据对齐（DDA）方法，同时校正像素和频率域的分布，有效去除了虚假相关性。结合新提出的DDA-COCO和EvalGEN基准， extensive 实验证明该方法能显著提升检测器在多样化、 unseen 生成模型场景下的鲁棒性和泛化性能，为构建更通用的AIGI检测系统提供了新思路。",
-        "en": "- **Background**: The rapid rise of AI-generated images (AIGIs) necessitates robust detection methods. However, existing detectors are often trained on biased datasets, leading to overfitting on spurious correlations..."
+        "zh": "AgentEscapeBench 填补了评估 LLM 代理在陌生环境中进行长程、工具 grounding 推理能力的空白。通过引入基于 DAG 的密室逃脱任务，该基准测试揭示了当前代理在状态跟踪和复杂依赖处理上的局限性，为未来提升代理的通用推理、行动和适应能力提供了重要的诊断测试床。",
+        "en": "- **Background**: As LLM-based agents increasingly rely on external tools, it is critical to evaluate their ability to sustain tool-grounded reasoning beyond familiar workflows and short-range interactions. -..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2505.14359v6",
-        "pdf": "https://arxiv.org/pdf/2505.14359v6",
-        "github": "https://github.com/roy-ch/Dual-Data-Alignment"
+        "abs": "http://arxiv.org/abs/2605.07926v1",
+        "pdf": "https://arxiv.org/pdf/2605.07926v1",
+        "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2505.14359.md",
-        "summary_en_path": "summary_en/2026-05/2505.14359.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2505.14359.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2505.14359.md"
+        "summary_zh_path": "summary/2026-05/2605.07926.md",
+        "summary_en_path": "summary_en/2026-05/2605.07926.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.07926.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.07926.md"
       },
       "signals": {
-        "priority_keyword": "manual-arxiv-id"
+        "priority_keyword": "Agent"
       },
       "provenance": {
         "institution": "dashscope|pdf-first-page-hint",
@@ -58,42 +57,39 @@
       }
     },
     {
-      "id": "arxiv:2512.06746",
-      "date": "2026-05-09",
-      "title": "AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment",
+      "id": "arxiv:2605.07830",
+      "date": "2026-05-08",
+      "title": "CyBiasBench: Benchmarking Bias in LLM Agents for Cyber-Attack Scenarios",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Ruoxin Chen",
-        "Jiahui Gao",
-        "Kaiqing Lin",
-        "Keyue Zhang",
-        "Yandan Zhao",
-        "Isabel Guan",
-        "Taiping Yao",
-        "Shouhong Ding"
+        "Taein Lim",
+        "Seongyong Ju",
+        "Munhyeok Kim",
+        "Hyunjun Kim",
+        "Hoki Kim"
       ],
-      "institution": "Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology",
+      "institution": "Chung-Ang University, Myongji University",
       "summary": {
-        "zh": "本文揭示了AIGI检测中根本性的“任务-模型”错位问题，即VLM擅长语义但弱于像素，传统视觉模型反之。通过提出“任务-模型对齐”原则，作者构建了AlignGemini，将检测任务解耦为语义一致性检查和像素伪影检测，并分别由最适合的模型分支处理。这种方法不仅在简化训练数据的前提下显著提升了检测精度和泛化能力，还为设计通用且高效的AIGI检测器提供了新的原则性框架。",
-        "en": "- **Background**: Vision Language Models (VLMs) are increasingly adopted for AI-generated image (AIGI) detection. However, converting VLMs into reliable detectors is resource-intensive, and the resulting models often..."
+        "zh": "本文首次系统性地揭示并量化了LLM网络安全智能体中的“攻击选择偏差”现象。通过引入 CyBiasBench 基准，作者证明了不同智能体具有独特的、稳定的攻击偏好，且这种偏好具有惯性，难以通过简单的提示工程纠正，同时也不直接决定攻击的成功率。这一发现对于理解LLM智能体的行为风险、优化红队自动化策略以及制定更全面的AI安全治理标准具有重要意义。",
+        "en": "- **Background**: Large Language Models (LLMs) are increasingly deployed as autonomous agents in offensive cybersecurity tasks such as penetration testing and red-teaming. Current evaluations primarily focus on..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2512.06746v2",
-        "pdf": "https://arxiv.org/pdf/2512.06746v2",
-        "github": null
+        "abs": "http://arxiv.org/abs/2605.07830v1",
+        "pdf": "https://arxiv.org/pdf/2605.07830v1",
+        "github": "https://github.com/Harry24k/CyBiasBench"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2512.06746.md",
-        "summary_en_path": "summary_en/2026-05/2512.06746.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2512.06746.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2512.06746.md"
+        "summary_zh_path": "summary/2026-05/2605.07830.md",
+        "summary_en_path": "summary_en/2026-05/2605.07830.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.07830.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.07830.md"
       },
       "signals": {
-        "priority_keyword": "manual-arxiv-id"
+        "priority_keyword": "Agent"
       },
       "provenance": {
         "institution": "dashscope|pdf-first-page-hint",
@@ -107,45 +103,144 @@
       }
     },
     {
-      "id": "arxiv:2504.01396",
-      "date": "2026-05-09",
-      "title": "All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning",
+      "id": "arxiv:2605.08060",
+      "date": "2026-05-08",
+      "title": "The Memory Curse: How Expanded Recall Erodes Cooperative Intent in LLM Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Zheng Yang",
-        "Ruoxin Chen",
-        "Zhiyuan Yan",
-        "Ke-Yue Zhang",
-        "Xinghe Fu",
-        "Shuang Wu",
-        "Xiujun Shu",
-        "Taiping Yao",
-        "Shouhong Ding",
-        "Zequn Qin",
-        "Xi Li"
+        "Jiayuan Liu",
+        "Tianqin Li",
+        "Shiyi Du",
+        "Xin Luo",
+        "Haoxuan Zeng",
+        "Emanuel Tewolde",
+        "Tai Sing Lee",
+        "Tonghan Wang",
+        "Carl Kingsford",
+        "Vincent Conitzer"
       ],
-      "institution": "Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay",
+      "institution": "Carnegie Mellon University, University of Michigan, Harvard University",
       "summary": {
-        "zh": "本文揭示了AIGI检测中“所有补丁都包含伪影”的特性，并指出了现有方法因“懒惰学习”而导致的少补丁偏差问题。提出的PPL框架通过随机补丁替换和补丁级对比学习，成功迫使模型均匀利用所有补丁信息。该方法在多个基准测试中展现了卓越的泛化能力和鲁棒性，为提升AI生成图像检测的性能提供了新的视角和技术路径。",
-        "en": "- **Background**: The exponential growth of AI-generated images (AIGIs) poses significant challenges to content authenticity and information security. Due to the continuous evolution of generative models, detectors..."
+        "zh": "本文揭示了 LLM 多智能体系统中一个反直觉的现象：“记忆诅咒”。研究表明，简单地扩展上下文窗口并不总能带来更好的社会协调结果，反而可能因智能体对历史负面信息的过度关注和详细推理而破坏合作。文章通过词汇分析、针对性微调和记忆净化实验，证明了合作崩溃源于前瞻性意图的侵蚀以及显式推理对负面记忆的放大。这一发现重新定义了记忆在多智能体行为中的作用，指出长回忆既可能 destabilize（破坏）也可能...",
+        "en": "- **Background**: Context window expansion in Large Language Models (LLMs) is often viewed as a straightforward capability upgrade. Classical game theory suggests that longer interaction histories should facilitate..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2504.01396v3",
-        "pdf": "https://arxiv.org/pdf/2504.01396v3",
+        "abs": "http://arxiv.org/abs/2605.08060v1",
+        "pdf": "https://arxiv.org/pdf/2605.08060v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2504.01396.md",
-        "summary_en_path": "summary_en/2026-05/2504.01396.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2504.01396.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2504.01396.md"
+        "summary_zh_path": "summary/2026-05/2605.08060.md",
+        "summary_en_path": "summary_en/2026-05/2605.08060.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.08060.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.08060.md"
       },
       "signals": {
-        "priority_keyword": "manual-arxiv-id"
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.08083",
+      "date": "2026-05-08",
+      "title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Tong Zheng",
+        "Haolin Liu",
+        "Chengsong Huang",
+        "Huiwen Bao",
+        "Sheng Zhang",
+        "Rui Liu",
+        "Runpeng Dai",
+        "Ruibo Chen",
+        "Chenxi Liu",
+        "Tianyi Xiong",
+        "Xidong Wu",
+        "Hongming Zhang",
+        "Heng Huang"
+      ],
+      "institution": "University of Maryland, University of Virginia, Washington University in St. Louis, University of North Carolina, Google, Meta",
+      "summary": {
+        "zh": "AutoTTS 通过改变人类在 TTS 开发中的角色，从手动调整 heuristic 转向构建自动化发现环境，成功解决了 TTS 策略设计中搜索空间大和评估成本高的问题。该方法以极低的成本自动发现了优于人工设计的 TTS 策略，并在多个基准和模型规模上表现出良好的泛化能力，为高效利用推理时计算资源提供了新范式。",
+        "en": "- **Background**: Test-time scaling (TTS) has emerged as a powerful paradigm for improving large language model (LLM) performance by allocating additional computation during inference. - **Limitations of Existing..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.08083v1",
+        "pdf": "https://arxiv.org/pdf/2605.08083v1",
+        "github": "https://github.com/zhengkid/AutoTTS"
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.08083.md",
+        "summary_en_path": "summary_en/2026-05/2605.08083.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.08083.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.08083.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.07840",
+      "date": "2026-05-08",
+      "title": "RelAgent: LLM Agents as Data Scientists for Relational Learning",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Xingyue Huang",
+        "Louis Tichelman",
+        "Jinwoo Kim",
+        "Krzysztof Olejniczak",
+        "İsmail İlkan Ceylan"
+      ],
+      "institution": "University of Oxford, TU Wien, AITHYRA, KAIST",
+      "summary": {
+        "zh": "RelAgent 创新性地将 LLM 作为搜索代理而非直接的预测模型，用于自动化关系学习中的特征工程。通过“搜索-执行”分离的架构，它既利用了 LLM 强大的代码生成和推理能力来探索复杂的特征空间，又保留了传统 SQL 和经典模型的高效性、确定性和可解释性。这种方法有效克服了现有图模型和表格方法在灵活性与可解释性之间的权衡，为关系数据库上的自动化机器学习提供了一条可扩展且实用的新路径。",
+        "en": "- **Background**: Relational learning aims to automate predictive modeling over relational databases. Traditionally, this requires data analysts to manually write complex SQL queries for feature construction (joins,..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.07840v1",
+        "pdf": "https://arxiv.org/pdf/2605.07840v1",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.07840.md",
+        "summary_en_path": "summary_en/2026-05/2605.07840.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.07840.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.07840.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
       },
       "provenance": {
         "institution": "dashscope|pdf-first-page-hint",
