@@ -1,7 +1,7 @@
 <h2 align='center'>llm-paper-daily 日常论文精选</h2>
 <div align='center'>
 
-[![Status](https://img.shields.io/badge/status-Update_05.10_13:34-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
+[![Status](https://img.shields.io/badge/status-Update_05.13_11:30-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
 
 </div>
 
@@ -11,12 +11,14 @@
 
 <!-- paper-daily:readme:updates:start -->
 <details>
-  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月10日 13:34</sub></summary>
+  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月13日 11:30</sub></summary>
 <br>
 
-- Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable 
-- AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment 
-- All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning 
+- Iterative Audit Convergence in LLM-Managed Multi-Agent Systems: A Case Study in Prompt Engineering Quality Assurance 
+- Agent-Based Post-Hoc Correction of Agricultural Yield Forecasts 
+- Predicting Decisions of AI Agents from Limited Interaction through Text-Tabular Modeling 
+- ProfiliTable: Profiling-Driven Tabular Data Processing via Agentic Workflows 
+- PRISM: Pareto-Efficient Retrieval over Intent-Aware Structured Memory for Long-Horizon Agents 
 </details>
 <!-- paper-daily:readme:updates:end -->
 
@@ -40,6 +42,11 @@ Agent 会使用仓库里的 `paper-subscribe` skill，只读取公开的 `feed-p
 
 | &nbsp;Date&nbsp;&nbsp; | Paper | Links & Summary |
 | --- | --- | --- |
+| <span style='display: inline-block; width: 42px;'>05-12</span> | **Iterative Audit Convergence in LLM-Managed Multi-Agent Systems: A Case Study in Prompt Engineering Quality Assurance**<br><sub>机构: Swift (North) AI Lab, The Swift Group, LLC; Capitol Technology University<br>本文通过一个实证案例研究，展示了在多智能体 LLM 系统中应用迭代式代理驱动审计的有效性。研究不仅揭示了提示词规范中常见的七类一致性缺陷，还观察到了审计过程中的非单调收敛行为。提出的审计协议和分类法为提升提示词工程的质量保证提供了具体指导，强调了在多文档环境中进行结构化、跨文件验证的重要性。尽管研究局限于单一系统和同一家族 LLM，但其方法论为未来的泛化研究奠定了基础。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12280v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12280.md)  |
+| <span style='display: inline-block; width: 42px;'>05-12</span> | **Agent-Based Post-Hoc Correction of Agricultural Yield Forecasts**<br><sub>机构: University of Aberdeen, University of East Anglia, UiT The Arctic University of Norway<br>本文针对商业农业中数据稀缺导致产量预测不准的问题，提出了一种基于LLM代理的事后修正方法。通过引入农业领域知识（阶段检测、偏差学习、范围验证），该方法有效解决了传统模型违反生长规律和存在系统性偏差的问题。实验表明，该方法能显著提升多种主流预测模型（XGBoost, Random Forest, Moirai2）的精度，且无需额外数据采集或模型重训，具有极高的实际部署价值。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12375v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12375.md)  |
+| <span style='display: inline-block; width: 42px;'>05-12</span> | **Predicting Decisions of AI Agents from Limited Interaction through Text-Tabular Modeling**<br><sub>机构: Technion – Israel Institute of Technology<br>本文提出了一种新颖的文本表格建模方法，用于在有限交互下预测 AI 代理的决策。通过结合结构化游戏数据和“LLM-as-Observer”提取的隐藏表征，该方法在无需访问对手内部逻辑的情况下，显著提升了预测准确性。研究证明了利用 LLM 隐藏状态作为特征编码器在少样本对手建模中的有效性，为黑盒环境下的智能体交互预测提供了新的技术路径。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12411v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12411.md)  |
+| <span style='display: inline-block; width: 42px;'>05-12</span> | **ProfiliTable: Profiling-Driven Tabular Data Processing via Agentic Workflows**<br><sub>机构: Peking University, Institute of Computing Technology, Chinese Academy of Sciences<br>ProfiliTable 通过引入动态 profiling 和多智能体协作机制，有效解决了现有 LLM 基于表格处理方法在面对模糊指令和复杂任务时的局限性。其核心创新在于构建了“探索-合成-反馈”的闭环工作流，显著提升了表格数据处理的自动化水平和代码生成的语义准确性，为现实世界中复杂的数据清洗和转换任务提供了 robust 且 compliant 的解决方案。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12376v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12376.md)  |
+| <span style='display: inline-block; width: 42px;'>05-12</span> | **PRISM: Pareto-Efficient Retrieval over Intent-Aware Structured Memory for Long-Horizon Agents**<br><sub>机构: Singapore Management University, The Ohio State University, Fudan University<br>PRISM 通过创新地将检索形式化为类型化路径模板上的最小代价选择，并配合 LLM 侧的压缩步骤，成功解决了长周期智能体中的记忆管理难题。它在无需训练的情况下，以极低的上下文成本实现了高准确率的证据检索，为长 horizon 代理系统的部署提供了高效且经济的解决方案。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12260v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12260.md)  |
 | <span style='display: inline-block; width: 42px;'>05-09</span> | **Dual Data Alignment Makes AI-Generated Image Detector Easier Generalizable**<br><sub>机构: Tencent YouTu Lab, East China University of Science and Technology, Peking University, Renmin University of China, Shenzhen University, Hong Kong University of Science and Technology<br>本文揭示了现有AI生成图像检测器泛化能力差的根本原因不仅在于像素级的语义偏差，更在于被忽视的频率级不对齐。通过提出双数据对齐（DDA）方法，同时校正像素和频率域的分布，有效去除了虚假相关性。结合新提出的DDA-COCO和EvalGEN基准， extensive 实验证明该方法能显著提升检测器在多样化、 unseen 生成模型场景下的鲁棒性和泛化性能，为构建更通用的AIGI检测系统提供了新思路。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2505.14359v6)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2505.14359.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/roy-ch/Dual-Data-Alignment)</div> |
 | <span style='display: inline-block; width: 42px;'>05-09</span> | **AlignGemini: Generalizable AI-Generated Image Detection Through Task-Model Alignment**<br><sub>机构: Tencent Youtu Lab, East China University of Science and Technology, Shenzhen University, Hong Kong University of Science and Technology<br>本文揭示了AIGI检测中根本性的“任务-模型”错位问题，即VLM擅长语义但弱于像素，传统视觉模型反之。通过提出“任务-模型对齐”原则，作者构建了AlignGemini，将检测任务解耦为语义一致性检查和像素伪影检测，并分别由最适合的模型分支处理。这种方法不仅在简化训练数据的前提下显著提升了检测精度和泛化能力，还为设计通用且高效的AIGI检测器提供了新的原则性框架。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2512.06746v2)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2512.06746.md)  |
 | <span style='display: inline-block; width: 42px;'>05-09</span> | **All Patches Matter, More Patches Better: Enhance AI-Generated Image Detection via Panoptic Patch Learning**<br><sub>机构: Zhejiang University, Tencent Youtu Lab, Peking University, Wechat Pay<br>本文揭示了AIGI检测中“所有补丁都包含伪影”的特性，并指出了现有方法因“懒惰学习”而导致的少补丁偏差问题。提出的PPL框架通过随机补丁替换和补丁级对比学习，成功迫使模型均匀利用所有补丁信息。该方法在多个基准测试中展现了卓越的泛化能力和鲁棒性，为提升AI生成图像检测的性能提供了新的视角和技术路径。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2504.01396v3)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2504.01396.md)  |

@@ -1,46 +1,37 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-11T05:13:46.123381+00:00",
-  "run_date": "2026-05-08",
+  "generated_at": "2026-05-13T11:30:23.019605+00:00",
+  "run_date": "2026-05-12",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.07926",
-      "date": "2026-05-08",
-      "title": "AgentEscapeBench: Evaluating Out-of-Domain Tool-Grounded Reasoning in LLM Agents",
+      "id": "arxiv:2605.12280",
+      "date": "2026-05-12",
+      "title": "Iterative Audit Convergence in LLM-Managed Multi-Agent Systems: A Case Study in Prompt Engineering Quality Assurance",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Zhengkang Guo",
-        "Yiyang Li",
-        "Lin Qiu",
-        "Xiaohua Wang",
-        "Jingwen Xv",
-        "Dongyu Ru",
-        "Xiaoyu Li",
-        "Xiaoqing Zheng",
-        "Xuezhi Cao",
-        "Xunliang Cai"
+        "Elias Calboreanu"
       ],
-      "institution": "Fudan University, Meituan Longcat Team",
+      "institution": "Swift (North) AI Lab, The Swift Group, LLC; Capitol Technology University",
       "summary": {
-        "zh": "AgentEscapeBench 填补了评估 LLM 代理在陌生环境中进行长程、工具 grounding 推理能力的空白。通过引入基于 DAG 的密室逃脱任务，该基准测试揭示了当前代理在状态跟踪和复杂依赖处理上的局限性，为未来提升代理的通用推理、行动和适应能力提供了重要的诊断测试床。",
-        "en": "- **Background**: As LLM-based agents increasingly rely on external tools, it is critical to evaluate their ability to sustain tool-grounded reasoning beyond familiar workflows and short-range interactions. -..."
+        "zh": "本文通过一个实证案例研究，展示了在多智能体 LLM 系统中应用迭代式代理驱动审计的有效性。研究不仅揭示了提示词规范中常见的七类一致性缺陷，还观察到了审计过程中的非单调收敛行为。提出的审计协议和分类法为提升提示词工程的质量保证提供了具体指导，强调了在多文档环境中进行结构化、跨文件验证的重要性。尽管研究局限于单一系统和同一家族 LLM，但其方法论为未来的泛化研究奠定了基础。",
+        "en": "- **Background**: In multi-agent Large Language Model (LLM) systems, prompt specifications carry data contracts and integration logic across many interdependent files. However, unlike source code, these natural language..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.07926v1",
-        "pdf": "https://arxiv.org/pdf/2605.07926v1",
+        "abs": "http://arxiv.org/abs/2605.12280v1",
+        "pdf": "https://arxiv.org/pdf/2605.12280v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.07926.md",
-        "summary_en_path": "summary_en/2026-05/2605.07926.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.07926.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.07926.md"
+        "summary_zh_path": "summary/2026-05/2605.12280.md",
+        "summary_en_path": "summary_en/2026-05/2605.12280.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12280.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12280.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -57,87 +48,34 @@
       }
     },
     {
-      "id": "arxiv:2605.07830",
-      "date": "2026-05-08",
-      "title": "CyBiasBench: Benchmarking Bias in LLM Agents for Cyber-Attack Scenarios",
+      "id": "arxiv:2605.12375",
+      "date": "2026-05-12",
+      "title": "Agent-Based Post-Hoc Correction of Agricultural Yield Forecasts",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Taein Lim",
-        "Seongyong Ju",
-        "Munhyeok Kim",
-        "Hyunjun Kim",
-        "Hoki Kim"
+        "Matthew Beddows",
+        "Aiden Durrant",
+        "Georgios Leontidis"
       ],
-      "institution": "Chung-Ang University, Myongji University",
+      "institution": "University of Aberdeen, University of East Anglia, UiT The Arctic University of Norway",
       "summary": {
-        "zh": "本文首次系统性地揭示并量化了LLM网络安全智能体中的“攻击选择偏差”现象。通过引入 CyBiasBench 基准，作者证明了不同智能体具有独特的、稳定的攻击偏好，且这种偏好具有惯性，难以通过简单的提示工程纠正，同时也不直接决定攻击的成功率。这一发现对于理解LLM智能体的行为风险、优化红队自动化策略以及制定更全面的AI安全治理标准具有重要意义。",
-        "en": "- **Background**: Large Language Models (LLMs) are increasingly deployed as autonomous agents in offensive cybersecurity tasks such as penetration testing and red-teaming. Current evaluations primarily focus on..."
+        "zh": "本文针对商业农业中数据稀缺导致产量预测不准的问题，提出了一种基于LLM代理的事后修正方法。通过引入农业领域知识（阶段检测、偏差学习、范围验证），该方法有效解决了传统模型违反生长规律和存在系统性偏差的问题。实验表明，该方法能显著提升多种主流预测模型（XGBoost, Random Forest, Moirai2）的精度，且无需额外数据采集或模型重训，具有极高的实际部署价值。",
+        "en": "This paper addresses the gap between data-rich academic models and data-scarce commercial farming realities by proposing an LLM agent-based post-hoc correction framework. By integrating domain knowledge via phase..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.07830v1",
-        "pdf": "https://arxiv.org/pdf/2605.07830v1",
-        "github": "https://github.com/Harry24k/CyBiasBench"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.07830.md",
-        "summary_en_path": "summary_en/2026-05/2605.07830.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.07830.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.07830.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.08060",
-      "date": "2026-05-08",
-      "title": "The Memory Curse: How Expanded Recall Erodes Cooperative Intent in LLM Agents",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Jiayuan Liu",
-        "Tianqin Li",
-        "Shiyi Du",
-        "Xin Luo",
-        "Haoxuan Zeng",
-        "Emanuel Tewolde",
-        "Tai Sing Lee",
-        "Tonghan Wang",
-        "Carl Kingsford",
-        "Vincent Conitzer"
-      ],
-      "institution": "Carnegie Mellon University, University of Michigan, Harvard University",
-      "summary": {
-        "zh": "本文揭示了 LLM 多智能体系统中一个反直觉的现象：“记忆诅咒”。研究表明，简单地扩展上下文窗口并不总能带来更好的社会协调结果，反而可能因智能体对历史负面信息的过度关注和详细推理而破坏合作。文章通过词汇分析、针对性微调和记忆净化实验，证明了合作崩溃源于前瞻性意图的侵蚀以及显式推理对负面记忆的放大。这一发现重新定义了记忆在多智能体行为中的作用，指出长回忆既可能 destabilize（破坏）也可能...",
-        "en": "- **Background**: Context window expansion in Large Language Models (LLMs) is often viewed as a straightforward capability upgrade. Classical game theory suggests that longer interaction histories should facilitate..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.08060v1",
-        "pdf": "https://arxiv.org/pdf/2605.08060v1",
+        "abs": "http://arxiv.org/abs/2605.12375v1",
+        "pdf": "https://arxiv.org/pdf/2605.12375v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.08060.md",
-        "summary_en_path": "summary_en/2026-05/2605.08060.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.08060.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.08060.md"
+        "summary_zh_path": "summary/2026-05/2605.12375.md",
+        "summary_en_path": "summary_en/2026-05/2605.12375.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12375.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12375.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -154,90 +92,128 @@
       }
     },
     {
-      "id": "arxiv:2605.08083",
-      "date": "2026-05-08",
-      "title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling",
+      "id": "arxiv:2605.12411",
+      "date": "2026-05-12",
+      "title": "Predicting Decisions of AI Agents from Limited Interaction through Text-Tabular Modeling",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Tong Zheng",
-        "Haolin Liu",
-        "Chengsong Huang",
-        "Huiwen Bao",
-        "Sheng Zhang",
-        "Rui Liu",
-        "Runpeng Dai",
-        "Ruibo Chen",
-        "Chenxi Liu",
-        "Tianyi Xiong",
-        "Xidong Wu",
-        "Hongming Zhang",
-        "Heng Huang"
+        "Eilam Shapira",
+        "Moshe Tennenholtz",
+        "Roi Reichart"
       ],
-      "institution": "University of Maryland, University of Virginia, Washington University in St. Louis, University of North Carolina, Google, Meta",
+      "institution": "Technion – Israel Institute of Technology",
       "summary": {
-        "zh": "AutoTTS 通过改变人类在 TTS 开发中的角色，从手动调整 heuristic 转向构建自动化发现环境，成功解决了 TTS 策略设计中搜索空间大和评估成本高的问题。该方法以极低的成本自动发现了优于人工设计的 TTS 策略，并在多个基准和模型规模上表现出良好的泛化能力，为高效利用推理时计算资源提供了新范式。",
-        "en": "- **Background**: Test-time scaling (TTS) has emerged as a powerful paradigm for improving large language model (LLM) performance by allocating additional computation during inference. - **Limitations of Existing..."
+        "zh": "本文提出了一种新颖的文本表格建模方法，用于在有限交互下预测 AI 代理的决策。通过结合结构化游戏数据和“LLM-as-Observer”提取的隐藏表征，该方法在无需访问对手内部逻辑的情况下，显著提升了预测准确性。研究证明了利用 LLM 隐藏状态作为特征编码器在少样本对手建模中的有效性，为黑盒环境下的智能体交互预测提供了新的技术路径。",
+        "en": "- **Background**: AI agents increasingly negotiate and transact in natural language with unfamiliar counterparts (e.g., a buyer bot facing an unknown seller). In these interactions, the counterpart's underlying LLM,..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.08083v1",
-        "pdf": "https://arxiv.org/pdf/2605.08083v1",
-        "github": "https://github.com/zhengkid/AutoTTS"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.08083.md",
-        "summary_en_path": "summary_en/2026-05/2605.08083.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.08083.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.08083.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.07840",
-      "date": "2026-05-08",
-      "title": "RelAgent: LLM Agents as Data Scientists for Relational Learning",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Xingyue Huang",
-        "Louis Tichelman",
-        "Jinwoo Kim",
-        "Krzysztof Olejniczak",
-        "İsmail İlkan Ceylan"
-      ],
-      "institution": "University of Oxford, TU Wien, AITHYRA, KAIST",
-      "summary": {
-        "zh": "RelAgent 创新性地将 LLM 作为搜索代理而非直接的预测模型，用于自动化关系学习中的特征工程。通过“搜索-执行”分离的架构，它既利用了 LLM 强大的代码生成和推理能力来探索复杂的特征空间，又保留了传统 SQL 和经典模型的高效性、确定性和可解释性。这种方法有效克服了现有图模型和表格方法在灵活性与可解释性之间的权衡，为关系数据库上的自动化机器学习提供了一条可扩展且实用的新路径。",
-        "en": "- **Background**: Relational learning aims to automate predictive modeling over relational databases. Traditionally, this requires data analysts to manually write complex SQL queries for feature construction (joins,..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.07840v1",
-        "pdf": "https://arxiv.org/pdf/2605.07840v1",
+        "abs": "http://arxiv.org/abs/2605.12411v1",
+        "pdf": "https://arxiv.org/pdf/2605.12411v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.07840.md",
-        "summary_en_path": "summary_en/2026-05/2605.07840.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.07840.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.07840.md"
+        "summary_zh_path": "summary/2026-05/2605.12411.md",
+        "summary_en_path": "summary_en/2026-05/2605.12411.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12411.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12411.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.12376",
+      "date": "2026-05-12",
+      "title": "ProfiliTable: Profiling-Driven Tabular Data Processing via Agentic Workflows",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Wei Liu",
+        "Yang Gu",
+        "Xi Yan",
+        "Zihan Nan",
+        "Beicheng Xu",
+        "Keyao Ding",
+        "Bin Cui",
+        "Wentao Zhang"
+      ],
+      "institution": "Peking University, Institute of Computing Technology, Chinese Academy of Sciences",
+      "summary": {
+        "zh": "ProfiliTable 通过引入动态 profiling 和多智能体协作机制，有效解决了现有 LLM 基于表格处理方法在面对模糊指令和复杂任务时的局限性。其核心创新在于构建了“探索-合成-反馈”的闭环工作流，显著提升了表格数据处理的自动化水平和代码生成的语义准确性，为现实世界中复杂的数据清洗和转换任务提供了 robust 且 compliant 的解决方案。",
+        "en": "- **Background**: Table processing (including cleaning, transformation, augmentation, and matching) is a foundational yet error-prone stage in real-world data pipelines. While LLM-based approaches show promise, they..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.12376v1",
+        "pdf": "https://arxiv.org/pdf/2605.12376v1",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.12376.md",
+        "summary_en_path": "summary_en/2026-05/2605.12376.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12376.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12376.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.12260",
+      "date": "2026-05-12",
+      "title": "PRISM: Pareto-Efficient Retrieval over Intent-Aware Structured Memory for Long-Horizon Agents",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Jingyi Peng",
+        "Zhongwei Wan",
+        "Weiting Liu",
+        "Qiuzhuang Sun"
+      ],
+      "institution": "Singapore Management University, The Ohio State University, Fudan University",
+      "summary": {
+        "zh": "PRISM 通过创新地将检索形式化为类型化路径模板上的最小代价选择，并配合 LLM 侧的压缩步骤，成功解决了长周期智能体中的记忆管理难题。它在无需训练的情况下，以极低的上下文成本实现了高准确率的证据检索，为长 horizon 代理系统的部署提供了高效且经济的解决方案。",
+        "en": "- **Background**: In long-horizon agentic tasks, conversation history accumulates faster than fixed context windows can hold, making memory management critical for both answer accuracy and serving cost. - **Limitations..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.12260v1",
+        "pdf": "https://arxiv.org/pdf/2605.12260v1",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.12260.md",
+        "summary_en_path": "summary_en/2026-05/2605.12260.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12260.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12260.md"
       },
       "signals": {
         "priority_keyword": "Agent"
