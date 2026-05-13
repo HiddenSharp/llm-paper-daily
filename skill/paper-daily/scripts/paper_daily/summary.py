@@ -153,13 +153,18 @@ def parse_json_block(content: str) -> dict:
     if content.startswith("```"):
         content = re.sub(r"^```(?:json)?", "", content).strip()
         content = re.sub(r"```$", "", content).strip()
+    content = repair_json_escapes(content)
     try:
         return json.loads(content)
     except json.JSONDecodeError:
         match = re.search(r"\{.*\}", content, re.S)
         if not match:
             raise
-        return json.loads(match.group(0))
+        return json.loads(repair_json_escapes(match.group(0)))
+
+
+def repair_json_escapes(content: str) -> str:
+    return re.sub(r'\\(?!["\\/bfnrtu])', r"\\\\", content)
 
 
 def summarize_with_dashscope_http(*, api_key: str, user_prompt: str) -> str:
