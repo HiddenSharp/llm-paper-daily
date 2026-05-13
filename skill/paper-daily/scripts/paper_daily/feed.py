@@ -9,8 +9,11 @@ from .models import CanonicalPaper, FeedItem
 from .render import summary_paths
 
 
-def read_feed_state(skill_root: Path) -> dict:
-    path = skill_root / "output" / "state-feed.json"
+def read_feed_state(repo_root: Path) -> dict:
+    path = repo_root / "data" / "state-feed.json"
+    legacy_path = repo_root / "skill" / "paper-daily" / "output" / "state-feed.json"
+    if not path.exists() and legacy_path.exists():
+        path = legacy_path
     if not path.exists():
         return default_feed_state()
     try:
@@ -72,7 +75,6 @@ def unique_dates(values: list[str]) -> list[str]:
 
 def write_feed_outputs(
     repo_root: Path,
-    skill_root: Path,
     records: list[CanonicalPaper],
     run_date: str,
     *,
@@ -94,24 +96,16 @@ def write_feed_outputs(
         "source_repo": source_repo,
         "items": [canonical_to_feed_item(record, public_base_url=public_base_url).to_dict() for record in records],
     }
-    output_dir = skill_root / "output"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    canonical_output = output_dir / "canonical-papers.json"
-    feed_output = output_dir / "feed-papers.json"
-    state_output = output_dir / "state-feed.json"
-    canonical_output.write_text(json.dumps(canonical_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    feed_output.write_text(json.dumps(feed_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
     root_canonical = repo_root / "data" / "canonical-papers.json"
     root_feed = repo_root / "feed-papers.json"
     root_canonical.parent.mkdir(parents=True, exist_ok=True)
-    root_canonical.write_text(canonical_output.read_text(encoding="utf-8"), encoding="utf-8")
-    root_feed.write_text(feed_output.read_text(encoding="utf-8"), encoding="utf-8")
-    return root_canonical, root_feed, state_output
+    root_canonical.write_text(json.dumps(canonical_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    root_feed.write_text(json.dumps(feed_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return root_canonical, root_feed, repo_root / "data" / "state-feed.json"
 
 
 def write_feed_state(
-    skill_root: Path,
+    repo_root: Path,
     *,
     previous_state: dict | None,
     records: list[CanonicalPaper],
@@ -121,9 +115,9 @@ def write_feed_state(
     selected_date: str | None = None,
 ) -> Path:
     generated_at = datetime.now(timezone.utc).isoformat()
-    output_dir = skill_root / "output"
+    output_dir = repo_root / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
-    previous_state = previous_state or read_feed_state(skill_root)
+    previous_state = previous_state or read_feed_state(repo_root)
     analyzed_dates = list(previous_state.get("analyzed_content_dates", []))
     if updated and selected_date and selected_date not in analyzed_dates:
         analyzed_dates.append(selected_date)

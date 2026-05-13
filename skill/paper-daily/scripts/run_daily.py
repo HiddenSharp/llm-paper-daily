@@ -41,7 +41,7 @@ def main() -> int:
     skill_root = Path(__file__).resolve().parents[1]
     catalog = load_catalog(skill_root / "references" / "institutions.json")
     client = ArxivClient(delay_seconds=args.delay_seconds, timeout_seconds=args.timeout_seconds, retries=args.retries)
-    previous_state = read_feed_state(skill_root)
+    previous_state = read_feed_state(repo_root)
     analyzed_dates = set(previous_state.get("analyzed_content_dates", []))
     previous_latest_updates_date = previous_state.get("latest_updates_date")
 
@@ -106,7 +106,6 @@ def main() -> int:
         ensure_readme_markers(repo_root)
         write_feed_outputs(
             repo_root,
-            skill_root,
             canonical,
             selected_date,
             public_base_url=args.public_base_url,
@@ -130,7 +129,7 @@ def main() -> int:
             update_readme_timestamps(repo_root / "README.md", locale="zh", now=run_now)
             update_readme_timestamps(repo_root / "README_en.md", locale="en", now=run_now)
         write_feed_state(
-            skill_root,
+            repo_root,
             previous_state=previous_state,
             records=canonical,
             preferred_date=args.date,

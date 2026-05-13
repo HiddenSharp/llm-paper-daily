@@ -19,7 +19,7 @@ def main() -> int:
     skill_root = Path(__file__).resolve().parents[1]
     catalog = load_catalog(skill_root / "references" / "institutions.json")
     client = ArxivClient(delay_seconds=args.delay_seconds, timeout_seconds=args.timeout_seconds, retries=args.retries)
-    previous_state = read_feed_state(skill_root)
+    previous_state = read_feed_state(repo_root)
     selection = find_next_discovery(
         client=client,
         catalog=catalog,
@@ -34,7 +34,7 @@ def main() -> int:
 
     if not selected_date or not discovered:
         state_path = write_feed_state(
-            skill_root,
+            repo_root,
             previous_state=previous_state,
             records=[],
             preferred_date=args.date,
@@ -58,14 +58,13 @@ def main() -> int:
     write_summary_files(repo_root, canonical)
     canonical_path, feed_path, state_path = write_feed_outputs(
         repo_root,
-        skill_root,
         canonical,
         selected_date,
         public_base_url=args.public_base_url,
         source_repo=args.source_repo,
     )
     state_path = write_feed_state(
-        skill_root,
+        repo_root,
         previous_state=previous_state,
         records=canonical,
         preferred_date=args.date,
