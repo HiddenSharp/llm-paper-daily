@@ -64,19 +64,16 @@ def main() -> int:
         attempted_dates = selection["attempted_dates"]
 
         if not selected_date or not discovered:
-            if publish_enabled:
-                write_feed_state(
-                    skill_root,
-                    previous_state=previous_state,
-                    records=[],
-                    preferred_date=args.date,
-                    attempted_dates=attempted_dates,
-                    updated=False,
-                )
             print(f"preferred_date={args.date}")
             print(f"mode={'view-only' if args.view_only else 'publish'}")
             print("selected=0")
             print(f"attempted_dates={','.join(attempted_dates)}")
+            if selection["discovery_errors"]:
+                print("discovery_errors:")
+                for error in selection["discovery_errors"]:
+                    print(f"- {error}")
+                print("arXiv discovery failed for one or more attempted queries; not updating state.")
+                return 2
             print("No new analyzable papers found in the configured fallback window.")
             if selection["skipped_analyzed_dates"]:
                 print(f"skipped_already_analyzed={','.join(selection['skipped_analyzed_dates'])}")

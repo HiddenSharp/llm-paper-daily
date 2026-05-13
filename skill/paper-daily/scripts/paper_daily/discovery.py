@@ -67,6 +67,7 @@ def find_next_discovery(
     analyzed_dates = analyzed_dates or set()
     attempted_dates: list[str] = []
     skipped_analyzed_dates: list[str] = []
+    discovery_errors: list[str] = []
     start_date = datetime.strptime(preferred_date, "%Y-%m-%d").date()
     stage_limits = backfill_stage_limits(max_lookback_days)
 
@@ -78,6 +79,7 @@ def find_next_discovery(
             stage_limit=stage_limit,
             attempted_dates=attempted_dates,
             skipped_analyzed_dates=skipped_analyzed_dates,
+            discovery_errors=discovery_errors,
             analyzed_dates=analyzed_dates,
             keywords=keywords,
             categories=categories,
@@ -90,6 +92,7 @@ def find_next_discovery(
                 "selected_date": candidate_date,
                 "attempted_dates": attempted_dates,
                 "skipped_analyzed_dates": skipped_analyzed_dates,
+                "discovery_errors": discovery_errors,
                 "used_backfill": candidate_date != preferred_date,
                 "selected_stage_limit": stage_limit,
                 "discovered": discovered,
@@ -100,6 +103,7 @@ def find_next_discovery(
         "selected_date": None,
         "attempted_dates": attempted_dates,
         "skipped_analyzed_dates": skipped_analyzed_dates,
+        "discovery_errors": discovery_errors,
         "used_backfill": False,
         "selected_stage_limit": None,
         "discovered": None,
@@ -145,6 +149,7 @@ def scan_discovery_window(
     stage_limit: int,
     attempted_dates: list[str],
     skipped_analyzed_dates: list[str],
+    discovery_errors: list[str],
     analyzed_dates: set[str],
     keywords: list[str] | None,
     categories: list[str] | None,
@@ -166,6 +171,12 @@ def scan_discovery_window(
             categories=categories,
             max_results_per_keyword=max_results_per_keyword,
         )
+        errors = [
+            f"{candidate_date}:{keyword}:{total}"
+            for keyword, total in discovered["query_totals"].items()
+            if isinstance(total, str) and total.startswith("ERROR:")
+        ]
+        discovery_errors.extend(errors)
         if discovered["ranked"]:
             return candidate_date, discovered
     return None
