@@ -1,37 +1,41 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-13T11:30:23.019605+00:00",
-  "run_date": "2026-05-12",
+  "generated_at": "2026-05-13T12:31:40.129145+00:00",
+  "run_date": "2026-05-11",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.12280",
-      "date": "2026-05-12",
-      "title": "Iterative Audit Convergence in LLM-Managed Multi-Agent Systems: A Case Study in Prompt Engineering Quality Assurance",
+      "id": "arxiv:2605.11229",
+      "date": "2026-05-11",
+      "title": "Comment and Control: Hijacking Agentic Workflows via Context-Grounded Evolution",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Elias Calboreanu"
+        "Neil Fendley",
+        "Zhengyu Liu",
+        "Aonan Guan",
+        "Jiacheng Zhong",
+        "Yinzhi Cao"
       ],
-      "institution": "Swift (North) AI Lab, The Swift Group, LLC; Capitol Technology University",
+      "institution": "Johns Hopkins University, Johns Hopkins University Applied Physics Lab, Wyze Labs",
       "summary": {
-        "zh": "本文通过一个实证案例研究，展示了在多智能体 LLM 系统中应用迭代式代理驱动审计的有效性。研究不仅揭示了提示词规范中常见的七类一致性缺陷，还观察到了审计过程中的非单调收敛行为。提出的审计协议和分类法为提升提示词工程的质量保证提供了具体指导，强调了在多文档环境中进行结构化、跨文件验证的重要性。尽管研究局限于单一系统和同一家族 LLM，但其方法论为未来的泛化研究奠定了基础。",
-        "en": "- **Background**: In multi-agent Large Language Model (LLM) systems, prompt specifications carry data contracts and integration logic across many interdependent files. However, unlike source code, these natural language..."
+        "zh": "本文首次系统性地研究了自动化平台中代理工作流的安全风险，指出了现有静态分析和传统 LLM 越狱方法在此场景下的局限性。通过提出 JAW 框架，结合静态路径分析、动态提示追踪和运行时能力分析，实现了对代理工作流的有效劫持检测与利用。大规模实验验证了该风险的普遍性和严重性，并推动了主流厂商的安全修复。",
+        "en": "This paper systematically investigates the security risks of agentic workflows in automation platforms, highlighting the inadequacy of existing static analysis and traditional LLM jailbreaking methods. By proposing the..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.12280v1",
-        "pdf": "https://arxiv.org/pdf/2605.12280v1",
+        "abs": "http://arxiv.org/abs/2605.11229v1",
+        "pdf": "https://arxiv.org/pdf/2605.11229v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.12280.md",
-        "summary_en_path": "summary_en/2026-05/2605.12280.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12280.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12280.md"
+        "summary_zh_path": "summary/2026-05/2605.11229.md",
+        "summary_en_path": "summary_en/2026-05/2605.11229.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11229.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11229.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -48,34 +52,36 @@
       }
     },
     {
-      "id": "arxiv:2605.12375",
-      "date": "2026-05-12",
-      "title": "Agent-Based Post-Hoc Correction of Agricultural Yield Forecasts",
+      "id": "arxiv:2605.11225",
+      "date": "2026-05-11",
+      "title": "PIVOT: Bridging Planning and Execution in LLM Agents via Trajectory Refinement",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Matthew Beddows",
-        "Aiden Durrant",
-        "Georgios Leontidis"
+        "Tuo Zhang",
+        "Alin-Ionut Popa",
+        "Yan Xu",
+        "Rui Song",
+        "Dimitrios Dimitriadis"
       ],
-      "institution": "University of Aberdeen, University of East Anglia, UiT The Arctic University of Norway",
+      "institution": "Amazon",
       "summary": {
-        "zh": "本文针对商业农业中数据稀缺导致产量预测不准的问题，提出了一种基于LLM代理的事后修正方法。通过引入农业领域知识（阶段检测、偏差学习、范围验证），该方法有效解决了传统模型违反生长规律和存在系统性偏差的问题。实验表明，该方法能显著提升多种主流预测模型（XGBoost, Random Forest, Moirai2）的精度，且无需额外数据采集或模型重训，具有极高的实际部署价值。",
-        "en": "This paper addresses the gap between data-rich academic models and data-scarce commercial farming realities by proposing an LLM agent-based post-hoc correction framework. By integrating domain knowledge via phase..."
+        "zh": "PIVOT 证明了基于反馈（自监督或人工监督）的轨迹优化是缓解自主代理系统中规划-执行差距的原则性方法。通过将完整轨迹作为离散语言空间中的可优化对象，并结合单调接受机制，PIVOT 不仅在约束满足和任务成功率上取得了显著提升，还大幅降低了计算成本，为构建更可靠的 LLM 代理系统提供了新范式。",
+        "en": "- **Background**: LLM-based autonomous agents often generate plans that appear coherent but fail during execution due to infeasible actions, constraint violations, and compounding errors over long horizons. This..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.12375v1",
-        "pdf": "https://arxiv.org/pdf/2605.12375v1",
+        "abs": "http://arxiv.org/abs/2605.11225v1",
+        "pdf": "https://arxiv.org/pdf/2605.11225v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.12375.md",
-        "summary_en_path": "summary_en/2026-05/2605.12375.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12375.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12375.md"
+        "summary_zh_path": "summary/2026-05/2605.11225.md",
+        "summary_en_path": "summary_en/2026-05/2605.11225.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11225.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11225.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -92,34 +98,47 @@
       }
     },
     {
-      "id": "arxiv:2605.12411",
-      "date": "2026-05-12",
-      "title": "Predicting Decisions of AI Agents from Limited Interaction through Text-Tabular Modeling",
+      "id": "arxiv:2605.11086",
+      "date": "2026-05-11",
+      "title": "ExploitGym: Can AI Agents Turn Security Vulnerabilities into Real Attacks?",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Eilam Shapira",
-        "Moshe Tennenholtz",
-        "Roi Reichart"
+        "Zhun Wang",
+        "Nico Schiller",
+        "Hongwei Li",
+        "Srijiith Sesha Narayana",
+        "Milad Nasr",
+        "Nicholas Carlini",
+        "Xiangyu Qi",
+        "Eric Wallace",
+        "Elie Bursztein",
+        "Luca Invernizzi",
+        "Kurt Thomas",
+        "Yan Shoshitaishvili",
+        "Wenbo Guo",
+        "Jingxuan He",
+        "Thorsten Holz",
+        "Dawn Song"
       ],
-      "institution": "Technion – Israel Institute of Technology",
+      "institution": "UC Berkeley, Max Planck Institute for Security and Privacy, UC Santa Barbara, Arizona State University, Anthropic, OpenAI, Google",
       "summary": {
-        "zh": "本文提出了一种新颖的文本表格建模方法，用于在有限交互下预测 AI 代理的决策。通过结合结构化游戏数据和“LLM-as-Observer”提取的隐藏表征，该方法在无需访问对手内部逻辑的情况下，显著提升了预测准确性。研究证明了利用 LLM 隐藏状态作为特征编码器在少样本对手建模中的有效性，为黑盒环境下的智能体交互预测提供了新的技术路径。",
-        "en": "- **Background**: AI agents increasingly negotiate and transact in natural language with unfamiliar counterparts (e.g., a buyer bot facing an unknown seller). In these interactions, the counterpart's underlying LLM,..."
+        "zh": "ExploitGym 填补了 AI 安全评估中关于“漏洞利用”这一关键环节的空白。通过大规模真实场景的测试，论文证明了前沿 AI 模型已具备将漏洞转化为实际攻击的显著能力，即便在面对现代防御机制时也不例外。这不仅为防御性工作流提供了有价值的诊断工具，也突显了日益强大的 AI Agent 所带来的潜在网络安全风险，呼吁社区重视对此类双用技术的监管与防御研究。",
+        "en": "- **Background**: As Large Language Models (LLMs) and AI agents rapidly advance, their potential to reshape cybersecurity necessitates rigorous evaluation. A critical capability is \"exploitation\": transforming a known..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.12411v1",
-        "pdf": "https://arxiv.org/pdf/2605.12411v1",
+        "abs": "http://arxiv.org/abs/2605.11086v1",
+        "pdf": "https://arxiv.org/pdf/2605.11086v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.12411.md",
-        "summary_en_path": "summary_en/2026-05/2605.12411.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12411.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12411.md"
+        "summary_zh_path": "summary/2026-05/2605.11086.md",
+        "summary_en_path": "summary_en/2026-05/2605.11086.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11086.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11086.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -136,39 +155,34 @@
       }
     },
     {
-      "id": "arxiv:2605.12376",
-      "date": "2026-05-12",
-      "title": "ProfiliTable: Profiling-Driven Tabular Data Processing via Agentic Workflows",
+      "id": "arxiv:2605.11269",
+      "date": "2026-05-11",
+      "title": "gwBenchmarks: Stress-Testing LLM Agents on High-Precision Gravitational Wave Astronomy",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Wei Liu",
-        "Yang Gu",
-        "Xi Yan",
-        "Zihan Nan",
-        "Beicheng Xu",
-        "Keyao Ding",
-        "Bin Cui",
-        "Wentao Zhang"
+        "Tousif Islam",
+        "Digvijay Wadekar",
+        "Zihan Zhou"
       ],
-      "institution": "Peking University, Institute of Computing Technology, Chinese Academy of Sciences",
+      "institution": "Kavli Institute for Theoretical Physics, University of California Santa Barbara; Center for Gravitational Physics, University of Texas at Austin; Department of Physics, Princeton University",
       "summary": {
-        "zh": "ProfiliTable 通过引入动态 profiling 和多智能体协作机制，有效解决了现有 LLM 基于表格处理方法在面对模糊指令和复杂任务时的局限性。其核心创新在于构建了“探索-合成-反馈”的闭环工作流，显著提升了表格数据处理的自动化水平和代码生成的语义准确性，为现实世界中复杂的数据清洗和转换任务提供了 robust 且 compliant 的解决方案。",
-        "en": "- **Background**: Table processing (including cleaning, transformation, augmentation, and matching) is a foundational yet error-prone stage in real-world data pipelines. While LLM-based approaches show promise, they..."
+        "zh": "本文引入了 gwBenchmarks，首个针对高精度引力波天文学建模的 LLM Agent 基准测试。研究表明，尽管当前最先进的 LLM Agent 在简单科学任务上表现出一定的能力，但在面对需要极高精度和复杂物理推理的真实世界科学建模问题时，仍存在显著缺陷，普遍无法满足领域标准的精度要求。该工作强调了开发更强大的物理感知 Agent 和更严格评估框架的必要性。",
+        "en": "- **Background**: Modern gravitational wave astronomy relies on high-precision modeling tasks (e.g., building waveform surrogates, black hole orbital dynamics) that typically require months of graduate-level effort and..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.12376v1",
-        "pdf": "https://arxiv.org/pdf/2605.12376v1",
-        "github": null
+        "abs": "http://arxiv.org/abs/2605.11269v1",
+        "pdf": "https://arxiv.org/pdf/2605.11269v1",
+        "github": "https://github.com/tousifislam/gwBenchmarks"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.12376.md",
-        "summary_en_path": "summary_en/2026-05/2605.12376.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12376.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12376.md"
+        "summary_zh_path": "summary/2026-05/2605.11269.md",
+        "summary_en_path": "summary_en/2026-05/2605.11269.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11269.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11269.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -185,35 +199,40 @@
       }
     },
     {
-      "id": "arxiv:2605.12260",
-      "date": "2026-05-12",
-      "title": "PRISM: Pareto-Efficient Retrieval over Intent-Aware Structured Memory for Long-Horizon Agents",
+      "id": "arxiv:2605.11169",
+      "date": "2026-05-11",
+      "title": "OLIVIA: Online Learning via Inference-time Action Adaptation for Decision Making in LLM ReAct Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Jingyi Peng",
-        "Zhongwei Wan",
-        "Weiting Liu",
-        "Qiuzhuang Sun"
+        "Sheldon Yu",
+        "Junda Wu",
+        "Xintong Li",
+        "Nikki Lijing Kuang",
+        "Sizhe Zhou",
+        "Tong Yu",
+        "Jiawei Han",
+        "Jingbo Shang",
+        "Julian McAuley"
       ],
-      "institution": "Singapore Management University, The Ohio State University, Fudan University",
+      "institution": "University of California, San Diego; University of Illinois at Urbana-Champaign; Adobe Research",
       "summary": {
-        "zh": "PRISM 通过创新地将检索形式化为类型化路径模板上的最小代价选择，并配合 LLM 侧的压缩步骤，成功解决了长周期智能体中的记忆管理难题。它在无需训练的情况下，以极低的上下文成本实现了高准确率的证据检索，为长 horizon 代理系统的部署提供了高效且经济的解决方案。",
-        "en": "- **Background**: In long-horizon agentic tasks, conversation history accumulates faster than fixed context windows can hold, making memory management critical for both answer accuracy and serving cost. - **Limitations..."
+        "zh": "OLIVIA 证明了在 LLM 代理中引入显式的在线决策层是纯提示或检索基于适应方法的有效替代方案。通过将动作选择建模为上下文线性 Bandit 问题，OLIVIA 实现了细粒度、可追踪且具备不确定性意识的推理时适应，为部署环境下的 LLM 代理提供了高效、低开销的性能提升路径。",
+        "en": "- **Background**: Large Language Model (LLM) agents typically operate in a ReAct style in deployed settings, interleaving reasoning, action selection, and observation to solve multi-step decision-making tasks. In..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.12260v1",
-        "pdf": "https://arxiv.org/pdf/2605.12260v1",
+        "abs": "http://arxiv.org/abs/2605.11169v1",
+        "pdf": "https://arxiv.org/pdf/2605.11169v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.12260.md",
-        "summary_en_path": "summary_en/2026-05/2605.12260.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.12260.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.12260.md"
+        "summary_zh_path": "summary/2026-05/2605.11169.md",
+        "summary_en_path": "summary_en/2026-05/2605.11169.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11169.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11169.md"
       },
       "signals": {
         "priority_keyword": "Agent"
