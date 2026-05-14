@@ -1,41 +1,47 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-13T12:31:40.129145+00:00",
-  "run_date": "2026-05-11",
+  "generated_at": "2026-05-14T05:04:33.009333+00:00",
+  "run_date": "2026-05-13",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.11229",
-      "date": "2026-05-11",
-      "title": "Comment and Control: Hijacking Agentic Workflows via Context-Grounded Evolution",
+      "id": "arxiv:2605.13542",
+      "date": "2026-05-13",
+      "title": "RealICU: Do LLM Agents Understand Long-Context ICU Data? A Benchmark Beyond Behavior Imitation",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Neil Fendley",
-        "Zhengyu Liu",
-        "Aonan Guan",
-        "Jiacheng Zhong",
-        "Yinzhi Cao"
+        "Chengzhi Shen",
+        "Weixiang Shen",
+        "Tobias Susetzky",
+        "Chen",
+        "Chen",
+        "Jun Li",
+        "Yuyuan Liu",
+        "Xuepeng Zhang",
+        "Zhenyu Gong",
+        "Daniel Rueckert",
+        "Jiazhen Pan"
       ],
-      "institution": "Johns Hopkins University, Johns Hopkins University Applied Physics Lab, Wyze Labs",
+      "institution": "Technical University of Munich (TUM), TUM University Hospital, LMU Munich",
       "summary": {
-        "zh": "本文首次系统性地研究了自动化平台中代理工作流的安全风险，指出了现有静态分析和传统 LLM 越狱方法在此场景下的局限性。通过提出 JAW 框架，结合静态路径分析、动态提示追踪和运行时能力分析，实现了对代理工作流的有效劫持检测与利用。大规模实验验证了该风险的普遍性和严重性，并推动了主流厂商的安全修复。",
-        "en": "This paper systematically investigates the security risks of agentic workflows in automation platforms, highlighting the inadequacy of existing static analysis and traditional LLM jailbreaking methods. By proposing the..."
+        "zh": "RealICU提供了一个具有临床依据的测试平台，用于衡量和改进高风险护理中的AI序列决策支持。它超越了简单的行为模仿，通过高质量的后见之明标注揭示了当前LLM在长程医疗上下文理解中的根本缺陷，为开发更可靠、安全的ICU AI副驾驶指明了方向。",
+        "en": "- **Background**: Intensive Care Units (ICUs) generate long, dense, and evolving streams of clinical information. Physicians must repeatedly reassess patient states under time pressure, creating a clear need for..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.11229v1",
-        "pdf": "https://arxiv.org/pdf/2605.11229v1",
+        "abs": "http://arxiv.org/abs/2605.13542v1",
+        "pdf": "https://arxiv.org/pdf/2605.13542v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.11229.md",
-        "summary_en_path": "summary_en/2026-05/2605.11229.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11229.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11229.md"
+        "summary_zh_path": "summary/2026-05/2605.13542.md",
+        "summary_en_path": "summary_en/2026-05/2605.13542.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13542.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13542.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -52,36 +58,38 @@
       }
     },
     {
-      "id": "arxiv:2605.11225",
-      "date": "2026-05-11",
-      "title": "PIVOT: Bridging Planning and Execution in LLM Agents via Trajectory Refinement",
+      "id": "arxiv:2605.13725",
+      "date": "2026-05-13",
+      "title": "ScioMind: Cognitively Grounded Multi-Agent Social Simulation with Anchoring-Based Belief Dynamics and Dynamic Profiles",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Tuo Zhang",
-        "Alin-Ionut Popa",
-        "Yan Xu",
-        "Rui Song",
-        "Dimitrios Dimitriadis"
+        "Yitian Yang",
+        "Yiqun Duan",
+        "Linghan Huang",
+        "Yiqi Zhu",
+        "Francesco Bailo",
+        "Chunmeizi Su",
+        "Huaming Chen"
       ],
-      "institution": "Amazon",
+      "institution": "The University of Sydney",
       "summary": {
-        "zh": "PIVOT 证明了基于反馈（自监督或人工监督）的轨迹优化是缓解自主代理系统中规划-执行差距的原则性方法。通过将完整轨迹作为离散语言空间中的可优化对象，并结合单调接受机制，PIVOT 不仅在约束满足和任务成功率上取得了显著提升，还大幅降低了计算成本，为构建更可靠的 LLM 代理系统提供了新范式。",
-        "en": "- **Background**: LLM-based autonomous agents often generate plans that appear coherent but fail during execution due to infeasible actions, constraint violations, and compounding errors over long horizons. This..."
+        "zh": "ScioMind 通过引入认知心理学中的锚定效应、分层记忆和动态画像，成功解决了现有LLM社交模拟中信念更新缺乏结构化约束和认知基础的问题。该框架不仅提高了模拟的稳定性，还增强了行为层面的真实性，为计算社会科学中研究信念的形成、持久性和演变提供了新的解决方案。",
+        "en": "- **Background**: LLM-based multi-agent simulation is a powerful testbed for studying social opinion dynamics. However, current approaches typically fall into two contrasting categories: relying on fixed update rules..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.11225v1",
-        "pdf": "https://arxiv.org/pdf/2605.11225v1",
+        "abs": "http://arxiv.org/abs/2605.13725v1",
+        "pdf": "https://arxiv.org/pdf/2605.13725v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.11225.md",
-        "summary_en_path": "summary_en/2026-05/2605.11225.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11225.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11225.md"
+        "summary_zh_path": "summary/2026-05/2605.13725.md",
+        "summary_en_path": "summary_en/2026-05/2605.13725.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13725.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13725.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -98,47 +106,39 @@
       }
     },
     {
-      "id": "arxiv:2605.11086",
-      "date": "2026-05-11",
-      "title": "ExploitGym: Can AI Agents Turn Security Vulnerabilities into Real Attacks?",
+      "id": "arxiv:2605.13618",
+      "date": "2026-05-13",
+      "title": "OpenAaaS: An Open Agent-as-a-Service Framework for Distributed Materials-Informatics Research",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Zhun Wang",
-        "Nico Schiller",
-        "Hongwei Li",
-        "Srijiith Sesha Narayana",
-        "Milad Nasr",
-        "Nicholas Carlini",
-        "Xiangyu Qi",
-        "Eric Wallace",
-        "Elie Bursztein",
-        "Luca Invernizzi",
-        "Kurt Thomas",
-        "Yan Shoshitaishvili",
-        "Wenbo Guo",
-        "Jingxuan He",
-        "Thorsten Holz",
-        "Dawn Song"
+        "Peng Kang",
+        "Bixuan Li",
+        "Xiaoya Huang",
+        "Shuo Shi",
+        "Weiqiao Zhou",
+        "Zhen Li",
+        "Yu Liu",
+        "Lei Zheng"
       ],
-      "institution": "UC Berkeley, Max Planck Institute for Security and Privacy, UC Santa Barbara, Arizona State University, Anthropic, OpenAI, Google",
+      "institution": "Beihang University, Tianmushan Laboratory",
       "summary": {
-        "zh": "ExploitGym 填补了 AI 安全评估中关于“漏洞利用”这一关键环节的空白。通过大规模真实场景的测试，论文证明了前沿 AI 模型已具备将漏洞转化为实际攻击的显著能力，即便在面对现代防御机制时也不例外。这不仅为防御性工作流提供了有价值的诊断工具，也突显了日益强大的 AI Agent 所带来的潜在网络安全风险，呼吁社区重视对此类双用技术的监管与防御研究。",
-        "en": "- **Background**: As Large Language Models (LLMs) and AI agents rapidly advance, their potential to reshape cybersecurity necessitates rigorous evaluation. A critical capability is \"exploitation\": transforming a known..."
+        "zh": "OpenAaaS 通过智能体集体建立了通往“有组织研究”的原则性路径，为下一代材料智能设计平台提供了可扩展的基础。它成功解决了材料信息学中数据孤岛与安全协作之间的矛盾，证明了在保护数据主权的同时实现跨尺度、跨领域智能集成的可行性。",
+        "en": "- **Background**: The Materials Genome Initiative spurred the growth of centralized platforms (SaaS/PaaS/IaaS) aggregating computational and experimental resources. Concurrently, breakthroughs in Large Language Models..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.11086v1",
-        "pdf": "https://arxiv.org/pdf/2605.11086v1",
-        "github": null
+        "abs": "http://arxiv.org/abs/2605.13618v1",
+        "pdf": "https://arxiv.org/pdf/2605.13618v1",
+        "github": "https://github.com/Wolido/OpenAaaS"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.11086.md",
-        "summary_en_path": "summary_en/2026-05/2605.11086.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11086.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11086.md"
+        "summary_zh_path": "summary/2026-05/2605.13618.md",
+        "summary_en_path": "summary_en/2026-05/2605.13618.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13618.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13618.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -155,34 +155,37 @@
       }
     },
     {
-      "id": "arxiv:2605.11269",
-      "date": "2026-05-11",
-      "title": "gwBenchmarks: Stress-Testing LLM Agents on High-Precision Gravitational Wave Astronomy",
+      "id": "arxiv:2605.13839",
+      "date": "2026-05-13",
+      "title": "Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Tousif Islam",
-        "Digvijay Wadekar",
-        "Zihan Zhou"
+        "Wenrui Bao",
+        "Huan Wang",
+        "Jian Wang",
+        "Zhangyang Wang",
+        "Kai Wang",
+        "Yuzhang Shang"
       ],
-      "institution": "Kavli Institute for Theoretical Physics, University of California Santa Barbara; Center for Gravitational Physics, University of Texas at Austin; Department of Physics, Princeton University",
+      "institution": "University of Central Florida",
       "summary": {
-        "zh": "本文引入了 gwBenchmarks，首个针对高精度引力波天文学建模的 LLM Agent 基准测试。研究表明，尽管当前最先进的 LLM Agent 在简单科学任务上表现出一定的能力，但在面对需要极高精度和复杂物理推理的真实世界科学建模问题时，仍存在显著缺陷，普遍无法满足领域标准的精度要求。该工作强调了开发更强大的物理感知 Agent 和更严格评估框架的必要性。",
-        "en": "- **Background**: Modern gravitational wave astronomy relies on high-precision modeling tasks (e.g., building waveform surrogates, black hole orbital dynamics) that typically require months of graduate-level effort and..."
+        "zh": "本文指出了当前多智能体 LLM 系统中基于自然语言通信的效率瓶颈，提出了 TFlow 框架，通过将通信内容转化为权重空间的低秩扰动（LoRA），显著降低了计算和内存开销。实验表明，该方法在保持甚至提升准确率的同时，大幅减少了 token 消耗和推理延迟，为高效的多智能体协作提供了新的范式。",
+        "en": "- **Background**: Multi-agent LLM systems typically collaborate by exchanging natural-language messages. While simple and interpretable, this interface forces the sender's intermediate computations to be serialized into..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.11269v1",
-        "pdf": "https://arxiv.org/pdf/2605.11269v1",
-        "github": "https://github.com/tousifislam/gwBenchmarks"
+        "abs": "http://arxiv.org/abs/2605.13839v1",
+        "pdf": "https://arxiv.org/pdf/2605.13839v1",
+        "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.11269.md",
-        "summary_en_path": "summary_en/2026-05/2605.11269.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11269.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11269.md"
+        "summary_zh_path": "summary/2026-05/2605.13839.md",
+        "summary_en_path": "summary_en/2026-05/2605.13839.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13839.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13839.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -199,40 +202,34 @@
       }
     },
     {
-      "id": "arxiv:2605.11169",
-      "date": "2026-05-11",
-      "title": "OLIVIA: Online Learning via Inference-time Action Adaptation for Decision Making in LLM ReAct Agents",
+      "id": "arxiv:2605.13716",
+      "date": "2026-05-13",
+      "title": "SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Sheldon Yu",
-        "Junda Wu",
-        "Xintong Li",
-        "Nikki Lijing Kuang",
-        "Sizhe Zhou",
-        "Tong Yu",
-        "Jiawei Han",
-        "Jingbo Shang",
-        "Julian McAuley"
+        "Hongji Pu",
+        "Xinyuan Song",
+        "Liang Zhao"
       ],
-      "institution": "University of California, San Diego; University of Illinois at Urbana-Champaign; Adobe Research",
+      "institution": "Emory University, University of Illinois Urbana-Champaign",
       "summary": {
-        "zh": "OLIVIA 证明了在 LLM 代理中引入显式的在线决策层是纯提示或检索基于适应方法的有效替代方案。通过将动作选择建模为上下文线性 Bandit 问题，OLIVIA 实现了细粒度、可追踪且具备不确定性意识的推理时适应，为部署环境下的 LLM 代理提供了高效、低开销的性能提升路径。",
-        "en": "- **Background**: Large Language Model (LLM) agents typically operate in a ReAct style in deployed settings, interleaving reasoning, action selection, and observation to solve multi-step decision-making tasks. In..."
+        "zh": "SkillOps 首次系统性地解决了 LLM 智能体技能库中的“技术债务”问题。通过引入技能契约和分层生态系统图，它实现了技能库的自动化、低开销维护。实验表明，SkillOps 不仅能作为独立模块显著提升任务成功率，还能无缝集成到现有系统中提升检索效率，为构建长期可靠、自维护的 LLM 智能体生态系统提供了新的架构思路。",
+        "en": "SkillOps systematically addresses the issue of \"technical debt\" in LLM agent skill libraries. By introducing skill contracts and a hierarchical ecosystem graph, it enables automated, low-overhead maintenance of skill..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.11169v1",
-        "pdf": "https://arxiv.org/pdf/2605.11169v1",
-        "github": null
+        "abs": "http://arxiv.org/abs/2605.13716v1",
+        "pdf": "https://arxiv.org/pdf/2605.13716v1",
+        "github": "https://github.com/Hik289/SkillOps.git"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.11169.md",
-        "summary_en_path": "summary_en/2026-05/2605.11169.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.11169.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.11169.md"
+        "summary_zh_path": "summary/2026-05/2605.13716.md",
+        "summary_en_path": "summary_en/2026-05/2605.13716.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13716.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13716.md"
       },
       "signals": {
         "priority_keyword": "Agent"

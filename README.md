@@ -1,7 +1,7 @@
 <h2 align='center'>llm-paper-daily 日常论文精选</h2>
 <div align='center'>
 
-[![Status](https://img.shields.io/badge/status-Update_05.13_11:30-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
+[![Status](https://img.shields.io/badge/status-Update_05.14_05:04-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
 
 </div>
 
@@ -11,14 +11,14 @@
 
 <!-- paper-daily:readme:updates:start -->
 <details>
-  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月13日 11:30</sub></summary>
+  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月14日 05:04</sub></summary>
 <br>
 
-- Iterative Audit Convergence in LLM-Managed Multi-Agent Systems: A Case Study in Prompt Engineering Quality Assurance 
-- Agent-Based Post-Hoc Correction of Agricultural Yield Forecasts 
-- Predicting Decisions of AI Agents from Limited Interaction through Text-Tabular Modeling 
-- ProfiliTable: Profiling-Driven Tabular Data Processing via Agentic Workflows 
-- PRISM: Pareto-Efficient Retrieval over Intent-Aware Structured Memory for Long-Horizon Agents 
+- RealICU: Do LLM Agents Understand Long-Context ICU Data? A Benchmark Beyond Behavior Imitation 
+- ScioMind: Cognitively Grounded Multi-Agent Social Simulation with Anchoring-Based Belief Dynamics and Dynamic Profiles 
+- OpenAaaS: An Open Agent-as-a-Service Framework for Distributed Materials-Informatics Research 
+- Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights 
+- SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems 
 </details>
 <!-- paper-daily:readme:updates:end -->
 
@@ -42,6 +42,11 @@ Agent 会使用仓库里的 `paper-subscribe` skill，只读取公开的 `feed-p
 
 | &nbsp;Date&nbsp;&nbsp; | Paper | Links & Summary |
 | --- | --- | --- |
+| <span style='display: inline-block; width: 42px;'>05-13</span> | **RealICU: Do LLM Agents Understand Long-Context ICU Data? A Benchmark Beyond Behavior Imitation**<br><sub>机构: Technical University of Munich (TUM), TUM University Hospital, LMU Munich<br>RealICU提供了一个具有临床依据的测试平台，用于衡量和改进高风险护理中的AI序列决策支持。它超越了简单的行为模仿，通过高质量的后见之明标注揭示了当前LLM在长程医疗上下文理解中的根本缺陷，为开发更可靠、安全的ICU AI副驾驶指明了方向。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.13542v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.13542.md)  |
+| <span style='display: inline-block; width: 42px;'>05-13</span> | **ScioMind: Cognitively Grounded Multi-Agent Social Simulation with Anchoring-Based Belief Dynamics and Dynamic Profiles**<br><sub>机构: The University of Sydney<br>ScioMind 通过引入认知心理学中的锚定效应、分层记忆和动态画像，成功解决了现有LLM社交模拟中信念更新缺乏结构化约束和认知基础的问题。该框架不仅提高了模拟的稳定性，还增强了行为层面的真实性，为计算社会科学中研究信念的形成、持久性和演变提供了新的解决方案。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.13725v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.13725.md)  |
+| <span style='display: inline-block; width: 42px;'>05-13</span> | **OpenAaaS: An Open Agent-as-a-Service Framework for Distributed Materials-Informatics Research**<br><sub>机构: Beihang University, Tianmushan Laboratory<br>OpenAaaS 通过智能体集体建立了通往“有组织研究”的原则性路径，为下一代材料智能设计平台提供了可扩展的基础。它成功解决了材料信息学中数据孤岛与安全协作之间的矛盾，证明了在保护数据主权的同时实现跨尺度、跨领域智能集成的可行性。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.13618v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.13618.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/Wolido/OpenAaaS)</div> |
+| <span style='display: inline-block; width: 42px;'>05-13</span> | **Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights**<br><sub>机构: University of Central Florida<br>本文指出了当前多智能体 LLM 系统中基于自然语言通信的效率瓶颈，提出了 TFlow 框架，通过将通信内容转化为权重空间的低秩扰动（LoRA），显著降低了计算和内存开销。实验表明，该方法在保持甚至提升准确率的同时，大幅减少了 token 消耗和推理延迟，为高效的多智能体协作提供了新的范式。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.13839v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.13839.md)  |
+| <span style='display: inline-block; width: 42px;'>05-13</span> | **SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems**<br><sub>机构: Emory University, University of Illinois Urbana-Champaign<br>SkillOps 首次系统性地解决了 LLM 智能体技能库中的“技术债务”问题。通过引入技能契约和分层生态系统图，它实现了技能库的自动化、低开销维护。实验表明，SkillOps 不仅能作为独立模块显著提升任务成功率，还能无缝集成到现有系统中提升检索效率，为构建长期可靠、自维护的 LLM 智能体生态系统提供了新的架构思路。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.13716v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.13716.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/Hik289/SkillOps.git)</div> |
 | <span style='display: inline-block; width: 42px;'>05-12</span> | **Iterative Audit Convergence in LLM-Managed Multi-Agent Systems: A Case Study in Prompt Engineering Quality Assurance**<br><sub>机构: Swift (North) AI Lab, The Swift Group, LLC; Capitol Technology University<br>本文通过一个实证案例研究，展示了在多智能体 LLM 系统中应用迭代式代理驱动审计的有效性。研究不仅揭示了提示词规范中常见的七类一致性缺陷，还观察到了审计过程中的非单调收敛行为。提出的审计协议和分类法为提升提示词工程的质量保证提供了具体指导，强调了在多文档环境中进行结构化、跨文件验证的重要性。尽管研究局限于单一系统和同一家族 LLM，但其方法论为未来的泛化研究奠定了基础。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12280v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12280.md)  |
 | <span style='display: inline-block; width: 42px;'>05-12</span> | **Agent-Based Post-Hoc Correction of Agricultural Yield Forecasts**<br><sub>机构: University of Aberdeen, University of East Anglia, UiT The Arctic University of Norway<br>本文针对商业农业中数据稀缺导致产量预测不准的问题，提出了一种基于LLM代理的事后修正方法。通过引入农业领域知识（阶段检测、偏差学习、范围验证），该方法有效解决了传统模型违反生长规律和存在系统性偏差的问题。实验表明，该方法能显著提升多种主流预测模型（XGBoost, Random Forest, Moirai2）的精度，且无需额外数据采集或模型重训，具有极高的实际部署价值。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12375v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12375.md)  |
 | <span style='display: inline-block; width: 42px;'>05-12</span> | **Predicting Decisions of AI Agents from Limited Interaction through Text-Tabular Modeling**<br><sub>机构: Technion – Israel Institute of Technology<br>本文提出了一种新颖的文本表格建模方法，用于在有限交互下预测 AI 代理的决策。通过结合结构化游戏数据和“LLM-as-Observer”提取的隐藏表征，该方法在无需访问对手内部逻辑的情况下，显著提升了预测准确性。研究证明了利用 LLM 隐藏状态作为特征编码器在少样本对手建模中的有效性，为黑盒环境下的智能体交互预测提供了新的技术路径。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.12411v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.12411.md)  |
