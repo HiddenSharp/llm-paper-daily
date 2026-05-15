@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -83,18 +84,29 @@ class ArxivClient:
         last_error: Exception | None = None
 
         for attempt in range(self.retries + 1):
+            self._last_request = time.monotonic()
             try:
                 with urllib.request.urlopen(req, timeout=self.timeout_seconds) as response:
                     data = response.read()
-                self._last_request = time.monotonic()
                 return ET.fromstring(data)
             except Exception as exc:  # network APIs fail in several urllib-specific shapes
                 last_error = exc
                 if attempt >= self.retries:
                     break
-                time.sleep(min(2**attempt, 8))
+                time.sleep(self._retry_delay(exc, attempt))
 
         raise RuntimeError(f"arXiv query failed after {self.retries + 1} attempts: {last_error}")
+
+    def _retry_delay(self, exc: Exception, attempt: int) -> float:
+        if isinstance(exc, urllib.error.HTTPError) and exc.code == 429:
+            retry_after = exc.headers.get("Retry-After")
+            if retry_after:
+                try:
+                    return max(float(retry_after), self.delay_seconds)
+                except ValueError:
+                    pass
+            return max(30.0 * (attempt + 1), self.delay_seconds)
+        return max(min(2**attempt, 8), self.delay_seconds)
 
 
 def build_query(*, keyword: str, date: str, categories: list[str]) -> str:

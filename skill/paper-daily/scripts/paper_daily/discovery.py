@@ -97,6 +97,8 @@ def find_next_discovery(
                 "selected_stage_limit": stage_limit,
                 "discovered": discovered,
             }
+        if discovery_errors:
+            break
 
     return {
         "preferred_date": preferred_date,
@@ -177,6 +179,8 @@ def scan_discovery_window(
             if isinstance(total, str) and total.startswith("ERROR:")
         ]
         discovery_errors.extend(errors)
+        if errors and len(errors) == len(discovered["query_totals"]):
+            return None
         if discovered["ranked"]:
             return candidate_date, discovered
     return None
