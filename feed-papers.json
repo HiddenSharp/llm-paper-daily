@@ -1,47 +1,41 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-14T05:04:33.009333+00:00",
-  "run_date": "2026-05-13",
+  "generated_at": "2026-05-16T09:12:13.058069+00:00",
+  "run_date": "2026-05-14",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.13542",
-      "date": "2026-05-13",
-      "title": "RealICU: Do LLM Agents Understand Long-Context ICU Data? A Benchmark Beyond Behavior Imitation",
+      "id": "arxiv:2605.15097",
+      "date": "2026-05-14",
+      "title": "Veritas: A Semantically Grounded Agentic Framework for Memory Corruption Vulnerability Detection in Binaries",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Chengzhi Shen",
-        "Weixiang Shen",
-        "Tobias Susetzky",
-        "Chen",
-        "Chen",
-        "Jun Li",
-        "Yuyuan Liu",
-        "Xuepeng Zhang",
-        "Zhenyu Gong",
-        "Daniel Rueckert",
-        "Jiazhen Pan"
+        "Xinran Zheng",
+        "Alfredo Pesoli",
+        "Marco Valleri",
+        "Suman Jana",
+        "Lorenzo Cavallaro"
       ],
-      "institution": "Technical University of Munich (TUM), TUM University Hospital, LMU Munich",
+      "institution": "University College London",
       "summary": {
-        "zh": "RealICU提供了一个具有临床依据的测试平台，用于衡量和改进高风险护理中的AI序列决策支持。它超越了简单的行为模仿，通过高质量的后见之明标注揭示了当前LLM在长程医疗上下文理解中的根本缺陷，为开发更可靠、安全的ICU AI副驾驶指明了方向。",
-        "en": "- **Background**: Intensive Care Units (ICUs) generate long, dense, and evolving streams of clinical information. Physicians must repeatedly reassess patient states under time pressure, creating a clear need for..."
+        "zh": "Veritas 证明了“语义接地”作为二进制漏洞检测操作设计原则的有效性。通过结合静态分析的精确性、LLM 的推理能力以及动态验证的可靠性，Veritas 能够在剥离二进制文件中高效、准确地检测内存破坏漏洞，并在实际场景中发现了高危未知漏洞，展现了其在实际安全审计中的应用潜力。",
+        "en": "- **Background**: Detecting memory corruption vulnerabilities (MCVs) in stripped binaries is challenging as it requires recovering object semantics, interprocedural propagation, and feasible trigger conditions from..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.13542v1",
-        "pdf": "https://arxiv.org/pdf/2605.13542v1",
+        "abs": "http://arxiv.org/abs/2605.15097v1",
+        "pdf": "https://arxiv.org/pdf/2605.15097v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.13542.md",
-        "summary_en_path": "summary_en/2026-05/2605.13542.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13542.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13542.md"
+        "summary_zh_path": "summary/2026-05/2605.15097.md",
+        "summary_en_path": "summary_en/2026-05/2605.15097.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15097.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15097.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -58,38 +52,144 @@
       }
     },
     {
-      "id": "arxiv:2605.13725",
-      "date": "2026-05-13",
-      "title": "ScioMind: Cognitively Grounded Multi-Agent Social Simulation with Anchoring-Based Belief Dynamics and Dynamic Profiles",
+      "id": "arxiv:2605.15040",
+      "date": "2026-05-14",
+      "title": "Orchard: An Open-Source Agentic Modeling Framework",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Yitian Yang",
-        "Yiqun Duan",
-        "Linghan Huang",
-        "Yiqi Zhu",
-        "Francesco Bailo",
-        "Chunmeizi Su",
-        "Huaming Chen"
+        "Baolin Peng",
+        "Wenlin Yao",
+        "Qianhui Wu",
+        "Hao Cheng",
+        "Xiao Yu",
+        "Rui Yang",
+        "Tao Ge",
+        "Alessandrio Sordoni",
+        "Xingdi Yuan",
+        "Yelong Shen",
+        "Pengcheng He",
+        "Tong Zhang",
+        "Zhou Yu",
+        "Jianfeng Gao"
       ],
-      "institution": "The University of Sydney",
+      "institution": "Microsoft Research, Columbia University, UIUC",
       "summary": {
-        "zh": "ScioMind 通过引入认知心理学中的锚定效应、分层记忆和动态画像，成功解决了现有LLM社交模拟中信念更新缺乏结构化约束和认知基础的问题。该框架不仅提高了模拟的稳定性，还增强了行为层面的真实性，为计算社会科学中研究信念的形成、持久性和演变提供了新的解决方案。",
-        "en": "- **Background**: LLM-based multi-agent simulation is a powerful testbed for studying social opinion dynamics. However, current approaches typically fall into two contrasting categories: relying on fixed update rules..."
+        "zh": "Orchard 通过提供一个轻量级、开源且与 harness 无关的环境层（Orchard Env），解决了智能体研究中基础设施碎片化和训练不可扩展的问题。它不仅在代码生成、GUI 操作和个人助理三个截然不同的领域展示了卓越的性能，还证明了通过高效的数据蒸馏和针对性的训练策略（如信用分配 SFT 和平衡自适应 RL），小参数开源模型可以达到甚至超越专有系统的水平。该框架的发布有望加速开源社区在智能体建模方面的创新。",
+        "en": "- **Background**: Agentic modeling aims to transform LLMs into autonomous agents capable of solving complex tasks through planning, reasoning, tool use, and multi-turn interaction with environments. - **Limitations of..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.13725v1",
-        "pdf": "https://arxiv.org/pdf/2605.13725v1",
+        "abs": "http://arxiv.org/abs/2605.15040v1",
+        "pdf": "https://arxiv.org/pdf/2605.15040v1",
+        "github": "https://github.com/microsoft/Orchard"
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.15040.md",
+        "summary_en_path": "summary_en/2026-05/2605.15040.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15040.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15040.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.15155",
+      "date": "2026-05-14",
+      "title": "Self-Distilled Agentic Reinforcement Learning",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Zhengxi Lu",
+        "Zhiyuan Yao",
+        "Zhuowen Han",
+        "Zi-Han Wang",
+        "Jinyang Wu",
+        "Qi Gu",
+        "Xunliang Cai",
+        "Weiming Lu",
+        "Jun Xiao",
+        "Yueting Zhuang",
+        "Yongliang Shen"
+      ],
+      "institution": "Zhejiang University, Meituan, Tsinghua University",
+      "summary": {
+        "zh": "本文针对多轮 LLM 智能体训练中 RL 监督稀疏和 OPSD 不稳定的问题，提出了 SDAR 框架。通过引入门控机制，SDAR 有效地利用了 OPSD 的密集 token 级指导，同时通过不对称处理教师信号解决了多轮累积误差和特权上下文带来的噪声问题。实验证明，SDAR 在多个基准任务上均取得了显著的性能提升，且训练更加稳定，为 LLM 智能体的后训练提供了一种高效的新范式。",
+        "en": "- **Background**: Reinforcement Learning (RL) is central to post-training LLM agents but offers only coarse trajectory-level rewards for long-horizon interactions. On-Policy Self-Distillation (OPSD) complements RL by..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.15155v1",
+        "pdf": "https://arxiv.org/pdf/2605.15155v1",
+        "github": "https://github.com/ZJU-REAL/SDAR"
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.15155.md",
+        "summary_en_path": "summary_en/2026-05/2605.15155.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15155.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15155.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.15104",
+      "date": "2026-05-14",
+      "title": "From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Md Tahmid Rahman Laskar",
+        "Xue-Yong Fu",
+        "Seyyed Saeed Sarfjoo",
+        "Quinten McNamara",
+        "Jonas Robertson",
+        "Shashi Bhushan TN"
+      ],
+      "institution": "Dialpad Inc.",
+      "summary": {
+        "zh": "本文提出了一种将文本工具调用基准转换为音频基准的通用框架，解决了现有音频基准缺乏通用性和复用性的问题。通过实证研究揭示了全模态模型在语音工具调用中的性能瓶颈及主要失败模式，并验证了开源大模型作为评估裁判的可靠性。该框架为语音代理系统的开发和部署提供了低成本、可复现的诊断手段，是对专用音频语料库的重要补充。",
+        "en": "- **Background**: Tool calling is a cornerstone of modern Agentic AI systems. However, prominent benchmarks (e.g., Confetti, When2Call) are text-based, while real-world applications like customer support increasingly..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.15104v1",
+        "pdf": "https://arxiv.org/pdf/2605.15104v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.13725.md",
-        "summary_en_path": "summary_en/2026-05/2605.13725.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13725.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13725.md"
+        "summary_zh_path": "summary/2026-05/2605.15104.md",
+        "summary_en_path": "summary_en/2026-05/2605.15104.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15104.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15104.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -106,130 +206,36 @@
       }
     },
     {
-      "id": "arxiv:2605.13618",
-      "date": "2026-05-13",
-      "title": "OpenAaaS: An Open Agent-as-a-Service Framework for Distributed Materials-Informatics Research",
+      "id": "arxiv:2605.14786",
+      "date": "2026-05-14",
+      "title": "Known By Their Actions: Fingerprinting LLM Browser Agents via UI Traces",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Peng Kang",
-        "Bixuan Li",
-        "Xiaoya Huang",
-        "Shuo Shi",
-        "Weiqiao Zhou",
-        "Zhen Li",
-        "Yu Liu",
-        "Lei Zheng"
+        "William Lugoloobi",
+        "Samuelle Marro",
+        "Jabez Magomere",
+        "Joss Wright",
+        "Chris Russell"
       ],
-      "institution": "Beihang University, Tianmushan Laboratory",
+      "institution": "University of Oxford",
       "summary": {
-        "zh": "OpenAaaS 通过智能体集体建立了通往“有组织研究”的原则性路径，为下一代材料智能设计平台提供了可扩展的基础。它成功解决了材料信息学中数据孤岛与安全协作之间的矛盾，证明了在保护数据主权的同时实现跨尺度、跨领域智能集成的可行性。",
-        "en": "- **Background**: The Materials Genome Initiative spurred the growth of centralized platforms (SaaS/PaaS/IaaS) aggregating computational and experimental resources. Concurrently, breakthroughs in Large Language Models..."
+        "zh": "本文首次系统性地揭示了 LLM 浏览器代理的行为指纹特性。通过被动监测用户的 UI 交互痕迹（动作类型与时序），攻击者能够以极高的准确率识别出代理背后使用的具体 LLM 模型。这种识别能力不依赖于易被篡改的网络头信息，而是基于模型固有的行为动力学特征。研究还表明，常见的简单防御措施（如随机延迟）不足以抵御此类攻击。这一发现强调了在 LLM 代理广泛部署的背景下，保护模型身份隐私和防范针对性攻击的紧迫性。",
+        "en": "- **Background**: As LLM-based browser agents become prevalent, they act on behalf of users. Websites can passively observe agent behaviors to identify the underlying model, posing a significant security risk by..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.13618v1",
-        "pdf": "https://arxiv.org/pdf/2605.13618v1",
-        "github": "https://github.com/Wolido/OpenAaaS"
+        "abs": "http://arxiv.org/abs/2605.14786v1",
+        "pdf": "https://arxiv.org/pdf/2605.14786v1",
+        "github": "https://github.com/KabakaWilliam/known_actions"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.13618.md",
-        "summary_en_path": "summary_en/2026-05/2605.13618.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13618.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13618.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.13839",
-      "date": "2026-05-13",
-      "title": "Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Wenrui Bao",
-        "Huan Wang",
-        "Jian Wang",
-        "Zhangyang Wang",
-        "Kai Wang",
-        "Yuzhang Shang"
-      ],
-      "institution": "University of Central Florida",
-      "summary": {
-        "zh": "本文指出了当前多智能体 LLM 系统中基于自然语言通信的效率瓶颈，提出了 TFlow 框架，通过将通信内容转化为权重空间的低秩扰动（LoRA），显著降低了计算和内存开销。实验表明，该方法在保持甚至提升准确率的同时，大幅减少了 token 消耗和推理延迟，为高效的多智能体协作提供了新的范式。",
-        "en": "- **Background**: Multi-agent LLM systems typically collaborate by exchanging natural-language messages. While simple and interpretable, this interface forces the sender's intermediate computations to be serialized into..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.13839v1",
-        "pdf": "https://arxiv.org/pdf/2605.13839v1",
-        "github": null
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.13839.md",
-        "summary_en_path": "summary_en/2026-05/2605.13839.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13839.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13839.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.13716",
-      "date": "2026-05-13",
-      "title": "SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Hongji Pu",
-        "Xinyuan Song",
-        "Liang Zhao"
-      ],
-      "institution": "Emory University, University of Illinois Urbana-Champaign",
-      "summary": {
-        "zh": "SkillOps 首次系统性地解决了 LLM 智能体技能库中的“技术债务”问题。通过引入技能契约和分层生态系统图，它实现了技能库的自动化、低开销维护。实验表明，SkillOps 不仅能作为独立模块显著提升任务成功率，还能无缝集成到现有系统中提升检索效率，为构建长期可靠、自维护的 LLM 智能体生态系统提供了新的架构思路。",
-        "en": "SkillOps systematically addresses the issue of \"technical debt\" in LLM agent skill libraries. By introducing skill contracts and a hierarchical ecosystem graph, it enables automated, low-overhead maintenance of skill..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.13716v1",
-        "pdf": "https://arxiv.org/pdf/2605.13716v1",
-        "github": "https://github.com/Hik289/SkillOps.git"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.13716.md",
-        "summary_en_path": "summary_en/2026-05/2605.13716.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13716.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13716.md"
+        "summary_zh_path": "summary/2026-05/2605.14786.md",
+        "summary_en_path": "summary_en/2026-05/2605.14786.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.14786.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.14786.md"
       },
       "signals": {
         "priority_keyword": "Agent"
