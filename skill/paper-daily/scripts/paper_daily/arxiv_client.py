@@ -57,6 +57,33 @@ class ArxivClient:
         ]
         return candidates, total
 
+    def search_keywords_combined(
+        self,
+        *,
+        keywords: list[str],
+        date: str,
+        categories: list[str],
+        max_results: int,
+    ) -> tuple[list[PaperCandidate], int]:
+        query = build_combined_query(keywords=keywords, date=date, categories=categories)
+        params = {
+            "search_query": query,
+            "start": 0,
+            "max_results": max_results,
+            "sortBy": "submittedDate",
+            "sortOrder": "descending",
+        }
+        root = self._fetch(params)
+        total = int(root.findtext("opensearch:totalResults", default="0", namespaces=ATOM_NS))
+        candidates = []
+        for entry in root.findall("atom:entry", ATOM_NS):
+            candidate = parse_entry(entry, keyword=keywords[0], keyword_rank=1, query_total=total)
+            keyword, keyword_rank = infer_priority_keyword(candidate, keywords)
+            candidate.priority_keyword = keyword
+            candidate.keyword_rank = keyword_rank
+            candidates.append(candidate)
+        return candidates, total
+
     def get_by_arxiv_ids(self, arxiv_ids: list[str]) -> list[PaperCandidate]:
         normalized_ids = [normalize_arxiv_id(arxiv_id) for arxiv_id in arxiv_ids]
         params = {
@@ -116,9 +143,25 @@ def build_query(*, keyword: str, date: str, categories: list[str]) -> str:
     return f"({category_query}) AND (all:{keyword}) AND submittedDate:[{start} TO {end}]"
 
 
+def build_combined_query(*, keywords: list[str], date: str, categories: list[str]) -> str:
+    start = date.replace("-", "") + "0000"
+    end = date.replace("-", "") + "2359"
+    category_query = " OR ".join(f"cat:{category}" for category in categories)
+    keyword_query = " OR ".join(f"all:{keyword}" for keyword in keywords)
+    return f"({category_query}) AND ({keyword_query}) AND submittedDate:[{start} TO {end}]"
+
+
 def normalize_arxiv_id(raw: str) -> str:
     raw = raw.split("/abs/")[-1].strip()
     return re.sub(r"v\d+$", "", raw)
+
+
+def infer_priority_keyword(candidate: PaperCandidate, keywords: list[str]) -> tuple[str, int]:
+    text = f"{candidate.title} {candidate.abstract}".lower()
+    for rank, keyword in enumerate(keywords, start=1):
+        if keyword.lower() in text:
+            return keyword, rank
+    return keywords[0], 1
 
 
 def parse_entry(entry: ET.Element, *, keyword: str, keyword_rank: int, query_total: int) -> PaperCandidate:

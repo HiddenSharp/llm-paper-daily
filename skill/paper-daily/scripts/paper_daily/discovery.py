@@ -22,19 +22,18 @@ def discover_ranked(
 
     raw_candidates = []
     query_totals: dict[str, int | str] = {}
-    for rank, keyword in enumerate(keywords, start=1):
-        try:
-            candidates, total = client.search_keyword(
-                keyword=keyword,
-                keyword_rank=rank,
-                date=date,
-                categories=categories,
-                max_results=max_results_per_keyword,
-            )
-            raw_candidates.extend(candidates)
-            query_totals[keyword] = total
-        except Exception as exc:
-            query_totals[keyword] = f"ERROR:{type(exc).__name__}:{exc}"
+    query_key = f"combined:{','.join(keywords)}"
+    try:
+        candidates, total = client.search_keywords_combined(
+            keywords=keywords,
+            date=date,
+            categories=categories,
+            max_results=max_results_per_keyword * len(keywords),
+        )
+        raw_candidates.extend(candidates)
+        query_totals[query_key] = total
+    except Exception as exc:
+        query_totals[query_key] = f"ERROR:{type(exc).__name__}:{exc}"
 
     deduped = dedupe_by_priority(raw_candidates)
     filtered = [candidate for candidate in deduped if keep_candidate(candidate)]
