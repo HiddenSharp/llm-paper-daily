@@ -1,41 +1,40 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-16T09:12:13.058069+00:00",
-  "run_date": "2026-05-14",
+  "generated_at": "2026-05-17T05:07:17.463235+00:00",
+  "run_date": "2026-05-13",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.15097",
-      "date": "2026-05-14",
-      "title": "Veritas: A Semantically Grounded Agentic Framework for Memory Corruption Vulnerability Detection in Binaries",
+      "id": "arxiv:2605.14034",
+      "date": "2026-05-13",
+      "title": "From Descriptive to Prescriptive: Uncover the Social Value Alignment of LLM-based Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Xinran Zheng",
-        "Alfredo Pesoli",
-        "Marco Valleri",
-        "Suman Jana",
-        "Lorenzo Cavallaro"
+        "Jinxian Qu",
+        "Qingqing Gu",
+        "Teng Chen",
+        "Luo Ji"
       ],
-      "institution": "University College London",
+      "institution": "Geely AI Lab",
       "summary": {
-        "zh": "Veritas 证明了“语义接地”作为二进制漏洞检测操作设计原则的有效性。通过结合静态分析的精确性、LLM 的推理能力以及动态验证的可靠性，Veritas 能够在剥离二进制文件中高效、准确地检测内存破坏漏洞，并在实际场景中发现了高危未知漏洞，展现了其在实际安全审计中的应用潜力。",
-        "en": "- **Background**: Detecting memory corruption vulnerabilities (MCVs) in stripped binaries is challenging as it requires recovering object semantics, interprocedural propagation, and feasible trigger conditions from..."
+        "zh": "本文针对LLM代理在社会价值对齐方面的不足，提出了SoVA框架。通过结合GraphRAG技术与经典心理学理论（马斯洛需求、普拉奇克情感轮盘、亚里士多德美德），将抽象价值观转化为可检索的执行指令。该方法克服了数据稀缺和泛化能力差的难题，在DAILYDILEMMAS基准上优于多种主流提示工程方法，为实现具备类人情感和道德判断能力的AI代理提供了新路径。",
+        "en": "- **Background**: The widespread application of LLM-based agents in social activities requires strong alignment with human social values, including self-cognition, dilemma decision-making, and self-emotions. - **Why..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.15097v1",
-        "pdf": "https://arxiv.org/pdf/2605.15097v1",
+        "abs": "http://arxiv.org/abs/2605.14034v1",
+        "pdf": "https://arxiv.org/pdf/2605.14034v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.15097.md",
-        "summary_en_path": "summary_en/2026-05/2605.15097.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15097.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15097.md"
+        "summary_zh_path": "summary/2026-05/2605.14034.md",
+        "summary_en_path": "summary_en/2026-05/2605.14034.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.14034.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.14034.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -52,45 +51,38 @@
       }
     },
     {
-      "id": "arxiv:2605.15040",
-      "date": "2026-05-14",
-      "title": "Orchard: An Open-Source Agentic Modeling Framework",
+      "id": "arxiv:2605.13941",
+      "date": "2026-05-13",
+      "title": "EvolveMem:Self-Evolving Memory Architecture via AutoResearch for LLM Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Baolin Peng",
-        "Wenlin Yao",
-        "Qianhui Wu",
-        "Hao Cheng",
-        "Xiao Yu",
-        "Rui Yang",
-        "Tao Ge",
-        "Alessandrio Sordoni",
-        "Xingdi Yuan",
-        "Yelong Shen",
-        "Pengcheng He",
-        "Tong Zhang",
-        "Zhou Yu",
-        "Jianfeng Gao"
+        "Jiaqi Liu",
+        "Xinyu Ye",
+        "Peng Xia",
+        "Zeyu Zheng",
+        "Cihang Xie",
+        "Mingyu Ding",
+        "Huaxiu Yao"
       ],
-      "institution": "Microsoft Research, Columbia University, UIUC",
+      "institution": "UNC-Chapel Hill, UC Berkeley, UCSC",
       "summary": {
-        "zh": "Orchard 通过提供一个轻量级、开源且与 harness 无关的环境层（Orchard Env），解决了智能体研究中基础设施碎片化和训练不可扩展的问题。它不仅在代码生成、GUI 操作和个人助理三个截然不同的领域展示了卓越的性能，还证明了通过高效的数据蒸馏和针对性的训练策略（如信用分配 SFT 和平衡自适应 RL），小参数开源模型可以达到甚至超越专有系统的水平。该框架的发布有望加速开源社区在智能体建模方面的创新。",
-        "en": "- **Background**: Agentic modeling aims to transform LLMs into autonomous agents capable of solving complex tasks through planning, reasoning, tool use, and multi-turn interaction with environments. - **Limitations of..."
+        "zh": "EvolveMem 突破了传统记忆系统检索机制固定的局限，提出了一种自我演化的记忆架构。通过 LLM 驱动的 AutoResearch 流程，系统能够自主诊断检索失败、调整配置并 safeguard 演化过程。实验证明，该方法在多个基准测试中显著优于现有最强基线，且具备良好的跨任务泛化能力，为构建真正自适应的 LLM 智能体记忆系统提供了新范式。",
+        "en": "- **Background**: Long-term memory is critical for LLM agents operating across multiple sessions. As memory stores grow in scale and complexity, different query types (e.g., factual lookup, temporal reasoning) require..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.15040v1",
-        "pdf": "https://arxiv.org/pdf/2605.15040v1",
-        "github": "https://github.com/microsoft/Orchard"
+        "abs": "http://arxiv.org/abs/2605.13941v1",
+        "pdf": "https://arxiv.org/pdf/2605.13941v1",
+        "github": "https://github.com/aiming-lab/SimpleMem"
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.15040.md",
-        "summary_en_path": "summary_en/2026-05/2605.15040.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15040.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15040.md"
+        "summary_zh_path": "summary/2026-05/2605.13941.md",
+        "summary_en_path": "summary_en/2026-05/2605.13941.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.13941.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.13941.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -107,89 +99,33 @@
       }
     },
     {
-      "id": "arxiv:2605.15155",
-      "date": "2026-05-14",
-      "title": "Self-Distilled Agentic Reinforcement Learning",
+      "id": "arxiv:2605.14153",
+      "date": "2026-05-13",
+      "title": "ExploitBench: A Capability Ladder Benchmark for LLM Cybersecurity Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Zhengxi Lu",
-        "Zhiyuan Yao",
-        "Zhuowen Han",
-        "Zi-Han Wang",
-        "Jinyang Wu",
-        "Qi Gu",
-        "Xunliang Cai",
-        "Weiming Lu",
-        "Jun Xiao",
-        "Yueting Zhuang",
-        "Yongliang Shen"
+        "Seunghyun Lee",
+        "David Brumley"
       ],
-      "institution": "Zhejiang University, Meituan, Tsinghua University",
+      "institution": "Carnegie Mellon University",
       "summary": {
-        "zh": "本文针对多轮 LLM 智能体训练中 RL 监督稀疏和 OPSD 不稳定的问题，提出了 SDAR 框架。通过引入门控机制，SDAR 有效地利用了 OPSD 的密集 token 级指导，同时通过不对称处理教师信号解决了多轮累积误差和特权上下文带来的噪声问题。实验证明，SDAR 在多个基准任务上均取得了显著的性能提升，且训练更加稳定，为 LLM 智能体的后训练提供了一种高效的新范式。",
-        "en": "- **Background**: Reinforcement Learning (RL) is central to post-training LLM agents but offers only coarse trajectory-level rewards for long-horizon interactions. On-Policy Self-Distillation (OPSD) complements RL by..."
+        "zh": "ExploitBench 通过细粒度的能力阶梯分解，解决了现有 LLM 安全基准测试过于简化的问题。研究结果表明，虽然当前公开的顶尖 LLM 能够轻松触发漏洞崩溃，但在构建高级利用原语以实现任意代码执行方面仍面临巨大挑战，而私有前沿模型已展现出显著的优势。该基准为评估和提升 LLM 在网络安全领域的实际攻防能力提供了更准确的度量标准。",
+        "en": "ExploitBench addresses the oversimplification of existing LLM security benchmarks by decomposing exploitation into a fine-grained capability ladder. The results indicate that while current public top-tier LLMs can..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.15155v1",
-        "pdf": "https://arxiv.org/pdf/2605.15155v1",
-        "github": "https://github.com/ZJU-REAL/SDAR"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.15155.md",
-        "summary_en_path": "summary_en/2026-05/2605.15155.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15155.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15155.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.15104",
-      "date": "2026-05-14",
-      "title": "From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Md Tahmid Rahman Laskar",
-        "Xue-Yong Fu",
-        "Seyyed Saeed Sarfjoo",
-        "Quinten McNamara",
-        "Jonas Robertson",
-        "Shashi Bhushan TN"
-      ],
-      "institution": "Dialpad Inc.",
-      "summary": {
-        "zh": "本文提出了一种将文本工具调用基准转换为音频基准的通用框架，解决了现有音频基准缺乏通用性和复用性的问题。通过实证研究揭示了全模态模型在语音工具调用中的性能瓶颈及主要失败模式，并验证了开源大模型作为评估裁判的可靠性。该框架为语音代理系统的开发和部署提供了低成本、可复现的诊断手段，是对专用音频语料库的重要补充。",
-        "en": "- **Background**: Tool calling is a cornerstone of modern Agentic AI systems. However, prominent benchmarks (e.g., Confetti, When2Call) are text-based, while real-world applications like customer support increasingly..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.15104v1",
-        "pdf": "https://arxiv.org/pdf/2605.15104v1",
+        "abs": "http://arxiv.org/abs/2605.14153v1",
+        "pdf": "https://arxiv.org/pdf/2605.14153v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.15104.md",
-        "summary_en_path": "summary_en/2026-05/2605.15104.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.15104.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.15104.md"
+        "summary_zh_path": "summary/2026-05/2605.14153.md",
+        "summary_en_path": "summary_en/2026-05/2605.14153.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.14153.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.14153.md"
       },
       "signals": {
         "priority_keyword": "Agent"
@@ -206,36 +142,80 @@
       }
     },
     {
-      "id": "arxiv:2605.14786",
-      "date": "2026-05-14",
-      "title": "Known By Their Actions: Fingerprinting LLM Browser Agents via UI Traces",
+      "id": "arxiv:2605.14141",
+      "date": "2026-05-13",
+      "title": "Distribution-Aware Algorithm Design with LLM Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "William Lugoloobi",
-        "Samuelle Marro",
-        "Jabez Magomere",
-        "Joss Wright",
-        "Chris Russell"
+        "Saharsh Koganti",
+        "Priyadarsi Mishra",
+        "Pierfrancesco Beneventano",
+        "Tomer Galanti"
       ],
-      "institution": "University of Oxford",
+      "institution": "Texas A&M University, Massachusetts Institute of Technology",
       "summary": {
-        "zh": "本文首次系统性地揭示了 LLM 浏览器代理的行为指纹特性。通过被动监测用户的 UI 交互痕迹（动作类型与时序），攻击者能够以极高的准确率识别出代理背后使用的具体 LLM 模型。这种识别能力不依赖于易被篡改的网络头信息，而是基于模型固有的行为动力学特征。研究还表明，常见的简单防御措施（如随机延迟）不足以抵御此类攻击。这一发现强调了在 LLM 代理广泛部署的背景下，保护模型身份隐私和防范针对性攻击的紧迫性。",
-        "en": "- **Background**: As LLM-based browser agents become prevalent, they act on behalf of users. Websites can passively observe agent behaviors to identify the underlying model, posing a significant security risk by..."
+        "zh": "本文提出了一种基于LLM Agent的分布感知算法设计新方法，通过引入“求解器提示”这一核心概念，成功将学习重点从单纯的解的正确性扩展到计算效率的泛化。理论证明了该方法在多项式样本下的可恢复性和泛化界，实验表明其在多个组合优化问题上显著超越了现有启发式方法和商业求解器，特别是在运行速度上实现了数量级的提升，展示了利用分布特定结构进行算法合成的巨大潜力。",
+        "en": "- **Background**: Classical learning theory focuses on correctness and generalization for predictors. However, for executable procedures like algorithm solvers, correctness is insufficient; two solvers may both be..."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.14786v1",
-        "pdf": "https://arxiv.org/pdf/2605.14786v1",
-        "github": "https://github.com/KabakaWilliam/known_actions"
+        "abs": "http://arxiv.org/abs/2605.14141v1",
+        "pdf": "https://arxiv.org/pdf/2605.14141v1",
+        "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.14786.md",
-        "summary_en_path": "summary_en/2026-05/2605.14786.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.14786.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.14786.md"
+        "summary_zh_path": "summary/2026-05/2605.14141.md",
+        "summary_en_path": "summary_en/2026-05/2605.14141.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.14141.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.14141.md"
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "dashscope|pdf-first-page-hint",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "dashscope",
+        "summary_en": "dashscope",
+        "github": "dashscope|none",
+        "blog": "dashscope|none",
+        "pdf_download": "ok",
+        "pdf_extract": "ok"
+      }
+    },
+    {
+      "id": "arxiv:2605.14126",
+      "date": "2026-05-13",
+      "title": "Reinforcement Learning for Tool-Calling Agents in Fast Healthcare Interoperability Resources (FHIR)",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Marius S. Knorr",
+        "Robert Müller",
+        "Jan P. Bremer",
+        "Nils Schweingruber"
+      ],
+      "institution": "IDM gGmbH, University Medical Center Hamburg-Eppendorf; Aganthos",
+      "summary": {
+        "zh": "本文针对 FHIR 医疗数据图谱中的复杂推理难题，提出了一种结合强化学习与工具调用的解决方案。通过将临床问答建模为序列决策问题，并利用基于执行的奖励机制进行后训练，该方法显著提升了小型开源模型在真实医院数据上的多步推理能力和准确性，为医疗互操作性应用提供了高效可靠的代理框架。",
+        "en": "- **Background**: Fast Healthcare Interoperability Resources (FHIR) is the dominant standard for healthcare data exchange, where electronic health records (EHR) form a directed graph of resources. Answering clinically..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.14126v1",
+        "pdf": "https://arxiv.org/pdf/2605.14126v1",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.14126.md",
+        "summary_en_path": "summary_en/2026-05/2605.14126.md",
+        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.14126.md",
+        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.14126.md"
       },
       "signals": {
         "priority_keyword": "Agent"
