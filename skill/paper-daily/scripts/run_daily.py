@@ -156,7 +156,7 @@ def main() -> int:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the repo-local paper daily pipeline. Use --date for replay mode and --view-only to inspect without publishing.")
+    parser = argparse.ArgumentParser(description="Run the repo-local publishing pipeline. This path generates summaries and patches repo artifacts; use discover.py for broad recall.")
     parser.add_argument("--repo-root", default=".")
     parser.add_argument("--date", default=default_utc_date())
     parser.add_argument("--arxiv-id", action="append", default=[], help="Manually publish one or more arXiv IDs. May be repeated or comma-separated. When set, --date is used as the display date.")

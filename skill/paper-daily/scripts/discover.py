@@ -44,30 +44,31 @@ def main() -> int:
         "ranked": [candidate.to_dict() for candidate in ranked],
     }
 
+    output_path = resolve_output_path(args, skill_root)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     if args.json:
-        output = json.dumps(payload, ensure_ascii=False, indent=2)
-        if args.out:
-            Path(args.out).write_text(output + "\n", encoding="utf-8")
-        else:
-            print(output)
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print_report(payload)
+    print(f"\nout: {output_path}")
 
     return 0
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Discover daily Agent/LLM papers from arXiv.")
+    parser = argparse.ArgumentParser(description="Recall daily Agent/LLM papers from arXiv with broad coverage.")
     parser.add_argument("--date", default=default_utc_date(), help="UTC arXiv submitted date, YYYY-MM-DD.")
     parser.add_argument("--keywords", nargs="+", default=DEFAULT_KEYWORDS, help="Priority keyword order.")
     parser.add_argument("--categories", nargs="+", default=DEFAULT_CATEGORIES, help="arXiv categories.")
     parser.add_argument("--max-results-per-keyword", type=int, default=50)
-    parser.add_argument("--select", type=int, default=5)
+    parser.add_argument("--select", type=int, default=50, help="Number of ranked papers to print or emit.")
     parser.add_argument("--delay-seconds", type=float, default=3.1)
     parser.add_argument("--timeout-seconds", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=2)
     parser.add_argument("--json", action="store_true", help="Emit JSON.")
-    parser.add_argument("--out", help="Write JSON output to a file.")
+    parser.add_argument("--out", help="Write JSON output to a specific file. Defaults to skill/paper-daily/output/discovered-YYYY-MM-DD.json.")
     return parser.parse_args()
 
 
@@ -92,6 +93,12 @@ def print_report(payload: dict) -> None:
         print(f"   abs: {candidate['abs_url']}")
         if candidate["pdf_url"]:
             print(f"   pdf: {candidate['pdf_url']}")
+
+
+def resolve_output_path(args: argparse.Namespace, skill_root: Path) -> Path:
+    if args.out:
+        return Path(args.out).expanduser().resolve()
+    return (skill_root / "output" / f"discovered-{args.date}.json").resolve()
 
 
 if __name__ == "__main__":
