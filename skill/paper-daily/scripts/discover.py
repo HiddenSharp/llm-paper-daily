@@ -63,7 +63,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--keywords", nargs="+", default=DEFAULT_KEYWORDS, help="Priority keyword order.")
     parser.add_argument("--categories", nargs="+", default=DEFAULT_CATEGORIES, help="arXiv categories.")
     parser.add_argument("--max-results-per-keyword", type=int, default=50)
-    parser.add_argument("--select", type=int, default=50, help="Number of ranked papers to print or emit.")
+    parser.add_argument("--select", type=int, default=20, help="Number of ranked papers to print or emit.")
     parser.add_argument("--delay-seconds", type=float, default=3.1)
     parser.add_argument("--timeout-seconds", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=2)
