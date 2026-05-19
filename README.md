@@ -1,7 +1,7 @@
 <h2 align='center'>llm-paper-daily 日常论文精选</h2>
 <div align='center'>
 
-[![Status](https://img.shields.io/badge/status-Update_05.16_17:12-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
+[![Status](https://img.shields.io/badge/status-Update_05.19_05:36-success.svg)]() [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md) [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en.md) 
 
 </div>
 
@@ -11,14 +11,14 @@
 
 <!-- paper-daily:readme:updates:start -->
 <details>
-  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月16日 17:12</sub></summary>
+  <summary>查看更新文章 &nbsp;&nbsp;<sub>更新时间: 2026年05月19日 05:36</sub></summary>
 <br>
 
-- Veritas: A Semantically Grounded Agentic Framework for Memory Corruption Vulnerability Detection in Binaries 
-- Orchard: An Open-Source Agentic Modeling Framework 
-- Self-Distilled Agentic Reinforcement Learning 
-- From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents 
-- Known By Their Actions: Fingerprinting LLM Browser Agents via UI Traces 
+- EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective 
+- Code as Agent Harness 
+- SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents 
+- Position: A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe LLM Agent Deployment 
+- LongMINT: Evaluating Memory under Multi-Target Interference in Long-Horizon Agent Systems 
 </details>
 <!-- paper-daily:readme:updates:end -->
 
@@ -42,6 +42,11 @@ Agent 会使用仓库里的 `paper-subscribe` skill，只读取公开的 `feed-p
 
 | &nbsp;Date&nbsp;&nbsp; | Paper | Links & Summary |
 | --- | --- | --- |
+| <span style='display: inline-block; width: 42px;'>05-18</span> | **EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective**<br><sub>机构: Hong Kong University of Science and Technology (Guangzhou)<br>本文引入了 EvoMemBench，填补了 LLM 代理记忆评估的空白。通过从自我进化的视角（单集/跨集，知识/执行）系统化评估，揭示了当前记忆系统的局限性及适用场景。研究表明，虽然长上下文模型强大，但在特定复杂任务和跨任务经验复用中，专用的记忆机制具有不可替代的价值，为未来开发更高效的代理记忆系统提供了方向。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.18421v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.18421.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/DSAIL-Memory/EvoMemBench)</div> |
+| <span style='display: inline-block; width: 42px;'>05-18</span> | **Code as Agent Harness**<br><sub>机构: University of Illinois Urbana-Champaign, Meta, Stanford University<br>本文通过提出“代码即智能体 Harness”的统一视角，系统地梳理了代码在智能体系统中作为推理基础、行动接口和环境模型的核心作用。文章不仅总结了当前的技术进展，还明确了从单智能体向多智能体扩展的路径，并指出了未来在可执行性、可验证性和状态保持方面的关键挑战，为构建更可靠、透明的 AI 智能体系统提供了理论框架和研究方向。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.18747v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.18747.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/YennNing/Awesome-Code-as-Agent-Harness-Papers)</div> |
+| <span style='display: inline-block; width: 42px;'>05-18</span> | **SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents**<br><sub>机构: SJTU, XJTU, NUS, QuantaAlpha, THU, SUFE, NTU, PKU, UCAS<br>SkillGenBench 建立了一个可复现的测试床，将技能生成确立为智能体系统中一个独立的研究问题。它不仅提供了标准化的评估框架，还通过实证分析揭示了当前 LLM 在从不同来源（代码库 vs 文档）和不同模式（任务特定 vs 通用）下生成可靠、可执行技能时的局限性与挑战，为未来改进技能生成流水线提供了明确的方向。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.18693v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.18693.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/QuantaAlpha/SkillGenBench)</div> |
+| <span style='display: inline-block; width: 42px;'>05-18</span> | **Position: A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe LLM Agent Deployment**<br><sub>机构: University of Liverpool<br>本文论证了对于部署的 LLM 智能体而言，单层安全强制执行在结构上是无效的。作者主张社区应采用基于契约的三层架构，分别独立认证语义、环境和动态三个维度的安全性。尽管该框架提供了理论上的组合安全边界，但要成为可部署的标准，仍需解决三个开放问题：从非独立同分布（non-i.i.d.）轨迹中估计边界、在部署漂移下实现契约的优雅降级，以及扩展到多智能体设置。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.18672v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.18672.md)  |
+| <span style='display: inline-block; width: 42px;'>05-18</span> | **LongMINT: Evaluating Memory under Multi-Target Interference in Long-Horizon Agent Systems**<br><sub>机构: University of North Carolina at Chapel Hill; The University of Texas at Austin<br>LongMINT 揭示了当前长周期智能体在处理动态、高干扰环境时的严重不足。现有技术在面对信息演变和冲突时，无论是检索还是记忆构建都存在明显缺陷。该研究强调了开发更 robust 的记忆管理系统的重要性，以支持跨领域的动态长周期任务。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.18565v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.18565.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/amy-hyunji/LongMINT)</div> |
 | <span style='display: inline-block; width: 42px;'>05-14</span> | **Veritas: A Semantically Grounded Agentic Framework for Memory Corruption Vulnerability Detection in Binaries**<br><sub>机构: University College London<br>Veritas 证明了“语义接地”作为二进制漏洞检测操作设计原则的有效性。通过结合静态分析的精确性、LLM 的推理能力以及动态验证的可靠性，Veritas 能够在剥离二进制文件中高效、准确地检测内存破坏漏洞，并在实际场景中发现了高危未知漏洞，展现了其在实际安全审计中的应用潜力。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.15097v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.15097.md)  |
 | <span style='display: inline-block; width: 42px;'>05-14</span> | **Orchard: An Open-Source Agentic Modeling Framework**<br><sub>机构: Microsoft Research, Columbia University, UIUC<br>Orchard 通过提供一个轻量级、开源且与 harness 无关的环境层（Orchard Env），解决了智能体研究中基础设施碎片化和训练不可扩展的问题。它不仅在代码生成、GUI 操作和个人助理三个截然不同的领域展示了卓越的性能，还证明了通过高效的数据蒸馏和针对性的训练策略（如信用分配 SFT 和平衡自适应 RL），小参数开源模型可以达到甚至超越专有系统的水平。该框架的发布有望加速开源社区在智能体建模方面的创新。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.15040v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.15040.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/microsoft/Orchard)</div> |
 | <span style='display: inline-block; width: 42px;'>05-14</span> | **Self-Distilled Agentic Reinforcement Learning**<br><sub>机构: Zhejiang University, Meituan, Tsinghua University<br>本文针对多轮 LLM 智能体训练中 RL 监督稀疏和 OPSD 不稳定的问题，提出了 SDAR 框架。通过引入门控机制，SDAR 有效地利用了 OPSD 的密集 token 级指导，同时通过不对称处理教师信号解决了多轮累积误差和特权上下文带来的噪声问题。实验证明，SDAR 在多个基准任务上均取得了显著的性能提升，且训练更加稳定，为 LLM 智能体的后训练提供了一种高效的新范式。</sub>| <div style='min-width:85px;'>[![arXiv](https://img.shields.io/badge/arXiv-Paper-%23D2691E?logo=arxiv)](https://arxiv.org/pdf/2605.15155v1)</div><div style='min-width:85px;'>[![Summary](https://img.shields.io/badge/Sum.-Read-blue?logo=dependabot)](summary/2026-05/2605.15155.md) <div style='min-width:85px;'>[![GitHub](https://img.shields.io/badge/GitHub-View-brightgreen?logo=github)](https://github.com/ZJU-REAL/SDAR)</div> |
