@@ -7,6 +7,7 @@ This repository is a content pipeline for daily LLM and Agent paper curation.
 - `skill/paper-daily/scripts/run_daily.py` is the main end-to-end entrypoint.
 - `skill/paper-daily/scripts/paper_daily/` holds discovery, ranking, summarization, rendering, and feed/state logic.
 - `skill/paper-daily/references/` stores prompt and institution reference data.
+- `skill/paper-learning/` contains the Notion-centered learning workflow orchestration layer. It consumes `paper-daily` records, publishes daily reports to Notion and Feishu, processes Notion-selected papers, writes deep-reading notes, and manages archive classification.
 - `skill/paper-subscribe/` contains the consumer-side subscription scripts in Node.js.
 - `summary/` and `summary_en/` contain generated paper summaries.
 - `data/` and `feed-papers.json` are generated artifacts and runtime state.
@@ -23,6 +24,12 @@ Use targeted scripts rather than a full build system.
   Run discovery and selection without modifying repository artifacts.
 - `python3 skill/paper-daily/scripts/run_daily.py --repo-root . --date YYYY-MM-DD`
   Produce summaries, patch `README.md`, and update feed/state files.
+- `python3 skill/paper-learning/scripts/run_daily_learning.py --config skill/paper-learning/templates/config.example.json --date YYYY-MM-DD --dry-run --skip-paper-daily`
+  Preview the Notion/Feishu daily learning workflow without external writes.
+- `python3 skill/paper-learning/scripts/process_notion_queue.py --config skill/paper-learning/templates/config.example.json --dry-run --limit 1`
+  Preview selected-paper queue processing without external writes.
+- `python3 -m unittest discover tests/paper_learning -v`
+  Run the paper-learning unit tests.
 - `node skill/paper-subscribe/scripts/prepare-digest.js --config ~/.paper-subscribe/config.json`
   Preview the subscriber digest from the public feed.
 
