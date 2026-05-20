@@ -1,0 +1,14 @@
+{
+  "date": "2026-05-20",
+  "selected": [
+    {
+      "arxiv_id": "2605.00001",
+      "score": 8.5,
+      "priority_keyword": "Agent",
+      "reasons": ["keyword:agent", "institution:Example AI Lab"],
+      "institution_matches": ["Example AI Lab"],
+      "lab_matches": []
+    }
+  ],
+  "ranked": []
+}

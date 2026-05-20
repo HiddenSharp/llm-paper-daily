@@ -1,0 +1,31 @@
+{
+  "schema_version": "v1",
+  "generated_at": "2026-05-20T00:00:00+00:00",
+  "run_date": "2026-05-20",
+  "items": [
+    {
+      "schema_version": "v1",
+      "paper_id": "2605.00001",
+      "date": "2026-05-20",
+      "title": "Agentic RL for Tool-Using Language Models",
+      "authors": ["A. Author", "B. Author"],
+      "abstract": "We study reinforcement learning for tool-using agents.",
+      "links": {
+        "abs": "https://arxiv.org/abs/2605.00001",
+        "pdf": "https://arxiv.org/pdf/2605.00001",
+        "github": null
+      },
+      "institution": "Example AI Lab",
+      "category_key": "agent",
+      "category_alias": "Agent",
+      "category_display": {"zh": "Agent", "en": "Agent"},
+      "summary_cn": "中文摘要",
+      "summary_en": "English summary",
+      "render_excerpt": "这是一篇关于 Agent RL 的论文。",
+      "render_excerpt_en": "This paper studies Agent RL.",
+      "source_discovery": {"source": "arxiv"},
+      "source_summary": {"source": "local"},
+      "provenance": {"pipeline": "paper-daily"}
+    }
+  ]
+}
