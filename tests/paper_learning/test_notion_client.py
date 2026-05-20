@@ -39,7 +39,7 @@ class NotionClientTest(unittest.TestCase):
         props = client.build_paper_properties(sample_record())
 
         self.assertEqual(props["Title"]["title"][0]["text"]["content"], "Agentic RL")
-        self.assertEqual(props["Status"]["select"]["name"], "New")
+        self.assertEqual(props["Status"]["status"]["name"], "New")
         self.assertEqual(props["Institutions"]["rich_text"][0]["text"]["content"], "Example AI Lab")
         self.assertEqual(props["Score"]["number"], 8.5)
 

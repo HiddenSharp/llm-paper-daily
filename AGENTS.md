@@ -26,6 +26,8 @@ Use targeted scripts rather than a full build system.
   Produce summaries, patch `README.md`, and update feed/state files.
 - `python3 skill/paper-learning/scripts/run_daily_learning.py --config skill/paper-learning/templates/config.example.json --date YYYY-MM-DD --dry-run --skip-paper-daily`
   Preview the Notion/Feishu daily learning workflow without external writes.
+- `python3 skill/paper-learning/scripts/bootstrap_notion.py --config skill/paper-learning/templates/config.example.json --parent-page <NOTION_PAGE_URL> --write-config`
+  Create the required Notion databases and write a local config file with the resulting IDs.
 - `python3 skill/paper-learning/scripts/process_notion_queue.py --config skill/paper-learning/templates/config.example.json --dry-run --limit 1`
   Preview selected-paper queue processing without external writes.
 - `python3 -m unittest discover tests/paper_learning -v`

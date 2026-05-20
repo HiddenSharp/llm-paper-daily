@@ -21,12 +21,31 @@ class ClassifierTest(unittest.TestCase):
             proposed_area="",
             archive_confidence="Medium",
         )
+        areas = [ResearchArea(name="Agent RL", aliases=["agentic RL"], description="", notion_page_id="area-1")]
+
+        result = classify_note(note, areas)
+
+        self.assertEqual(result.area_ids, ["area-1"])
+        self.assertEqual(result.review_status, "Auto Accepted")
+
+    def test_classify_note_matches_area_without_page_id_needs_review(self):
+        note = DeepNote(
+            title="Agentic RL note",
+            paper_id="arxiv:2605.00001",
+            reading_focus="Focus on RL",
+            markdown="This paper studies agentic RL and policy optimization.",
+            contribution_type="Method",
+            method_tags=["Agent", "RL"],
+            proposed_area="",
+            archive_confidence="Medium",
+        )
         areas = [ResearchArea(name="Agent RL", aliases=["agentic RL"], description="")]
 
         result = classify_note(note, areas)
 
-        self.assertEqual(result.area_ids, ["Agent RL"])
-        self.assertEqual(result.review_status, "Auto Accepted")
+        self.assertEqual(result.area_ids, [])
+        self.assertEqual(result.proposed_area, "Agent RL")
+        self.assertEqual(result.review_status, "Needs Human Review")
 
     def test_classify_note_proposes_new_area_when_no_match(self):
         note = DeepNote(

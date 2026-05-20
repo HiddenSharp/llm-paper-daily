@@ -41,8 +41,8 @@ class QueuePipelineTest(unittest.TestCase):
 
         self.assertTrue(result.ok)
         self.assertEqual(notion.notes, [("arxiv:2605.00001", ["area-1"])])
-        self.assertTrue(any(update[1]["Status"]["select"]["name"] == "Deep Reading" for update in notion.status_updates))
-        self.assertTrue(any(update[1]["Status"]["select"]["name"] == "Deep Read Done" for update in notion.status_updates))
+        self.assertTrue(any(update[1]["Status"]["status"]["name"] == "Deep Reading" for update in notion.status_updates))
+        self.assertTrue(any(update[1]["Status"]["status"]["name"] == "Deep Read Done" for update in notion.status_updates))
         self.assertTrue(any(update[1].get("Research Areas") == {"relation": [{"id": "area-1"}]} for update in notion.status_updates))
         self.assertTrue(any(update[1].get("Deep Note") == {"relation": [{"id": "note-1"}]} for update in notion.status_updates))
 
@@ -98,7 +98,7 @@ class QueuePipelineTest(unittest.TestCase):
 
         self.assertFalse(result.ok)
         self.assertEqual(result.status, "failed")
-        self.assertEqual(notion.status_updates[-1][1]["Status"]["select"]["name"], "Failed")
+        self.assertEqual(notion.status_updates[-1][1]["Status"]["status"]["name"], "Failed")
         self.assertEqual(notion.status_updates[-1][1]["Error"]["rich_text"][0]["text"]["content"], "reader failed")
 
 

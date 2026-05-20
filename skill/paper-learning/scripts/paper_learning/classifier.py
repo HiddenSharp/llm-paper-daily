@@ -22,13 +22,20 @@ def load_research_areas(path: Path) -> list[ResearchArea]:
 def classify_note(note: DeepNote, active_areas: list[ResearchArea]) -> ClassificationResult:
     text = " ".join([note.title, note.markdown, " ".join(note.method_tags)])
     matched = [area for area in active_areas if area.matches(text)]
-    if matched:
-        ids = [area.notion_page_id or area.name for area in matched]
+    matched_ids = [area.notion_page_id for area in matched if area.notion_page_id]
+    if matched_ids:
         return ClassificationResult(
-            area_ids=ids,
+            area_ids=matched_ids,
             proposed_area="",
             confidence="High",
             review_status="Auto Accepted",
+        )
+    if matched:
+        return ClassificationResult(
+            area_ids=[],
+            proposed_area=matched[0].name,
+            confidence="Low",
+            review_status="Needs Human Review",
         )
     return ClassificationResult(
         area_ids=[],

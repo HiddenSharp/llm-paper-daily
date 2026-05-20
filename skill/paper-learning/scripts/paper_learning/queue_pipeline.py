@@ -31,7 +31,7 @@ def process_selected_papers(
         notion.update_paper_status(
             paper.notion_page_id,
             {
-                "Status": {"select": {"name": "Deep Reading"}},
+                "Status": {"status": {"name": "Deep Reading"}},
                 "Error": {"rich_text": []},
             },
         )
@@ -41,7 +41,7 @@ def process_selected_papers(
             note_area_ids = paper.existing_research_area_ids or classification.area_ids
             note_result = notion.create_deep_note(paper, note, note_area_ids)
             final_properties = {
-                "Status": {"select": {"name": "Deep Read Done"}},
+                "Status": {"status": {"name": "Deep Read Done"}},
                 "Archive Confidence": {"select": {"name": classification.confidence}},
                 "Archive Review Status": {"select": {"name": classification.review_status}},
                 "Proposed Area": _rich_text_or_empty(classification.proposed_area),
@@ -58,7 +58,7 @@ def process_selected_papers(
             notion.update_paper_status(
                 paper.notion_page_id,
                 {
-                    "Status": {"select": {"name": "Failed"}},
+                    "Status": {"status": {"name": "Failed"}},
                     "Error": {"rich_text": [{"text": {"content": str(exc)[:2000]}}]},
                 },
             )

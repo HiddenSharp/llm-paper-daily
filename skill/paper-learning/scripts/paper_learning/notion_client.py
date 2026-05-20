@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from .config import NotionConfig
@@ -11,6 +12,47 @@ from .report import render_markdown_report
 class NotionClient:
     def __init__(self, config: NotionConfig):
         self.config = config
+
+    def create_database(self, *, parent_page_id: str, title: str, properties: dict) -> OperationResult:
+        payload = {
+            "parent": {"type": "page_id", "page_id": parent_page_id},
+            "title": [{"type": "text", "text": {"content": title[:2000]}}],
+            "properties": properties,
+        }
+        if self.config.dry_run:
+            return OperationResult(True, "dry_run", "database creation skipped in dry-run", payload)
+
+        data = self._request("POST", "/databases", payload)
+        return OperationResult(True, "created", "database created", data)
+
+    def update_database(self, database_id: str, properties: dict) -> OperationResult:
+        payload = {"properties": properties}
+        if self.config.dry_run:
+            return OperationResult(True, "dry_run", "database update skipped in dry-run", {"database_id": database_id, **payload})
+
+        data = self._request("PATCH", f"/databases/{database_id}", payload)
+        return OperationResult(True, "updated", "database updated", data)
+
+    def find_database_in_parent(self, *, parent_page_id: str, title: str) -> dict | None:
+        if self.config.dry_run:
+            return None
+
+        payload = {
+            "query": title,
+            "filter": {"property": "object", "value": "database"},
+            "page_size": 50,
+        }
+        data = self._request("POST", "/search", payload)
+        for result in data.get("results", []):
+            if result.get("object") != "database":
+                continue
+            if result.get("parent", {}).get("page_id") != parent_page_id:
+                continue
+            titles = result.get("title", [])
+            found = "".join(part.get("plain_text", "") for part in titles)
+            if found == title:
+                return result
+        return None
 
     def build_paper_properties(self, record: DailyPaperRecord, *, include_workflow_defaults: bool = True) -> dict:
         properties = {
@@ -27,7 +69,7 @@ class NotionClient:
             "Score": {"number": record.score},
         }
         if include_workflow_defaults:
-            properties["Status"] = {"select": {"name": "New"}}
+            properties["Status"] = {"status": {"name": "New"}}
             properties["Error"] = {"rich_text": []}
         return properties
 
@@ -70,7 +112,7 @@ class NotionClient:
         if self.config.dry_run:
             return []
 
-        payload = {"filter": {"property": "Status", "select": {"equals": "Selected"}}}
+        payload = {"filter": {"property": "Status", "status": {"equals": "Selected"}}}
         data = self._request("POST", f"/databases/{self.config.paper_inbox_database_id}/query", payload)
         return [selected_paper_from_page(page) for page in data.get("results", [])]
 
@@ -126,8 +168,12 @@ class NotionClient:
                 "Content-Type": "application/json",
             },
         )
-        with urlopen(request, timeout=60) as response:
-            return json.loads(response.read().decode("utf-8"))
+        try:
+            with urlopen(request, timeout=60) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            details = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"Notion API {exc.code} {exc.reason}: {details}") from exc
 
 
 def markdown_to_blocks(markdown: str) -> list[dict]:

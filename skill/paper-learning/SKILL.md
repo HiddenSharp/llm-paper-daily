@@ -47,6 +47,12 @@ Dry-run queue stage:
 python3 skill/paper-learning/scripts/process_notion_queue.py --config skill/paper-learning/templates/config.example.json --dry-run --limit 1
 ```
 
+Bootstrap Notion workspace:
+
+```bash
+python3 skill/paper-learning/scripts/bootstrap_notion.py --config skill/paper-learning/templates/config.example.json --parent-page <NOTION_PAGE_URL> --write-config
+```
+
 ## Output Contract
 
 The daily stage creates or updates:
