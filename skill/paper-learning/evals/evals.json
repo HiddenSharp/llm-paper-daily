@@ -1,0 +1,23 @@
+{
+  "skill_name": "paper-learning",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run today's paper learning daily report in dry-run mode and explain what would be sent to Notion and Feishu.",
+      "expected_output": "Uses paper-learning, runs or describes run_daily_learning.py with --dry-run, and separates Notion control-plane updates from Feishu delivery.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I selected two papers in Notion and wrote reading instructions. Process the queue without overwriting my manual research-area edits.",
+      "expected_output": "Uses paper-learning, runs or describes process_notion_queue.py, preserves manual Research Areas, and updates Deep Notes.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Add a new archive category suggestion flow for papers that do not match my existing Notion taxonomy.",
+      "expected_output": "Uses paper-learning and explains Proposed Area plus Needs Human Review rather than directly creating taxonomy entries.",
+      "files": []
+    }
+  ]
+}

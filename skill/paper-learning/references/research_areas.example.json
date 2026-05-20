@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Agent RL",
+    "aliases": ["agentic rl", "reinforcement learning", "on-policy distillation"],
+    "description": "Agent training, reinforcement learning, policy optimization, and distillation for agent systems."
+  },
+  {
+    "name": "Benchmark",
+    "aliases": ["evaluation", "eval", "leaderboard"],
+    "description": "Benchmarks, evaluation protocols, diagnostic datasets, and measurement methods."
+  },
+  {
+    "name": "Reasoning",
+    "aliases": ["planning", "chain of thought", "inference"],
+    "description": "Reasoning, planning, deliberation, and inference-time techniques."
+  },
+  {
+    "name": "Synthetic Data",
+    "aliases": ["data generation", "self training", "bootstrapping"],
+    "description": "Synthetic data generation and data-centric model improvement."
+  },
+  {
+    "name": "Tech Report",
+    "aliases": ["system report", "model report", "technical report"],
+    "description": "Major model, system, or product technical reports."
+  }
+]

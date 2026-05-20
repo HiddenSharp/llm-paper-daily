@@ -1,0 +1,45 @@
+{
+  "paper_daily": {
+    "repo_root": ".",
+    "python": "python3",
+    "generate_feed_script": "skill/paper-daily/scripts/generate_feed.py",
+    "discover_script": "skill/paper-daily/scripts/discover.py",
+    "select": 5,
+    "max_results_per_keyword": 10,
+    "score_threshold": 6.0
+  },
+  "huggingface": {
+    "enabled": true,
+    "endpoint": "https://huggingface.co/api/daily_papers",
+    "limit": 20
+  },
+  "notion": {
+    "enabled": true,
+    "dry_run": true,
+    "api_base": "https://api.notion.com/v1",
+    "api_version": "2022-06-28",
+    "token_env": "NOTION_TOKEN",
+    "paper_inbox_database_id": "paper-inbox-database-id",
+    "deep_notes_database_id": "deep-notes-database-id",
+    "research_areas_database_id": "research-areas-database-id",
+    "daily_report_parent_page_id": "daily-report-parent-page-id"
+  },
+  "feishu": {
+    "enabled": true,
+    "dry_run": true,
+    "webhook_url_env": "FEISHU_WEBHOOK_URL"
+  },
+  "deep_reading": {
+    "prompt_path": "skill/paper-learning/references/deep_reading_prompt.md",
+    "command": []
+  },
+  "classification": {
+    "confidence_threshold": 0.72,
+    "default_research_areas_path": "skill/paper-learning/references/research_areas.example.json"
+  },
+  "runtime": {
+    "artifact_dir": "data/paper-learning/runs",
+    "timeout_seconds": 60,
+    "dry_run": true
+  }
+}
