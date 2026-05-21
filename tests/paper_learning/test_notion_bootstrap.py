@@ -56,10 +56,14 @@ class NotionBootstrapTest(unittest.TestCase):
         self.assertEqual(result.data["paper_inbox_database_id"], "db-3")
         self.assertEqual(result.data["deep_notes_database_id"], "db-2")
         self.assertEqual(result.data["research_areas_database_id"], "db-1")
-        self.assertEqual(notion.updated[0]["database_id"], "db-3")
-        self.assertIn("Research Areas", notion.updated[0]["properties"])
-        self.assertEqual(notion.updated[1]["database_id"], "db-2")
-        self.assertIn("Paper", notion.updated[1]["properties"])
+        self.assertEqual(notion.updated[0]["database_id"], "db-1")
+        self.assertIn("Aliases", notion.updated[0]["properties"])
+        self.assertEqual(notion.updated[1]["database_id"], "db-3")
+        self.assertIn("Research Areas", notion.updated[1]["properties"])
+        self.assertIn("Status", notion.updated[1]["properties"])
+        self.assertEqual(notion.updated[2]["database_id"], "db-2")
+        self.assertIn("Paper", notion.updated[2]["properties"])
+        self.assertIn("Original Title", notion.updated[2]["properties"])
 
     def test_bootstrap_notion_workspace_reuses_existing_databases(self):
         notion = FakeNotion()
@@ -76,6 +80,8 @@ class NotionBootstrapTest(unittest.TestCase):
         self.assertEqual(result.data["paper_inbox_database_id"], "db-inbox")
         self.assertEqual(result.data["deep_notes_database_id"], "db-deep")
         self.assertEqual(result.data["research_areas_database_id"], "db-research")
+        self.assertEqual([item["database_id"] for item in notion.updated], ["db-research", "db-inbox", "db-deep"])
+        self.assertIn("Original Title", notion.updated[2]["properties"])
 
     def test_write_local_config_populates_database_ids(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -97,6 +103,8 @@ class NotionBootstrapTest(unittest.TestCase):
             self.assertEqual(payload["notion"]["deep_notes_database_id"], "deep-db")
             self.assertEqual(payload["notion"]["research_areas_database_id"], "areas-db")
             self.assertEqual(payload["notion"]["token_env"], "NOTION_TOKEN")
+            self.assertEqual(payload["deep_reading"]["mode"], "org_artifact")
+            self.assertEqual(payload["deep_reading"]["org_artifact_dir"], "data/paper-learning/deep-reading-org")
 
 
 def _result(data):

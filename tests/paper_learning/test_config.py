@@ -31,6 +31,24 @@ class ConfigTest(unittest.TestCase):
             self.assertEqual(cfg.notion.token, "notion-secret")
             self.assertEqual(cfg.feishu.webhook_url, "https://example.test/webhook")
             self.assertTrue(cfg.runtime.dry_run)
+            self.assertEqual(cfg.deep_reading.mode, "fallback")
+            self.assertEqual(cfg.deep_reading.org_artifact_dir, Path("data/paper-learning/deep-reading-org"))
+
+    def test_load_config_supports_org_artifact_deep_reading_mode(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "config.json"
+            path.write_text(json.dumps({
+                "paper_daily": {"repo_root": "."},
+                "deep_reading": {
+                    "mode": "org_artifact",
+                    "org_artifact_dir": "data/paper-learning/ljg-org",
+                },
+            }), encoding="utf-8")
+
+            cfg = load_config(path)
+
+            self.assertEqual(cfg.deep_reading.mode, "org_artifact")
+            self.assertEqual(cfg.deep_reading.org_artifact_dir, Path("data/paper-learning/ljg-org"))
 
 
 if __name__ == "__main__":

@@ -75,6 +75,7 @@ class DeepNote:
     method_tags: list[str]
     proposed_area: str
     archive_confidence: str
+    extra_properties: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return asdict(self)

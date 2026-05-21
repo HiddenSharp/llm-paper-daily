@@ -52,19 +52,17 @@ def bootstrap_notion_workspace(*, notion, parent_page_id: str) -> OperationResul
     )
     inbox_db_id = paper_inbox.data.get("id", "dry-run-paper-inbox")
 
+    research_update = notion.update_database(
+        research_db_id,
+        _research_areas_schema(),
+    )
     inbox_update = notion.update_database(
         inbox_db_id,
-        {
-            "Research Areas": _relation_schema(research_db_id),
-            "Deep Note": _relation_schema(deep_db_id),
-        },
+        _paper_inbox_schema_with_relations(research_db_id, deep_db_id),
     )
     deep_update = notion.update_database(
         deep_db_id,
-        {
-            "Paper": _relation_schema(inbox_db_id),
-            "Research Areas": _relation_schema(research_db_id),
-        },
+        _deep_notes_schema_with_relations(inbox_db_id, research_db_id),
     )
 
     return OperationResult(
@@ -79,6 +77,7 @@ def bootstrap_notion_workspace(*, notion, parent_page_id: str) -> OperationResul
             "paper_inbox_url": paper_inbox.data.get("url", ""),
             "deep_notes_url": deep_notes.data.get("url", ""),
             "research_areas_url": research_areas.data.get("url", ""),
+            "research_areas_update": research_update.to_dict(),
             "paper_inbox_update": inbox_update.to_dict(),
             "deep_notes_update": deep_update.to_dict(),
         },
@@ -116,7 +115,7 @@ def write_local_config(
 def app_config_to_dict(cfg: AppConfig) -> dict:
     payload = asdict(cfg)
     payload["paper_daily"]["repo_root"] = str(cfg.paper_daily.repo_root)
-    payload["deep_reading"]["prompt_path"] = str(cfg.deep_reading.prompt_path)
+    payload["deep_reading"]["org_artifact_dir"] = str(cfg.deep_reading.org_artifact_dir)
     payload["classification"]["default_research_areas_path"] = str(cfg.classification.default_research_areas_path)
     payload["runtime"]["artifact_dir"] = str(cfg.runtime.artifact_dir)
     payload["notion"]["token"] = ""
@@ -178,6 +177,14 @@ def _paper_inbox_base_schema() -> dict:
     }
 
 
+def _paper_inbox_schema_with_relations(research_db_id: str, deep_db_id: str) -> dict:
+    return {
+        **_paper_inbox_base_schema(),
+        "Research Areas": _relation_schema(research_db_id),
+        "Deep Note": _relation_schema(deep_db_id),
+    }
+
+
 def _deep_notes_base_schema() -> dict:
     return {
         "Title": {"title": {}},
@@ -201,6 +208,18 @@ def _deep_notes_base_schema() -> dict:
                 ]
             }
         },
+        "Original Title": {"rich_text": {}},
+        "Authors": {"rich_text": {}},
+        "Venue": {"rich_text": {}},
+        "Source URL": {"url": {}},
+    }
+
+
+def _deep_notes_schema_with_relations(inbox_db_id: str, research_db_id: str) -> dict:
+    return {
+        **_deep_notes_base_schema(),
+        "Paper": _relation_schema(inbox_db_id),
+        "Research Areas": _relation_schema(research_db_id),
     }
 
 

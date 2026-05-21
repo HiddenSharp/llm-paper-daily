@@ -18,8 +18,9 @@ Use this skill for the personal paper learning workflow built on top of `paper-d
 1. Run the daily stage with `run_daily_learning.py`.
 2. Review candidates in the Notion `Paper Inbox`.
 3. Set `Status = Selected` and optionally fill `Human Instruction`.
-4. Run `process_notion_queue.py`.
-5. Review generated `Deep Notes` and any `Proposed Area` fields in Notion.
+4. If `deep_reading.mode = "org_artifact"`, use the agent runtime with the `ljg-paper` skill to write the selected paper's Org note to `deep_reading.org_artifact_dir/<paper_id>.org`, replacing non filename-safe characters in the paper ID with underscores.
+5. Run `process_notion_queue.py`.
+6. Review generated `Deep Notes` and any `Proposed Area` fields in Notion.
 
 ## Commands
 
@@ -33,6 +34,12 @@ Queue stage:
 
 ```bash
 python3 skill/paper-learning/scripts/process_notion_queue.py --config ~/.paper-learning/config.json
+```
+
+Prepare ljg-paper runtime requests for selected papers:
+
+```bash
+python3 skill/paper-learning/scripts/prepare_ljg_paper_requests.py --config ~/.paper-learning/config.json --limit 1
 ```
 
 Dry-run daily stage:
@@ -77,6 +84,7 @@ The queue stage creates or updates:
 
 ## References
 
-- Default deep-reading prompt: `references/deep_reading_prompt.md`
 - Starter research areas: `references/research_areas.example.json`
 - Config template: `templates/config.example.json`
+- ljg-paper Org adapter: configure `deep_reading.mode = "org_artifact"` after an agent runtime has used the `ljg-paper` skill and written the resulting Org document into `deep_reading.org_artifact_dir`.
+- Artifact naming helper: `arxiv:2605.00001` becomes `arxiv_2605.00001.org`.

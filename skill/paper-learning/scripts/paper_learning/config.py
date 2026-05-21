@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -49,8 +49,8 @@ class FeishuConfig:
 
 @dataclass(frozen=True)
 class DeepReadingConfig:
-    prompt_path: Path = Path("skill/paper-learning/references/deep_reading_prompt.md")
-    command: list[str] = field(default_factory=list)
+    mode: str = "fallback"
+    org_artifact_dir: Path = Path("data/paper-learning/deep-reading-org")
 
 
 @dataclass(frozen=True)
@@ -139,8 +139,8 @@ def _feishu(raw: dict[str, Any]) -> FeishuConfig:
 
 def _deep_reading(raw: dict[str, Any]) -> DeepReadingConfig:
     return DeepReadingConfig(
-        prompt_path=Path(raw.get("prompt_path", "skill/paper-learning/references/deep_reading_prompt.md")),
-        command=list(raw.get("command", [])),
+        mode=raw.get("mode", "fallback"),
+        org_artifact_dir=Path(raw.get("org_artifact_dir", "data/paper-learning/deep-reading-org")),
     )
 
 

@@ -30,8 +30,8 @@
     "webhook_url_env": "FEISHU_WEBHOOK_URL"
   },
   "deep_reading": {
-    "prompt_path": "skill/paper-learning/references/deep_reading_prompt.md",
-    "command": []
+    "mode": "org_artifact",
+    "org_artifact_dir": "data/paper-learning/deep-reading-org"
   },
   "classification": {
     "confidence_threshold": 0.72,

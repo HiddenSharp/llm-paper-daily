@@ -1,12 +1,20 @@
 from __future__ import annotations
 
 import json
+import re
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from .config import NotionConfig
 from .models import DailyPaperRecord, DeepNote, OperationResult, ReportModel, SelectedPaper
 from .report import render_markdown_report
+
+
+_IMAGE_LINE_RE = re.compile(r"^!\[([^\]]*)\]\(([^)]+)\)$")
+_INLINE_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+_INLINE_BOLD_RE = re.compile(r"\*\*([^*\n]+?)\*\*")
+_RICH_TEXT_LIMIT = 2000
+_PARAGRAPH_LIMIT = 1900  # leave headroom for safe segmentation
 
 
 class NotionClient:
@@ -117,24 +125,55 @@ class NotionClient:
         return [selected_paper_from_page(page) for page in data.get("results", [])]
 
     def create_deep_note(self, paper: SelectedPaper, note: DeepNote, area_ids: list[str]) -> OperationResult:
+        properties = self._build_deep_note_properties(paper, note, area_ids)
+        children = markdown_to_blocks(note.markdown)
         if self.config.dry_run:
-            return OperationResult(True, "dry_run", "deep note skipped in dry-run", {"paper_id": paper.record.paper_id})
+            status = "dry_run_update" if paper.existing_deep_note_id else "dry_run_create"
+            return OperationResult(True, status, "deep note skipped in dry-run", {
+                "paper_id": paper.record.paper_id,
+                "page_id": paper.existing_deep_note_id,
+                "properties": properties,
+                "children": children,
+            })
+
+        if paper.existing_deep_note_id:
+            data = self._update_deep_note(paper.existing_deep_note_id, properties, children)
+            return OperationResult(True, "updated", "deep note updated", data)
 
         payload = {
             "parent": {"database_id": self.config.deep_notes_database_id},
-            "properties": {
-                "Title": _title(note.title),
-                "Paper": {"relation": [{"id": paper.notion_page_id}]},
-                "Research Areas": {"relation": [{"id": area_id} for area_id in area_ids]},
-                "Reading Focus": _rich_text(note.reading_focus),
-                "Contribution Type": {"select": {"name": note.contribution_type}},
-                "Method Tags": {"multi_select": [{"name": tag} for tag in note.method_tags]},
-                "Review Status": {"select": {"name": "Draft"}},
-            },
-            "children": markdown_to_blocks(note.markdown),
+            "properties": properties,
+            "children": children,
         }
         data = self._request("POST", "/pages", payload)
         return OperationResult(True, "created", "deep note created", data)
+
+    def _build_deep_note_properties(
+        self, paper: SelectedPaper, note: DeepNote, area_ids: list[str]
+    ) -> dict:
+        properties: dict = {
+            "Title": _title(note.title),
+            "Paper": {"relation": [{"id": paper.notion_page_id}]},
+            "Research Areas": {"relation": [{"id": area_id} for area_id in area_ids]},
+            "Reading Focus": _rich_text(note.reading_focus),
+            "Contribution Type": {"select": {"name": note.contribution_type}},
+            "Method Tags": {"multi_select": [{"name": tag} for tag in note.method_tags]},
+            "Review Status": {"select": {"name": "Draft"}},
+        }
+        extras = note.extra_properties or {}
+        original_title = extras.get("original_title")
+        if original_title:
+            properties["Original Title"] = _rich_text(original_title)
+        authors = extras.get("authors")
+        if authors:
+            properties["Authors"] = _rich_text(authors)
+        venue = extras.get("venue")
+        if venue:
+            properties["Venue"] = _rich_text(venue)
+        source_url = extras.get("source_url")
+        if source_url:
+            properties["Source URL"] = {"url": source_url}
+        return properties
 
     def update_paper_status(self, page_id: str, properties: dict) -> OperationResult:
         if self.config.dry_run:
@@ -148,6 +187,28 @@ class NotionClient:
         data = self._request("PATCH", f"/pages/{page_id}", {"properties": properties})
         return OperationResult(True, "updated", "paper status updated", data)
 
+    def _update_deep_note(self, page_id: str, properties: dict, children: list[dict]) -> dict:
+        data = self._request("PATCH", f"/pages/{page_id}", {"properties": properties})
+        existing_block_ids = self._list_block_children(page_id)
+        for block_id in existing_block_ids:
+            self._request("PATCH", f"/blocks/{block_id}", {"archived": True})
+        if children:
+            self._request("PATCH", f"/blocks/{page_id}/children", {"children": children})
+        return data
+
+    def _list_block_children(self, block_id: str) -> list[str]:
+        child_ids: list[str] = []
+        cursor: str | None = None
+        while True:
+            path = f"/blocks/{block_id}/children?page_size=100"
+            if cursor:
+                path += f"&start_cursor={cursor}"
+            data = self._request("GET", path)
+            child_ids.extend(result["id"] for result in data.get("results", []))
+            if not data.get("has_more"):
+                return child_ids
+            cursor = data.get("next_cursor")
+
     def _find_page_by_paper_id(self, paper_id: str) -> str | None:
         payload = {"filter": {"property": "Paper ID", "rich_text": {"equals": paper_id}}}
         data = self._request("POST", f"/databases/{self.config.paper_inbox_database_id}/query", payload)
@@ -156,8 +217,8 @@ class NotionClient:
             return None
         return results[0]["id"]
 
-    def _request(self, method: str, path: str, payload: dict) -> dict:
-        body = json.dumps(payload).encode("utf-8")
+    def _request(self, method: str, path: str, payload: dict | None = None) -> dict:
+        body = None if payload is None else json.dumps(payload).encode("utf-8")
         request = Request(
             self.config.api_base.rstrip("/") + path,
             data=body,
@@ -178,15 +239,42 @@ class NotionClient:
 
 def markdown_to_blocks(markdown: str) -> list[dict]:
     blocks: list[dict] = []
-    for line in markdown.splitlines():
+    lines = markdown.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if line.startswith("```"):
+            language = line[3:].strip() or "plain text"
+            if language == "text":
+                language = "plain text"
+            buffer: list[str] = []
+            i += 1
+            while i < len(lines) and not lines[i].startswith("```"):
+                buffer.append(lines[i])
+                i += 1
+            if i < len(lines):
+                i += 1  # consume closing ```
+            blocks.append(_code_block("\n".join(buffer), language))
+            continue
         if line.startswith("# "):
             blocks.append(_block("heading_1", line[2:]))
         elif line.startswith("## "):
             blocks.append(_block("heading_2", line[3:]))
+        elif line.startswith("### "):
+            blocks.append(_block("heading_3", line[4:]))
         elif line.startswith("- "):
-            blocks.append(_block("bulleted_list_item", line[2:]))
-        elif line.strip():
-            blocks.append(_block("paragraph", line))
+            blocks.append(_rich_block("bulleted_list_item", line[2:]))
+        else:
+            stripped = line.strip()
+            if not stripped:
+                i += 1
+                continue
+            image_match = _IMAGE_LINE_RE.match(stripped)
+            if image_match:
+                blocks.append(_image_block(image_match.group(2)))
+            else:
+                blocks.extend(_paragraph_blocks(line))
+        i += 1
     return blocks[:100]
 
 
@@ -235,6 +323,114 @@ def _block(block_type: str, content: str) -> dict:
         "type": block_type,
         block_type: {"rich_text": [{"type": "text", "text": {"content": content[:2000]}}]},
     }
+
+
+def _rich_block(block_type: str, content: str) -> dict:
+    return {
+        "object": "block",
+        "type": block_type,
+        block_type: {"rich_text": _rich_text_runs(content)},
+    }
+
+
+def _code_block(content: str, language: str = "plain text") -> dict:
+    safe = content[:_RICH_TEXT_LIMIT]
+    return {
+        "object": "block",
+        "type": "code",
+        "code": {
+            "rich_text": [{"type": "text", "text": {"content": safe}}],
+            "language": language,
+        },
+    }
+
+
+def _image_block(url: str) -> dict:
+    return {
+        "object": "block",
+        "type": "image",
+        "image": {"type": "external", "external": {"url": url}},
+    }
+
+
+def _paragraph_blocks(line: str) -> list[dict]:
+    chunks = _split_long_text(line, _PARAGRAPH_LIMIT)
+    return [
+        {
+            "object": "block",
+            "type": "paragraph",
+            "paragraph": {"rich_text": _rich_text_runs(chunk)},
+        }
+        for chunk in chunks
+    ]
+
+
+def _split_long_text(text: str, limit: int) -> list[str]:
+    if len(text) <= limit:
+        return [text]
+    chunks: list[str] = []
+    remaining = text
+    while len(remaining) > limit:
+        cut = remaining.rfind("。", 0, limit)
+        if cut < limit // 2:
+            cut = remaining.rfind(". ", 0, limit)
+        if cut < limit // 2:
+            cut = limit
+        chunks.append(remaining[: cut + 1].rstrip())
+        remaining = remaining[cut + 1 :].lstrip()
+    if remaining:
+        chunks.append(remaining)
+    return chunks
+
+
+def _rich_text_runs(text: str) -> list[dict]:
+    """Tokenize markdown inline (links, **bold**) into Notion rich_text runs."""
+    runs: list[dict] = []
+    cursor = 0
+    matches: list[tuple[int, int, dict]] = []
+    for match in _INLINE_LINK_RE.finditer(text):
+        matches.append((match.start(), match.end(), {
+            "kind": "link",
+            "label": match.group(1),
+            "url": match.group(2),
+        }))
+    for match in _INLINE_BOLD_RE.finditer(text):
+        # Skip bold spans that fall inside a link span we already captured.
+        if any(start <= match.start() and match.end() <= end for start, end, _ in matches):
+            continue
+        matches.append((match.start(), match.end(), {
+            "kind": "bold",
+            "label": match.group(1),
+        }))
+    matches.sort(key=lambda item: item[0])
+
+    for start, end, payload in matches:
+        if start < cursor:
+            continue
+        if start > cursor:
+            runs.append(_text_run(text[cursor:start]))
+        if payload["kind"] == "link":
+            runs.append(_text_run(payload["label"], link=payload["url"]))
+        else:
+            runs.append(_text_run(payload["label"], bold=True))
+        cursor = end
+    if cursor < len(text):
+        runs.append(_text_run(text[cursor:]))
+    if not runs:
+        runs.append(_text_run(text))
+    return runs
+
+
+def _text_run(content: str, *, bold: bool = False, link: str | None = None) -> dict:
+    run: dict = {
+        "type": "text",
+        "text": {"content": content[:_RICH_TEXT_LIMIT]},
+    }
+    if link:
+        run["text"]["link"] = {"url": link}
+    if bold:
+        run["annotations"] = {"bold": True}
+    return run
 
 
 def _plain_title(prop: dict) -> str:

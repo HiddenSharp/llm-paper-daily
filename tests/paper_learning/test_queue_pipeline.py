@@ -23,8 +23,9 @@ class FakeNotion:
         return OperationResult(True, "dry_run", "status", {"page_id": page_id})
 
     def create_deep_note(self, paper, note, area_ids):
-        self.notes.append((paper.record.paper_id, area_ids))
-        return OperationResult(True, "dry_run", "note", {"id": "note-1"})
+        self.notes.append((paper.record.paper_id, area_ids, paper.existing_deep_note_id))
+        note_id = paper.existing_deep_note_id or "note-1"
+        return OperationResult(True, "dry_run", "note", {"id": note_id})
 
 
 class QueuePipelineTest(unittest.TestCase):
@@ -40,7 +41,7 @@ class QueuePipelineTest(unittest.TestCase):
         )
 
         self.assertTrue(result.ok)
-        self.assertEqual(notion.notes, [("arxiv:2605.00001", ["area-1"])])
+        self.assertEqual(notion.notes, [("arxiv:2605.00001", ["area-1"], None)])
         self.assertTrue(any(update[1]["Status"]["status"]["name"] == "Deep Reading" for update in notion.status_updates))
         self.assertTrue(any(update[1]["Status"]["status"]["name"] == "Deep Read Done" for update in notion.status_updates))
         self.assertTrue(any(update[1].get("Research Areas") == {"relation": [{"id": "area-1"}]} for update in notion.status_updates))
@@ -64,7 +65,7 @@ class QueuePipelineTest(unittest.TestCase):
         self.assertTrue(result.ok)
         final_update = notion.status_updates[-1][1]
         self.assertNotIn("Research Areas", final_update)
-        self.assertEqual(notion.notes, [("arxiv:2605.00001", ["manual-area"])])
+        self.assertEqual(notion.notes, [("arxiv:2605.00001", ["manual-area"], None)])
 
     def test_process_selected_papers_skips_existing_deep_note_without_force(self):
         selected = SelectedPaper(
@@ -100,6 +101,26 @@ class QueuePipelineTest(unittest.TestCase):
         self.assertEqual(result.status, "failed")
         self.assertEqual(notion.status_updates[-1][1]["Status"]["status"]["name"], "Failed")
         self.assertEqual(notion.status_updates[-1][1]["Error"]["rich_text"][0]["text"]["content"], "reader failed")
+
+    def test_process_selected_papers_force_updates_existing_deep_note(self):
+        selected = SelectedPaper(
+            notion_page_id="page-1",
+            record=_sample_record(),
+            human_instruction="Focus on RL",
+            existing_deep_note_id="note-existing",
+        )
+        notion = FakeNotion([selected])
+
+        result = process_selected_papers(
+            notion=notion,
+            deep_reader=_deep_reader,
+            active_areas=[],
+            force=True,
+        )
+
+        self.assertTrue(result.ok)
+        self.assertEqual(notion.notes, [("arxiv:2605.00001", [], "note-existing")])
+        self.assertTrue(any(update[1].get("Deep Note") == {"relation": [{"id": "note-existing"}]} for update in notion.status_updates))
 
 
 def _sample_record() -> DailyPaperRecord:
