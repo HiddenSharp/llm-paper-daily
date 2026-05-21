@@ -64,7 +64,7 @@ def fallback_deep_note(paper: SelectedPaper) -> DeepNote:
     tags = [record.topic] if record.topic else []
     proposed = record.topic.title() if record.topic else "Uncategorized Paper"
     return DeepNote(
-        title=f"Deep Note: {record.title}",
+        title=_deep_note_page_title(record.title),
         paper_id=record.paper_id,
         reading_focus=focus,
         markdown=markdown,
@@ -91,7 +91,7 @@ def deep_note_from_ljg_org(
     tags = [paper.record.topic] if paper.record.topic else []
     proposed = paper.record.topic.title() if paper.record.topic else "Uncategorized Paper"
     return DeepNote(
-        title=merged_metadata.get("title") or paper.record.title,
+        title=_deep_note_page_title(merged_metadata.get("subtitle") or paper.record.title),
         paper_id=paper.record.paper_id,
         reading_focus=paper.human_instruction,
         markdown=markdown,
@@ -131,3 +131,8 @@ def _build_extra_properties(metadata: dict) -> dict:
         if metadata.get(key):
             extras[key] = metadata[key]
     return extras
+
+
+def _deep_note_page_title(paper_title: str) -> str:
+    normalized = (paper_title or "").strip()
+    return f"笔记：{normalized}" if normalized else "笔记"

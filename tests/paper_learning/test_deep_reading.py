@@ -24,7 +24,7 @@ class DeepReadingTest(unittest.TestCase):
 
         note = deep_note_from_ljg_org(paper, org)
 
-        self.assertEqual(note.title, "凝练 A")
+        self.assertEqual(note.title, "笔记：Agentic RL")
         self.assertEqual(note.paper_id, "arxiv:2605.00001")
         self.assertEqual(note.reading_focus, "Focus on RL")
         self.assertIn("## 问题", note.markdown)
@@ -44,7 +44,7 @@ class DeepReadingTest(unittest.TestCase):
                 DeepReadingConfig(mode="org_artifact", org_artifact_dir=Path(tmp)),
             )
 
-        self.assertEqual(note.title, "凝练 A")
+        self.assertEqual(note.title, "笔记：Agentic RL")
         self.assertIn("## 问题", note.markdown)
 
     def test_generate_deep_note_reports_missing_ljg_org_artifact(self):

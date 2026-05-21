@@ -147,7 +147,7 @@ def _sample_record() -> DailyPaperRecord:
 
 def _deep_reader(paper: SelectedPaper) -> DeepNote:
     return DeepNote(
-        title="Deep Note: Agentic RL",
+        title="笔记：Agentic RL",
         paper_id=paper.record.paper_id,
         reading_focus=paper.human_instruction,
         markdown="Agentic RL details",

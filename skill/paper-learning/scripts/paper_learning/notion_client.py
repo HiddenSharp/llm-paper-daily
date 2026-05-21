@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 from urllib.error import HTTPError
+from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 from .config import NotionConfig
@@ -65,16 +66,11 @@ class NotionClient:
     def build_paper_properties(self, record: DailyPaperRecord, *, include_workflow_defaults: bool = True) -> dict:
         properties = {
             "Title": _title(record.title),
-            "Paper ID": _rich_text(record.paper_id),
-            "Source": {"select": {"name": record.source}},
-            "URL": {"url": record.url or None},
-            "PDF URL": {"url": record.pdf_url},
-            "Authors": _rich_text(", ".join(record.authors)),
+            "Digest Summary": _rich_text(record.digest_summary),
             "Institutions": _rich_text(record.institutions),
             "Published Date": {"date": {"start": record.published_date}},
-            "Run Date": {"date": {"start": record.run_date}},
-            "Digest Summary": _rich_text(record.digest_summary),
-            "Score": {"number": record.score},
+            "URL": {"url": record.url or None},
+            "Source": {"select": {"name": record.source}},
         }
         if include_workflow_defaults:
             properties["Status"] = {"status": {"name": "New"}}
@@ -90,7 +86,7 @@ class NotionClient:
                 data={"paper_id": record.paper_id, "properties": self.build_paper_properties(record)},
             )
 
-        existing_page_id = self._find_page_by_paper_id(record.paper_id)
+        existing_page_id = self._find_page_by_url(record.url)
         if existing_page_id:
             properties = self.build_paper_properties(record, include_workflow_defaults=False)
             data = self._request("PATCH", f"/pages/{existing_page_id}", {"properties": properties})
@@ -160,19 +156,6 @@ class NotionClient:
             "Method Tags": {"multi_select": [{"name": tag} for tag in note.method_tags]},
             "Review Status": {"select": {"name": "Draft"}},
         }
-        extras = note.extra_properties or {}
-        original_title = extras.get("original_title")
-        if original_title:
-            properties["Original Title"] = _rich_text(original_title)
-        authors = extras.get("authors")
-        if authors:
-            properties["Authors"] = _rich_text(authors)
-        venue = extras.get("venue")
-        if venue:
-            properties["Venue"] = _rich_text(venue)
-        source_url = extras.get("source_url")
-        if source_url:
-            properties["Source URL"] = {"url": source_url}
         return properties
 
     def update_paper_status(self, page_id: str, properties: dict) -> OperationResult:
@@ -209,8 +192,10 @@ class NotionClient:
                 return child_ids
             cursor = data.get("next_cursor")
 
-    def _find_page_by_paper_id(self, paper_id: str) -> str | None:
-        payload = {"filter": {"property": "Paper ID", "rich_text": {"equals": paper_id}}}
+    def _find_page_by_url(self, url: str) -> str | None:
+        if not url:
+            return None
+        payload = {"filter": {"property": "URL", "url": {"equals": url}}}
         data = self._request("POST", f"/databases/{self.config.paper_inbox_database_id}/query", payload)
         results = data.get("results", [])
         if not results:
@@ -280,12 +265,13 @@ def markdown_to_blocks(markdown: str) -> list[dict]:
 
 def selected_paper_from_page(page: dict) -> SelectedPaper:
     props = page.get("properties", {})
-    authors = _plain_rich_text(props.get("Authors", {}))
+    url = props.get("URL", {}).get("url") or ""
+    paper_id = _plain_rich_text(props.get("Paper ID", {})) or _paper_id_from_url(url)
     record = DailyPaperRecord(
-        paper_id=_plain_rich_text(props.get("Paper ID", {})),
+        paper_id=paper_id,
         source=_select_name(props.get("Source", {})),
         title=_plain_title(props.get("Title", {})),
-        authors=authors.split(", ") if authors else [],
+        authors=[],
         institutions=_plain_rich_text(props.get("Institutions", {})),
         abstract="",
         digest_summary=_plain_rich_text(props.get("Digest Summary", {})),
@@ -293,10 +279,10 @@ def selected_paper_from_page(page: dict) -> SelectedPaper:
         summary_en="",
         published_date=_date_start(props.get("Published Date", {})),
         run_date=_date_start(props.get("Run Date", {})),
-        url=props.get("URL", {}).get("url") or "",
-        pdf_url=props.get("PDF URL", {}).get("url"),
+        url=url,
+        pdf_url=None,
         topic="",
-        score=float(props.get("Score", {}).get("number") or 0),
+        score=0,
         signals={},
         provenance={"source": "notion"},
     )
@@ -454,3 +440,16 @@ def _date_start(prop: dict) -> str:
 def _first_relation_id(prop: dict) -> str | None:
     relation = prop.get("relation", [])
     return relation[0]["id"] if relation else None
+
+
+def _paper_id_from_url(url: str) -> str:
+    if not url:
+        return ""
+    parsed = urlparse(url)
+    parts = [part for part in parsed.path.split("/") if part]
+    if parsed.netloc.endswith("arxiv.org") and len(parts) >= 2 and parts[0] in {"abs", "pdf"}:
+        arxiv_id = re.sub(r"v\d+$", "", parts[1].removesuffix(".pdf"))
+        return f"arxiv:{arxiv_id}"
+    if parsed.netloc == "huggingface.co" and len(parts) >= 2 and parts[0] == "papers":
+        return f"hf:{parts[1]}"
+    return url

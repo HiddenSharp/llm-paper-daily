@@ -7,6 +7,7 @@ Covers the Org subset used by ljg-paper notes:
 - Inline single-star bold ``*bold*``.
 - Image links ``[[file:relative/path.png]]`` and inline links ``[[url][text]]``.
 - ``#+ATTR_ORG`` directives (dropped).
+- ``#+begin_example`` / ``#+end_example`` example blocks.
 - Unordered ``- `` and ordered ``1. `` lists.
 - ASCII-art blocks wrapped in ```text fenced code.
 
@@ -51,6 +52,7 @@ def org_to_markdown(org_text: str) -> tuple[dict, str]:
     lines = org_text.splitlines()
     metadata, body_lines = _split_metadata(lines)
     body_lines = _drop_attr_directives(body_lines)
+    body_lines = _convert_example_blocks(body_lines)
     body_lines = _wrap_ascii_blocks(body_lines)
     converted = [_convert_line(line) for line in body_lines]
     markdown = "\n".join(converted).strip("\n") + "\n"
@@ -110,6 +112,27 @@ def _drop_attr_directives(lines: list[str]) -> list[str]:
     return [line for line in lines if not line.lstrip().lower().startswith("#+attr_")]
 
 
+def _convert_example_blocks(lines: list[str]) -> list[str]:
+    output: list[str] = []
+    in_example = False
+    for line in lines:
+        stripped = line.strip().lower()
+        if stripped == "#+begin_example":
+            if not in_example:
+                output.append("```text")
+                in_example = True
+            continue
+        if stripped == "#+end_example":
+            if in_example:
+                output.append("```")
+                in_example = False
+            continue
+        output.append(line)
+    if in_example:
+        output.append("```")
+    return output
+
+
 def _top_level_headings(lines: list[str]) -> list[str]:
     headings: list[str] = []
     for line in lines:
@@ -150,11 +173,23 @@ def _wrap_ascii_blocks(lines: list[str]) -> list[str]:
 
     n = len(lines)
     art_flag = [False] * n
+    in_fence = False
     for i, line in enumerate(lines):
+        if line.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
         if strict_art(line):
             art_flag[i] = True
     # Bridge: a line with a drawing glyph adjacent to strict art also counts.
+    in_fence = False
     for i, line in enumerate(lines):
+        if line.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
         if art_flag[i]:
             continue
         if not has_drawing(line):

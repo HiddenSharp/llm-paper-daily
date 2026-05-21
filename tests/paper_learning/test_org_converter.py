@@ -83,6 +83,23 @@ class OrgConverterTest(unittest.TestCase):
         self.assertEqual(markdown.count("```text"), 1)
         self.assertGreaterEqual(markdown.count("```"), 2)
 
+    def test_org_example_block_becomes_code_block(self):
+        org = (
+            "* 翻译\n\n"
+            "#+begin_example\n"
+            "用户目标\n"
+            "   |\n"
+            "   v\n"
+            "下一轮决策\n"
+            "#+end_example\n"
+        )
+
+        _, markdown = org_to_markdown(org)
+
+        self.assertIn("```text\n用户目标\n   |\n   v\n下一轮决策\n```", markdown)
+        self.assertNotIn("#+begin_example", markdown)
+        self.assertNotIn("#+end_example", markdown)
+
     def test_unknown_headers_are_still_extracted(self):
         org = "#+date:       [2026-05-20 Wed 10:00]\n#+filetags:   :paper:\n\nbody\n"
         metadata, markdown = org_to_markdown(org)

@@ -126,23 +126,6 @@ def app_config_to_dict(cfg: AppConfig) -> dict:
 def _paper_inbox_base_schema() -> dict:
     return {
         "Title": {"title": {}},
-        "Paper ID": {"rich_text": {}},
-        "Source": {
-            "select": {
-                "options": [
-                    {"name": "arXiv", "color": "blue"},
-                    {"name": "Hugging Face", "color": "orange"},
-                ]
-            }
-        },
-        "URL": {"url": {}},
-        "PDF URL": {"url": {}},
-        "Authors": {"rich_text": {}},
-        "Institutions": {"rich_text": {}},
-        "Published Date": {"date": {}},
-        "Run Date": {"date": {}},
-        "Digest Summary": {"rich_text": {}},
-        "Score": {"number": {"format": "number_with_commas"}},
         "Status": {
             "status": {
                 "options": [
@@ -154,8 +137,19 @@ def _paper_inbox_base_schema() -> dict:
                 ]
             }
         },
-        "Error": {"rich_text": {}},
+        "Digest Summary": {"rich_text": {}},
+        "Institutions": {"rich_text": {}},
+        "Published Date": {"date": {}},
+        "URL": {"url": {}},
         "Human Instruction": {"rich_text": {}},
+        "Archive Review Status": {
+            "select": {
+                "options": [
+                    {"name": "Auto Accepted", "color": "green"},
+                    {"name": "Needs Human Review", "color": "yellow"},
+                ]
+            }
+        },
         "Archive Confidence": {
             "select": {
                 "options": [
@@ -165,23 +159,36 @@ def _paper_inbox_base_schema() -> dict:
                 ]
             }
         },
-        "Archive Review Status": {
+        "Proposed Area": {"rich_text": {}},
+        "Source": {
             "select": {
                 "options": [
-                    {"name": "Auto Accepted", "color": "green"},
-                    {"name": "Needs Human Review", "color": "yellow"},
+                    {"name": "arXiv", "color": "blue"},
+                    {"name": "Hugging Face", "color": "orange"},
                 ]
             }
         },
-        "Proposed Area": {"rich_text": {}},
+        "Error": {"rich_text": {}},
     }
 
 
 def _paper_inbox_schema_with_relations(research_db_id: str, deep_db_id: str) -> dict:
+    base = _paper_inbox_base_schema()
     return {
-        **_paper_inbox_base_schema(),
+        "Title": base["Title"],
+        "Status": base["Status"],
         "Research Areas": _relation_schema(research_db_id),
+        "Digest Summary": base["Digest Summary"],
+        "Institutions": base["Institutions"],
+        "Published Date": base["Published Date"],
+        "URL": base["URL"],
+        "Human Instruction": base["Human Instruction"],
         "Deep Note": _relation_schema(deep_db_id),
+        "Archive Review Status": base["Archive Review Status"],
+        "Archive Confidence": base["Archive Confidence"],
+        "Proposed Area": base["Proposed Area"],
+        "Source": base["Source"],
+        "Error": base["Error"],
     }
 
 
@@ -208,18 +215,19 @@ def _deep_notes_base_schema() -> dict:
                 ]
             }
         },
-        "Original Title": {"rich_text": {}},
-        "Authors": {"rich_text": {}},
-        "Venue": {"rich_text": {}},
-        "Source URL": {"url": {}},
     }
 
 
 def _deep_notes_schema_with_relations(inbox_db_id: str, research_db_id: str) -> dict:
+    base = _deep_notes_base_schema()
     return {
-        **_deep_notes_base_schema(),
+        "Title": base["Title"],
         "Paper": _relation_schema(inbox_db_id),
         "Research Areas": _relation_schema(research_db_id),
+        "Reading Focus": base["Reading Focus"],
+        "Contribution Type": base["Contribution Type"],
+        "Method Tags": base["Method Tags"],
+        "Review Status": base["Review Status"],
     }
 
 

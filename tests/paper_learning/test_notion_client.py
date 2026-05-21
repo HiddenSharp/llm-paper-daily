@@ -41,7 +41,12 @@ class NotionClientTest(unittest.TestCase):
         self.assertEqual(props["Title"]["title"][0]["text"]["content"], "Agentic RL")
         self.assertEqual(props["Status"]["status"]["name"], "New")
         self.assertEqual(props["Institutions"]["rich_text"][0]["text"]["content"], "Example AI Lab")
-        self.assertEqual(props["Score"]["number"], 8.5)
+        self.assertEqual(props["URL"]["url"], "https://arxiv.org/abs/2605.00001")
+        self.assertNotIn("Paper ID", props)
+        self.assertNotIn("PDF URL", props)
+        self.assertNotIn("Authors", props)
+        self.assertNotIn("Run Date", props)
+        self.assertNotIn("Score", props)
 
     def test_build_paper_properties_can_omit_workflow_defaults_for_existing_pages(self):
         client = NotionClient(NotionConfig(dry_run=True, paper_inbox_database_id="db"))
@@ -50,7 +55,7 @@ class NotionClientTest(unittest.TestCase):
 
         self.assertNotIn("Status", props)
         self.assertNotIn("Error", props)
-        self.assertEqual(props["Paper ID"]["rich_text"][0]["text"]["content"], "arxiv:2605.00001")
+        self.assertEqual(props["URL"]["url"], "https://arxiv.org/abs/2605.00001")
 
     def test_dry_run_upsert_returns_operation(self):
         client = NotionClient(NotionConfig(dry_run=True, paper_inbox_database_id="db"))
@@ -60,7 +65,7 @@ class NotionClientTest(unittest.TestCase):
         self.assertTrue(result.ok)
         self.assertEqual(result.status, "dry_run")
         self.assertEqual(result.data["paper_id"], "arxiv:2605.00001")
-        self.assertEqual(result.data["properties"]["Paper ID"]["rich_text"][0]["text"]["content"], "arxiv:2605.00001")
+        self.assertEqual(result.data["properties"]["URL"]["url"], "https://arxiv.org/abs/2605.00001")
 
     def test_markdown_to_blocks_maps_supported_lines(self):
         blocks = markdown_to_blocks("# Report\n\nOverview\n## Paper\n- Point")
@@ -95,7 +100,7 @@ class NotionClientTest(unittest.TestCase):
         self.assertEqual(runs[3]["text"]["content"], "link")
         self.assertEqual(runs[3]["text"]["link"]["url"], "https://x.example")
 
-    def test_create_deep_note_dry_run_writes_extra_properties(self):
+    def test_create_deep_note_dry_run_ignores_metadata_extras(self):
         client = NotionClient(NotionConfig(dry_run=True, deep_notes_database_id="dn-db"))
         paper = SelectedPaper(notion_page_id="page-1", record=sample_record(), human_instruction="")
         note = DeepNote(
@@ -120,12 +125,12 @@ class NotionClientTest(unittest.TestCase):
         self.assertEqual(result.status, "dry_run_create")
         props = result.data["properties"]
         self.assertEqual(props["Title"]["title"][0]["text"]["content"], "学会反成枷锁")
-        self.assertEqual(props["Original Title"]["rich_text"][0]["text"]["content"], "Reinforcement Pre-Training")
-        self.assertEqual(props["Authors"]["rich_text"][0]["text"]["content"], "A. Author")
-        self.assertEqual(props["Venue"]["rich_text"][0]["text"]["content"], "arXiv 2026")
-        self.assertEqual(props["Source URL"]["url"], "https://arxiv.org/abs/2605.00001")
         self.assertEqual(props["Method Tags"]["multi_select"], [{"name": "Agent RL"}])
         self.assertEqual(props["Research Areas"]["relation"], [{"id": "area-1"}])
+        self.assertNotIn("Original Title", props)
+        self.assertNotIn("Authors", props)
+        self.assertNotIn("Venue", props)
+        self.assertNotIn("Source URL", props)
 
     def test_create_deep_note_dry_run_omits_missing_extras(self):
         client = NotionClient(NotionConfig(dry_run=True, deep_notes_database_id="dn-db"))
@@ -179,16 +184,11 @@ class NotionClientTest(unittest.TestCase):
             "id": "page-1",
             "properties": {
                 "Title": {"title": [{"plain_text": "Agentic RL"}]},
-                "Paper ID": {"rich_text": [{"plain_text": "arxiv:2605.00001"}]},
                 "Source": {"select": {"name": "arXiv"}},
-                "Authors": {"rich_text": [{"plain_text": "A. Author, B. Author"}]},
                 "Institutions": {"rich_text": [{"plain_text": "Example AI Lab"}]},
                 "Digest Summary": {"rich_text": [{"plain_text": "Digest"}]},
                 "Published Date": {"date": {"start": "2026-05-20"}},
-                "Run Date": {"date": {"start": "2026-05-20"}},
                 "URL": {"url": "https://arxiv.org/abs/2605.00001"},
-                "PDF URL": {"url": "https://arxiv.org/pdf/2605.00001"},
-                "Score": {"number": 8.5},
                 "Human Instruction": {"rich_text": [{"plain_text": "Focus on evals"}]},
                 "Research Areas": {"relation": [{"id": "area-1"}]},
                 "Deep Note": {"relation": [{"id": "note-1"}]},
@@ -199,10 +199,39 @@ class NotionClientTest(unittest.TestCase):
 
         self.assertEqual(selected.notion_page_id, "page-1")
         self.assertEqual(selected.record.paper_id, "arxiv:2605.00001")
-        self.assertEqual(selected.record.authors, ["A. Author", "B. Author"])
+        self.assertEqual(selected.record.authors, [])
         self.assertEqual(selected.human_instruction, "Focus on evals")
         self.assertEqual(selected.existing_research_area_ids, ["area-1"])
         self.assertEqual(selected.existing_deep_note_id, "note-1")
+
+    def test_selected_paper_from_page_keeps_legacy_paper_id_when_present(self):
+        page = {
+            "id": "page-1",
+            "properties": {
+                "Title": {"title": [{"plain_text": "Agentic RL"}]},
+                "Paper ID": {"rich_text": [{"plain_text": "legacy:id"}]},
+                "Source": {"select": {"name": "arXiv"}},
+                "URL": {"url": "https://arxiv.org/abs/2605.00001"},
+            },
+        }
+
+        selected = selected_paper_from_page(page)
+
+        self.assertEqual(selected.record.paper_id, "legacy:id")
+
+    def test_selected_paper_from_page_normalizes_arxiv_version_from_url(self):
+        page = {
+            "id": "page-1",
+            "properties": {
+                "Title": {"title": [{"plain_text": "Agentic RL"}]},
+                "Source": {"select": {"name": "arXiv"}},
+                "URL": {"url": "http://arxiv.org/abs/2605.18747v1"},
+            },
+        }
+
+        selected = selected_paper_from_page(page)
+
+        self.assertEqual(selected.record.paper_id, "arxiv:2605.18747")
 
 
 if __name__ == "__main__":

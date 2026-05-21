@@ -61,9 +61,17 @@ class NotionBootstrapTest(unittest.TestCase):
         self.assertEqual(notion.updated[1]["database_id"], "db-3")
         self.assertIn("Research Areas", notion.updated[1]["properties"])
         self.assertIn("Status", notion.updated[1]["properties"])
+        self.assertNotIn("Paper ID", notion.updated[1]["properties"])
+        self.assertNotIn("PDF URL", notion.updated[1]["properties"])
+        self.assertNotIn("Authors", notion.updated[1]["properties"])
+        self.assertNotIn("Run Date", notion.updated[1]["properties"])
+        self.assertNotIn("Score", notion.updated[1]["properties"])
         self.assertEqual(notion.updated[2]["database_id"], "db-2")
         self.assertIn("Paper", notion.updated[2]["properties"])
-        self.assertIn("Original Title", notion.updated[2]["properties"])
+        self.assertNotIn("Original Title", notion.updated[2]["properties"])
+        self.assertNotIn("Authors", notion.updated[2]["properties"])
+        self.assertNotIn("Venue", notion.updated[2]["properties"])
+        self.assertNotIn("Source URL", notion.updated[2]["properties"])
 
     def test_bootstrap_notion_workspace_reuses_existing_databases(self):
         notion = FakeNotion()
@@ -81,7 +89,46 @@ class NotionBootstrapTest(unittest.TestCase):
         self.assertEqual(result.data["deep_notes_database_id"], "db-deep")
         self.assertEqual(result.data["research_areas_database_id"], "db-research")
         self.assertEqual([item["database_id"] for item in notion.updated], ["db-research", "db-inbox", "db-deep"])
-        self.assertIn("Original Title", notion.updated[2]["properties"])
+        self.assertNotIn("Original Title", notion.updated[2]["properties"])
+
+    def test_bootstrap_schema_orders_human_decision_fields_first(self):
+        notion = FakeNotion()
+
+        bootstrap_notion_workspace(notion=notion, parent_page_id="page-1")
+
+        inbox_fields = list(notion.updated[1]["properties"])
+        self.assertEqual(
+            inbox_fields,
+            [
+                "Title",
+                "Status",
+                "Research Areas",
+                "Digest Summary",
+                "Institutions",
+                "Published Date",
+                "URL",
+                "Human Instruction",
+                "Deep Note",
+                "Archive Review Status",
+                "Archive Confidence",
+                "Proposed Area",
+                "Source",
+                "Error",
+            ],
+        )
+        deep_note_fields = list(notion.updated[2]["properties"])
+        self.assertEqual(
+            deep_note_fields,
+            [
+                "Title",
+                "Paper",
+                "Research Areas",
+                "Reading Focus",
+                "Contribution Type",
+                "Method Tags",
+                "Review Status",
+            ],
+        )
 
     def test_write_local_config_populates_database_ids(self):
         with tempfile.TemporaryDirectory() as tmp:
