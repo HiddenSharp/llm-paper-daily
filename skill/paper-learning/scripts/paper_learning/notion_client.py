@@ -66,7 +66,7 @@ class NotionClient:
     def build_paper_properties(self, record: DailyPaperRecord, *, include_workflow_defaults: bool = True) -> dict:
         properties = {
             "Title": _title(record.title),
-            "Digest Summary": _rich_text(record.digest_summary),
+            "Digest Summary": _rich_text(_normalize_digest_summary(record.digest_summary)),
             "Institutions": _rich_text(record.institutions),
             "Published Date": {"date": {"start": record.published_date}},
             "URL": {"url": record.url or None},
@@ -453,3 +453,15 @@ def _paper_id_from_url(url: str) -> str:
     if parsed.netloc == "huggingface.co" and len(parts) >= 2 and parts[0] == "papers":
         return f"hf:{parts[1]}"
     return url
+
+
+def _normalize_digest_summary(value: str) -> str:
+    text = (value or "").strip()
+    if not text:
+        return ""
+    for prefix in ("机构:", "机构：", "Institution:", "Institution："):
+        if text.startswith(prefix):
+            parts = text.split("<br>", 1)
+            if len(parts) == 2:
+                return parts[1].lstrip()
+    return text

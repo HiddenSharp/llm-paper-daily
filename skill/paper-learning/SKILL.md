@@ -100,6 +100,8 @@ The queue stage creates or updates:
 
 - Treat Notion as the only workflow state source.
 - Deep Note page titles should be stable and searchable. Use `笔记：<论文原标题>` for the Notion page title instead of the ljg-paper condensed title.
+- `Digest Summary` in Notion should be normalized to a pure summary. Strip source-side institution prefixes before writing it into the inbox row, but keep the original daily report rendering unchanged.
+- `Human Instruction` is human-only input. The automation must never inject debug logs, test notes, or other machine-generated text into this field.
 - Do not overwrite manually set `Research Areas` unless the user explicitly requests force reclassification.
 - Treat `Institutions` as a weak rich-text label.
 - Use `Proposed Area` for new taxonomy ideas instead of creating official `Research Areas` automatically.

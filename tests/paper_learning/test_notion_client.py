@@ -1,4 +1,5 @@
 import unittest
+from dataclasses import replace
 
 from skill.paper_learning_import import add_paper_learning_path
 
@@ -47,6 +48,14 @@ class NotionClientTest(unittest.TestCase):
         self.assertNotIn("Authors", props)
         self.assertNotIn("Run Date", props)
         self.assertNotIn("Score", props)
+
+    def test_build_paper_properties_strips_institution_prefix_from_digest_summary(self):
+        client = NotionClient(NotionConfig(dry_run=True, paper_inbox_database_id="db"))
+        record = replace(sample_record(), digest_summary="机构: Example AI Lab<br>纯摘要内容")
+
+        props = client.build_paper_properties(record)
+
+        self.assertEqual(props["Digest Summary"]["rich_text"][0]["text"]["content"], "纯摘要内容")
 
     def test_build_paper_properties_can_omit_workflow_defaults_for_existing_pages(self):
         client = NotionClient(NotionConfig(dry_run=True, paper_inbox_database_id="db"))
