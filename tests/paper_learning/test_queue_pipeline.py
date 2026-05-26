@@ -29,6 +29,20 @@ class FakeNotion:
 
 
 class QueuePipelineTest(unittest.TestCase):
+    def test_process_selected_papers_uses_preloaded_selection_when_provided(self):
+        selected = SelectedPaper(notion_page_id="page-1", record=_sample_record(), human_instruction="Focus on RL")
+        notion = FakeNotion([])
+
+        result = process_selected_papers(
+            notion=notion,
+            deep_reader=_deep_reader,
+            active_areas=[],
+            selected_papers=[selected],
+        )
+
+        self.assertTrue(result.ok)
+        self.assertEqual(notion.notes, [("arxiv:2605.00001", [], None)])
+
     def test_process_selected_papers_creates_note_and_updates_status(self):
         selected = SelectedPaper(notion_page_id="page-1", record=_sample_record(), human_instruction="Focus on RL")
         notion = FakeNotion([selected])

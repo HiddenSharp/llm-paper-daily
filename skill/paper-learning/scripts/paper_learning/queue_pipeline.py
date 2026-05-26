@@ -14,10 +14,11 @@ def process_selected_papers(
     notion,
     deep_reader: DeepReader,
     active_areas: list[ResearchArea],
+    selected_papers: list[SelectedPaper] | None = None,
     limit: int = 0,
     force: bool = False,
 ) -> OperationResult:
-    selected = notion.query_selected_papers()
+    selected = list(selected_papers) if selected_papers is not None else notion.query_selected_papers()
     if limit:
         selected = selected[:limit]
 

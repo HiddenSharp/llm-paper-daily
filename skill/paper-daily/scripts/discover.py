@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from paper_daily.arxiv_client import ArxivClient
+from paper_daily.defaults import DEFAULT_DAILY_SELECT, DEFAULT_MAX_RESULTS_PER_KEYWORD
 from paper_daily.discovery import discover_ranked
 from paper_daily.filters import DEFAULT_CATEGORIES, DEFAULT_KEYWORDS
 from paper_daily.institutions import load_catalog
@@ -62,8 +63,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--date", default=default_utc_date(), help="UTC arXiv submitted date, YYYY-MM-DD.")
     parser.add_argument("--keywords", nargs="+", default=DEFAULT_KEYWORDS, help="Priority keyword order.")
     parser.add_argument("--categories", nargs="+", default=DEFAULT_CATEGORIES, help="arXiv categories.")
-    parser.add_argument("--max-results-per-keyword", type=int, default=50)
-    parser.add_argument("--select", type=int, default=20, help="Number of ranked papers to print or emit.")
+    parser.add_argument("--max-results-per-keyword", type=int, default=DEFAULT_MAX_RESULTS_PER_KEYWORD)
+    parser.add_argument("--select", type=int, default=DEFAULT_DAILY_SELECT, help="Number of ranked papers to print or emit.")
     parser.add_argument("--delay-seconds", type=float, default=3.1)
     parser.add_argument("--timeout-seconds", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=2)

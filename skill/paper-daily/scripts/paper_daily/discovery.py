@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 
 from .arxiv_client import ArxivClient
+from .defaults import DEFAULT_DAILY_SELECT
 from .filters import DEFAULT_CATEGORIES, DEFAULT_KEYWORDS, dedupe_by_priority, keep_candidate
 from .institutions import InstitutionCatalog
 from .ranker import rank_candidates
@@ -115,7 +116,7 @@ def select_ranked_candidates(
     ranked_candidates: list,
     *,
     min_select: int = 3,
-    max_select: int = 5,
+    max_select: int = DEFAULT_DAILY_SELECT,
     score_threshold: float = 6.0,
 ) -> list:
     if not ranked_candidates or max_select <= 0:

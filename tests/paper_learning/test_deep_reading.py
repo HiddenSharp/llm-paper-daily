@@ -13,6 +13,7 @@ from paper_learning.deep_reading import (
     deep_note_from_ljg_org,
     generate_deep_note,
     org_artifact_path,
+    validate_org_artifacts,
 )
 from paper_learning.models import DailyPaperRecord, SelectedPaper
 
@@ -85,6 +86,24 @@ class DeepReadingTest(unittest.TestCase):
         self.assertEqual(request["human_instruction"], "Focus on RL")
         self.assertEqual(request["org_artifact_path"], "data/org/arxiv_2605.00001.org")
         self.assertIn("Use the ljg-paper skill", request["agent_instruction"])
+
+    def test_generate_deep_note_rejects_removed_fallback_mode(self):
+        paper = SelectedPaper(notion_page_id="page-1", record=_sample_record(), human_instruction="")
+
+        with self.assertRaisesRegex(ValueError, "no longer supported"):
+            generate_deep_note(
+                paper,
+                DeepReadingConfig(mode="fallback", org_artifact_dir=Path("data/org")),
+            )
+
+    def test_validate_org_artifacts_reports_missing_file(self):
+        paper = SelectedPaper(notion_page_id="page-1", record=_sample_record(), human_instruction="")
+        with tempfile.TemporaryDirectory() as tmp:
+            results = validate_org_artifacts([paper], DeepReadingConfig(mode="org_artifact", org_artifact_dir=Path(tmp)))
+        self.assertFalse(results[0]["ok"])
+        self.assertIn("No such file or directory", results[0]["error"])
+
+
 
 
 def _sample_record() -> DailyPaperRecord:

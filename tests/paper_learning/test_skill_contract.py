@@ -15,6 +15,13 @@ class SkillContractTest(unittest.TestCase):
         self.assertIn("Notion", text)
         self.assertIn("Feishu", text)
         self.assertIn("run_daily_learning.py", text)
+        self.assertIn("prepare_daily_learning_requests.py", text)
+        self.assertIn("request_deep_reading.py", text)
+        self.assertIn("confirm_deep_reading_request.py", text)
+        self.assertIn("prepare_selected_papers.py", text)
+        self.assertIn("prepare_queue_stage_requests.py", text)
+        self.assertIn("check_pipeline_readiness.py", text)
+        self.assertIn("rehearse_pipeline.py", text)
         self.assertIn("process_notion_queue.py", text)
 
     def test_config_and_evals_exist(self):

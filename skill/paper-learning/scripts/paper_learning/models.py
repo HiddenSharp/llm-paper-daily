@@ -26,6 +26,28 @@ class DailyPaperRecord:
     def to_dict(self) -> dict:
         return asdict(self)
 
+    @classmethod
+    def from_dict(cls, payload: dict) -> "DailyPaperRecord":
+        return cls(
+            paper_id=payload["paper_id"],
+            source=payload["source"],
+            title=payload["title"],
+            authors=list(payload.get("authors", [])),
+            institutions=payload.get("institutions", ""),
+            abstract=payload.get("abstract", ""),
+            digest_summary=payload.get("digest_summary", ""),
+            summary_cn=payload.get("summary_cn", ""),
+            summary_en=payload.get("summary_en", ""),
+            published_date=payload.get("published_date", ""),
+            run_date=payload.get("run_date", ""),
+            url=payload.get("url", ""),
+            pdf_url=payload.get("pdf_url"),
+            topic=payload.get("topic", ""),
+            score=float(payload.get("score", 0.0)),
+            signals=dict(payload.get("signals", {})),
+            provenance=dict(payload.get("provenance", {})),
+        )
+
 
 @dataclass(frozen=True)
 class ReportModel:
@@ -63,6 +85,65 @@ class SelectedPaper:
     human_instruction: str
     existing_research_area_ids: list[str] = field(default_factory=list)
     existing_deep_note_id: str | None = None
+
+    def to_dict(self) -> dict:
+        return {
+            "notion_page_id": self.notion_page_id,
+            "record": self.record.to_dict(),
+            "human_instruction": self.human_instruction,
+            "existing_research_area_ids": list(self.existing_research_area_ids),
+            "existing_deep_note_id": self.existing_deep_note_id,
+        }
+
+    @classmethod
+    def from_dict(cls, payload: dict) -> "SelectedPaper":
+        return cls(
+            notion_page_id=payload["notion_page_id"],
+            record=DailyPaperRecord.from_dict(payload["record"]),
+            human_instruction=payload.get("human_instruction", ""),
+            existing_research_area_ids=list(payload.get("existing_research_area_ids", [])),
+            existing_deep_note_id=payload.get("existing_deep_note_id"),
+        )
+
+
+@dataclass(frozen=True)
+class DeepReadingRequest:
+    date: str
+    selector_type: str
+    candidate_source: str
+    resolved_paper_ids: list[str]
+    human_instruction: str
+    trigger_source: str
+    requires_confirmation: bool
+    confirmed: bool = False
+    selected_papers: list[SelectedPaper] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return {
+            "date": self.date,
+            "selector_type": self.selector_type,
+            "candidate_source": self.candidate_source,
+            "resolved_paper_ids": list(self.resolved_paper_ids),
+            "human_instruction": self.human_instruction,
+            "trigger_source": self.trigger_source,
+            "requires_confirmation": self.requires_confirmation,
+            "confirmed": self.confirmed,
+            "selected_papers": [paper.to_dict() for paper in self.selected_papers],
+        }
+
+    @classmethod
+    def from_dict(cls, payload: dict) -> "DeepReadingRequest":
+        return cls(
+            date=payload["date"],
+            selector_type=payload["selector_type"],
+            candidate_source=payload["candidate_source"],
+            resolved_paper_ids=list(payload.get("resolved_paper_ids", [])),
+            human_instruction=payload.get("human_instruction", ""),
+            trigger_source=payload.get("trigger_source", "chat_manual"),
+            requires_confirmation=bool(payload.get("requires_confirmation", False)),
+            confirmed=bool(payload.get("confirmed", False)),
+            selected_papers=[SelectedPaper.from_dict(item) for item in payload.get("selected_papers", [])],
+        )
 
 
 @dataclass(frozen=True)

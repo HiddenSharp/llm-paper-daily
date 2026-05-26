@@ -120,6 +120,29 @@ class NotionClient:
         data = self._request("POST", f"/databases/{self.config.paper_inbox_database_id}/query", payload)
         return [selected_paper_from_page(page) for page in data.get("results", [])]
 
+    def get_papers_by_page_ids(self, page_ids: list[str]) -> list[SelectedPaper]:
+        if self.config.dry_run:
+            return []
+
+        papers: list[SelectedPaper] = []
+        for page_id in page_ids:
+            data = self._request("GET", f"/pages/{page_id}")
+            papers.append(selected_paper_from_page(data))
+        return papers
+
+    def find_papers_by_urls(self, urls: list[str]) -> list[SelectedPaper]:
+        if self.config.dry_run:
+            return []
+
+        papers: list[SelectedPaper] = []
+        for url in urls:
+            page_id = self._find_page_by_url(url)
+            if not page_id:
+                continue
+            data = self._request("GET", f"/pages/{page_id}")
+            papers.append(selected_paper_from_page(data))
+        return papers
+
     def create_deep_note(self, paper: SelectedPaper, note: DeepNote, area_ids: list[str]) -> OperationResult:
         properties = self._build_deep_note_properties(paper, note, area_ids)
         children = markdown_to_blocks(note.markdown)

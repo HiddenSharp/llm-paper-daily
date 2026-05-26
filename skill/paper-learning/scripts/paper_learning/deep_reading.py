@@ -10,7 +10,10 @@ from .org_converter import org_to_markdown, validate_ljg_paper_org
 
 def generate_deep_note(paper: SelectedPaper, cfg: DeepReadingConfig) -> DeepNote:
     if cfg.mode == "fallback":
-        return fallback_deep_note(paper)
+        raise ValueError(
+            "deep_reading.mode='fallback' is no longer supported. "
+            "Use the ljg-paper skill to write an Org artifact and configure deep_reading.mode='org_artifact'."
+        )
     if cfg.mode == "org_artifact":
         path = org_artifact_path(cfg.org_artifact_dir, paper.record.paper_id)
         if not path.exists():
@@ -27,6 +30,19 @@ def org_artifact_path(base_dir: str | Path, paper_id: str) -> Path:
     return Path(base_dir) / f"{safe_id}.org"
 
 
+def validate_org_artifacts(papers: list[SelectedPaper], cfg: DeepReadingConfig) -> list[dict]:
+    results: list[dict] = []
+    for paper in papers:
+        path = org_artifact_path(cfg.org_artifact_dir, paper.record.paper_id)
+        try:
+            text = path.read_text(encoding="utf-8")
+            validate_ljg_paper_org(text, fallback_metadata=_metadata_from_paper(paper))
+            results.append({"paper_id": paper.record.paper_id, "ok": True, "path": str(path)})
+        except Exception as exc:
+            results.append({"paper_id": paper.record.paper_id, "ok": False, "path": str(path), "error": str(exc)})
+    return results
+
+
 def build_ljg_paper_runtime_request(paper: SelectedPaper, cfg: DeepReadingConfig) -> dict:
     path = org_artifact_path(cfg.org_artifact_dir, paper.record.paper_id)
     return {
@@ -40,39 +56,6 @@ def build_ljg_paper_runtime_request(paper: SelectedPaper, cfg: DeepReadingConfig
         ),
     }
 
-
-def fallback_deep_note(paper: SelectedPaper) -> DeepNote:
-    record = paper.record
-    focus = paper.human_instruction or "Default deep-reading focus"
-    markdown = "\n".join(
-        [
-            f"# {record.title}",
-            "",
-            "## Problem Setting",
-            record.abstract or record.digest_summary or "No abstract available.",
-            "",
-            "## Core Contribution",
-            record.summary_en or record.digest_summary or "No generated summary available.",
-            "",
-            "## User Focus",
-            focus,
-            "",
-            "## Archive Recommendation",
-            f"Initial topic signal: {record.topic or 'Unknown'}.",
-        ]
-    )
-    tags = [record.topic] if record.topic else []
-    proposed = record.topic.title() if record.topic else "Uncategorized Paper"
-    return DeepNote(
-        title=_deep_note_page_title(record.title),
-        paper_id=record.paper_id,
-        reading_focus=focus,
-        markdown=markdown,
-        contribution_type="Method",
-        method_tags=tags,
-        proposed_area=proposed,
-        archive_confidence="Medium",
-    )
 
 
 def deep_note_from_ljg_org(

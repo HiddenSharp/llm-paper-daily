@@ -4,8 +4,9 @@
     "python": "python3",
     "generate_feed_script": "skill/paper-daily/scripts/generate_feed.py",
     "discover_script": "skill/paper-daily/scripts/discover.py",
-    "select": 5,
-    "max_results_per_keyword": 10,
+    "prepare_summary_requests_script": "skill/paper-daily/scripts/prepare_summary_requests.py",
+    "select": 20,
+    "max_results_per_keyword": 50,
     "score_threshold": 6.0
   },
   "huggingface": {

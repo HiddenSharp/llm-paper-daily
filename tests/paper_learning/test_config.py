@@ -28,10 +28,13 @@ class ConfigTest(unittest.TestCase):
             cfg = load_config(path)
 
             self.assertEqual(cfg.paper_daily.repo_root, Path("."))
+            self.assertEqual(cfg.paper_daily.prepare_summary_requests_script, "skill/paper-daily/scripts/prepare_summary_requests.py")
+            self.assertEqual(cfg.paper_daily.select, 20)
+            self.assertEqual(cfg.paper_daily.max_results_per_keyword, 50)
             self.assertEqual(cfg.notion.token, "notion-secret")
             self.assertEqual(cfg.feishu.webhook_url, "https://example.test/webhook")
             self.assertTrue(cfg.runtime.dry_run)
-            self.assertEqual(cfg.deep_reading.mode, "fallback")
+            self.assertEqual(cfg.deep_reading.mode, "org_artifact")
             self.assertEqual(cfg.deep_reading.org_artifact_dir, Path("data/paper-learning/deep-reading-org"))
 
     def test_load_config_supports_org_artifact_deep_reading_mode(self):

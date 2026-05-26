@@ -6,6 +6,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+DEFAULT_DAILY_SELECT = 20
+DEFAULT_MAX_RESULTS_PER_KEYWORD = 50
+DEFAULT_SCORE_THRESHOLD = 6.0
+
 
 @dataclass(frozen=True)
 class PaperDailyConfig:
@@ -13,9 +17,10 @@ class PaperDailyConfig:
     python: str = "python3"
     generate_feed_script: str = "skill/paper-daily/scripts/generate_feed.py"
     discover_script: str = "skill/paper-daily/scripts/discover.py"
-    select: int = 5
-    max_results_per_keyword: int = 10
-    score_threshold: float = 6.0
+    prepare_summary_requests_script: str = "skill/paper-daily/scripts/prepare_summary_requests.py"
+    select: int = DEFAULT_DAILY_SELECT
+    max_results_per_keyword: int = DEFAULT_MAX_RESULTS_PER_KEYWORD
+    score_threshold: float = DEFAULT_SCORE_THRESHOLD
 
 
 @dataclass(frozen=True)
@@ -49,7 +54,7 @@ class FeishuConfig:
 
 @dataclass(frozen=True)
 class DeepReadingConfig:
-    mode: str = "fallback"
+    mode: str = "org_artifact"
     org_artifact_dir: Path = Path("data/paper-learning/deep-reading-org")
 
 
@@ -97,9 +102,10 @@ def _paper_daily(raw: dict[str, Any]) -> PaperDailyConfig:
         python=raw.get("python", "python3"),
         generate_feed_script=raw.get("generate_feed_script", "skill/paper-daily/scripts/generate_feed.py"),
         discover_script=raw.get("discover_script", "skill/paper-daily/scripts/discover.py"),
-        select=int(raw.get("select", 5)),
-        max_results_per_keyword=int(raw.get("max_results_per_keyword", 10)),
-        score_threshold=float(raw.get("score_threshold", 6.0)),
+        prepare_summary_requests_script=raw.get("prepare_summary_requests_script", "skill/paper-daily/scripts/prepare_summary_requests.py"),
+        select=int(raw.get("select", DEFAULT_DAILY_SELECT)),
+        max_results_per_keyword=int(raw.get("max_results_per_keyword", DEFAULT_MAX_RESULTS_PER_KEYWORD)),
+        score_threshold=float(raw.get("score_threshold", DEFAULT_SCORE_THRESHOLD)),
     )
 
 
@@ -139,7 +145,7 @@ def _feishu(raw: dict[str, Any]) -> FeishuConfig:
 
 def _deep_reading(raw: dict[str, Any]) -> DeepReadingConfig:
     return DeepReadingConfig(
-        mode=raw.get("mode", "fallback"),
+        mode=raw.get("mode", "org_artifact"),
         org_artifact_dir=Path(raw.get("org_artifact_dir", "data/paper-learning/deep-reading-org")),
     )
 

@@ -7,6 +7,13 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from paper_daily.arxiv_client import ArxivClient
+from paper_daily.defaults import (
+    DEFAULT_DAILY_SELECT,
+    DEFAULT_MAX_RESULTS_PER_KEYWORD,
+    DEFAULT_MIN_SELECT,
+    DEFAULT_SCORE_THRESHOLD,
+    DEFAULT_SUMMARY_ARTIFACT_DIR,
+)
 from paper_daily.discovery import find_next_discovery, select_ranked_candidates
 from paper_daily.feed import read_feed_state, write_feed_outputs, write_feed_state
 from paper_daily.institutions import load_catalog
@@ -86,7 +93,10 @@ def main() -> int:
             score_threshold=args.score_threshold,
         )
     selected = [candidate.to_dict() for candidate in selected_candidates]
-    canonical = [candidate_to_canonical(candidate, run_date=selected_date) for candidate in selected]
+    canonical = [
+        candidate_to_canonical(candidate, run_date=selected_date, summary_artifact_dir=args.summary_artifact_dir)
+        for candidate in selected
+    ]
 
     debug_out_dir = None
     if args.debug_out:
@@ -156,20 +166,21 @@ def main() -> int:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the repo-local publishing pipeline. This path generates summaries and patches repo artifacts; use discover.py for broad recall.")
+    parser = argparse.ArgumentParser(description="Run the repo-local publishing pipeline. This path consumes external summary artifacts and patches repo artifacts; use discover.py for broad recall.")
     parser.add_argument("--repo-root", default=".")
     parser.add_argument("--date", default=default_utc_date())
     parser.add_argument("--arxiv-id", action="append", default=[], help="Manually publish one or more arXiv IDs. May be repeated or comma-separated. When set, --date is used as the display date.")
-    parser.add_argument("--select", type=int, default=5, help="Maximum number of papers to publish.")
-    parser.add_argument("--min-select", type=int, default=3, help="Minimum number of papers to publish when filtered candidates allow it.")
-    parser.add_argument("--score-threshold", type=float, default=6.0, help="Score threshold for preferred selection before falling back to the top-ranked minimum set.")
-    parser.add_argument("--max-results-per-keyword", type=int, default=10)
+    parser.add_argument("--select", type=int, default=DEFAULT_DAILY_SELECT, help="Maximum number of papers to publish.")
+    parser.add_argument("--min-select", type=int, default=DEFAULT_MIN_SELECT, help="Minimum number of papers to publish when filtered candidates allow it.")
+    parser.add_argument("--score-threshold", type=float, default=DEFAULT_SCORE_THRESHOLD, help="Score threshold for preferred selection before falling back to the top-ranked minimum set.")
+    parser.add_argument("--max-results-per-keyword", type=int, default=DEFAULT_MAX_RESULTS_PER_KEYWORD)
     parser.add_argument("--delay-seconds", type=float, default=3.1)
     parser.add_argument("--timeout-seconds", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=1)
     parser.add_argument("--backfill-days", type=int, default=7)
     parser.add_argument("--view-only", action="store_true", help="Inspect the selected papers without updating README/feed/state/summary artifacts.")
     parser.add_argument("--debug-out", help="Optional directory for debug JSON artifacts.")
+    parser.add_argument("--summary-artifact-dir", default=DEFAULT_SUMMARY_ARTIFACT_DIR, help="Directory containing externally generated summary JSON artifacts keyed by arXiv ID.")
     parser.add_argument("--public-base-url", default="", help="Optional public base URL for summary asset links.")
     parser.add_argument("--source-repo", default="xianshang33/llm-paper-daily", help="Source repository identifier for feed metadata.")
     return parser.parse_args()

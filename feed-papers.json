@@ -1,291 +1,136 @@
 {
   "schema_version": "v1",
   "feed_id": "paper-daily",
-  "generated_at": "2026-05-19T05:36:03.327742+00:00",
-  "run_date": "2026-05-18",
+  "generated_at": "2026-05-21T12:28:24.030211+00:00",
+  "run_date": "2026-05-19",
   "source_repo": "xianshang33/llm-paper-daily",
   "items": [
     {
-      "id": "arxiv:2605.18421",
-      "date": "2026-05-18",
-      "title": "EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective",
+      "id": "arxiv:2605.19932",
+      "date": "2026-05-19",
+      "title": "PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Yuyao Wang",
-        "Zhongjian Zhang",
-        "Mo Chi",
-        "Kaichi Yu",
-        "Yuhan Li",
-        "Miao Peng",
-        "Bing Tong",
-        "Chen Zhang",
-        "Yan Zhou",
-        "Jia Li"
+        "Zhuohan Gu",
+        "Qizheng Zhang",
+        "Omar Khattab",
+        "Samuel Madden"
       ],
-      "institution": "Hong Kong University of Science and Technology (Guangzhou)",
+      "institution": "OpenAI, MIT",
       "summary": {
-        "zh": "本文引入了 EvoMemBench，填补了 LLM 代理记忆评估的空白。通过从自我进化的视角（单集/跨集，知识/执行）系统化评估，揭示了当前记忆系统的局限性及适用场景。研究表明，虽然长上下文模型强大，但在特定复杂任务和跨任务经验复用中，专用的记忆机制具有不可替代的价值，为未来开发更高效的代理记忆系统提供了方向。",
-        "en": "- **Background**: While Large Language Model (LLM) agents have advanced in reasoning, planning, and execution, memory capability (storing, updating, and retrieving information over time) remains essential but..."
+        "zh": "PEEK 的价值在于把长期上下文 Agent 的记忆问题，从“多保留历史”转成“维护可复用上下文地图”，这让它在重复访问同一外部知识环境时更高效，也更接近真正可运维的 Agent 记忆机制。",
+        "en": "PEEK reframes long-context agent memory as maintaining a reusable map of the environment instead of merely preserving more history, which makes the proposal operationally compelling for repeated same-context workloads."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.18421v1",
-        "pdf": "https://arxiv.org/pdf/2605.18421v1",
-        "github": "https://github.com/DSAIL-Memory/EvoMemBench"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.18421.md",
-        "summary_en_path": "summary_en/2026-05/2605.18421.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.18421.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.18421.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.18747",
-      "date": "2026-05-18",
-      "title": "Code as Agent Harness",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Xuying Ning",
-        "Katherine Tieu",
-        "Dongqi Fu",
-        "Tianxin Wei",
-        "Zihao Li",
-        "Yuanchen Bei",
-        "Jiaru Zou",
-        "Mengting Ai",
-        "Zhining Liu",
-        "Ting-Wei Li",
-        "Lingjie Chen",
-        "Yanjun Zhao",
-        "Ke Yang",
-        "Bingxuan Li",
-        "Cheng Qian",
-        "Gaotang Li",
-        "Xiao Lin",
-        "Zhichen Zeng",
-        "Ruizhong Qiu",
-        "Sirui Chen",
-        "Yifan Sun",
-        "Xiyuan Yang",
-        "Ruida Wang",
-        "Rui Pan",
-        "Chenyuan Yang",
-        "Dylan Zhang",
-        "Liri Fang",
-        "Zikun Cui",
-        "Yang Cao",
-        "Pan Chen",
-        "Dorothy Sun",
-        "Ren Chen",
-        "Mahesh Srinivasan",
-        "Nipun Mathur",
-        "Yinglong Xia",
-        "Hong Li",
-        "Hong Yan",
-        "Pan Lu",
-        "Lingming Zhang",
-        "Tong Zhang",
-        "Hanghang Tong",
-        "Jingrui He"
-      ],
-      "institution": "University of Illinois Urbana-Champaign, Meta, Stanford University",
-      "summary": {
-        "zh": "本文通过提出“代码即智能体 Harness”的统一视角，系统地梳理了代码在智能体系统中作为推理基础、行动接口和环境模型的核心作用。文章不仅总结了当前的技术进展，还明确了从单智能体向多智能体扩展的路径，并指出了未来在可执行性、可验证性和状态保持方面的关键挑战，为构建更可靠、透明的 AI 智能体系统提供了理论框架和研究方向。",
-        "en": "- **Background**: With Large Language Models (LLMs) demonstrating superior capabilities in code understanding and generation, the role of code in agentic systems is evolving. Code is no longer just a final output..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.18747v1",
-        "pdf": "https://arxiv.org/pdf/2605.18747v1",
-        "github": "https://github.com/YennNing/Awesome-Code-as-Agent-Harness-Papers"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.18747.md",
-        "summary_en_path": "summary_en/2026-05/2605.18747.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.18747.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.18747.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.18693",
-      "date": "2026-05-18",
-      "title": "SkillGenBench: Benchmarking Skill Generation Pipelines for LLM Agents",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "Yifan Zhou",
-        "Zhentao Zhang",
-        "Ziming Cheng",
-        "Shuo Zhang",
-        "Qizhen Lan",
-        "Zhangquan Chen",
-        "Zhi Yang",
-        "QianyuXu",
-        "Ronghao Chen",
-        "Huacan Wang",
-        "Sen Hu"
-      ],
-      "institution": "SJTU, XJTU, NUS, QuantaAlpha, THU, SUFE, NTU, PKU, UCAS",
-      "summary": {
-        "zh": "SkillGenBench 建立了一个可复现的测试床，将技能生成确立为智能体系统中一个独立的研究问题。它不仅提供了标准化的评估框架，还通过实证分析揭示了当前 LLM 在从不同来源（代码库 vs 文档）和不同模式（任务特定 vs 通用）下生成可靠、可执行技能时的局限性与挑战，为未来改进技能生成流水线提供了明确的方向。",
-        "en": "- **Background**: As LLM agents are deployed in increasingly complex environments, the design trend is shifting from monolithic prompting to modular, persistent capability abstractions. Reusable \"Skills\" (packaged..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.18693v1",
-        "pdf": "https://arxiv.org/pdf/2605.18693v1",
-        "github": "https://github.com/QuantaAlpha/SkillGenBench"
-      },
-      "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.18693.md",
-        "summary_en_path": "summary_en/2026-05/2605.18693.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.18693.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.18693.md"
-      },
-      "signals": {
-        "priority_keyword": "Agent"
-      },
-      "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
-        "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
-      }
-    },
-    {
-      "id": "arxiv:2605.18672",
-      "date": "2026-05-18",
-      "title": "Position: A Three-Layer Probabilistic Assume-Guarantee Architecture Is Structurally Required for Safe LLM Agent Deployment",
-      "topic": "agent",
-      "language": [
-        "zh",
-        "en"
-      ],
-      "authors": [
-        "S. Bensalem",
-        "Y. Dong",
-        "M. Franzle",
-        "X. Huang",
-        "J. Kroger",
-        "D. Nickovic",
-        "A. Nouri",
-        "R. Roy",
-        "C. Wu"
-      ],
-      "institution": "University of Liverpool",
-      "summary": {
-        "zh": "本文论证了对于部署的 LLM 智能体而言，单层安全强制执行在结构上是无效的。作者主张社区应采用基于契约的三层架构，分别独立认证语义、环境和动态三个维度的安全性。尽管该框架提供了理论上的组合安全边界，但要成为可部署的标准，仍需解决三个开放问题：从非独立同分布（non-i.i.d.）轨迹中估计边界、在部署漂移下实现契约的优雅降级，以及扩展到多智能体设置。",
-        "en": "- **Background**: The deployment of LLM agents in safety-critical settings poses a qualitatively new challenge for runtime assurance. Unlike conventional software, LLM agents combine non-deterministic reasoning with..."
-      },
-      "links": {
-        "abs": "http://arxiv.org/abs/2605.18672v1",
-        "pdf": "https://arxiv.org/pdf/2605.18672v1",
+        "abs": "http://arxiv.org/abs/2605.19932v1",
+        "pdf": "https://arxiv.org/pdf/2605.19932v1",
         "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.18672.md",
-        "summary_en_path": "summary_en/2026-05/2605.18672.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.18672.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.18672.md"
+        "summary_zh_path": "summary/2026-05/2605.19932.md",
+        "summary_en_path": "summary_en/2026-05/2605.19932.md",
+        "summary_zh_url": null,
+        "summary_en_url": null
       },
       "signals": {
         "priority_keyword": "Agent"
       },
       "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
+        "institution": "summary-artifact",
         "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
+        "summary_cn": "summary-artifact",
+        "summary_en": "summary-artifact",
+        "github": "summary-artifact|none",
+        "blog": "summary-artifact|none"
       }
     },
     {
-      "id": "arxiv:2605.18565",
-      "date": "2026-05-18",
-      "title": "LongMINT: Evaluating Memory under Multi-Target Interference in Long-Horizon Agent Systems",
+      "id": "arxiv:2605.20530",
+      "date": "2026-05-19",
+      "title": "AgentAtlas: Beyond Outcome Leaderboards for LLM Agents",
       "topic": "agent",
       "language": [
         "zh",
         "en"
       ],
       "authors": [
-        "Hyunji Lee",
-        "Justin Chih-Yao Chen",
-        "Joykirat Singh",
-        "Zaid Khan",
-        "Elias Stengel-Eskin",
-        "Mohit Bansal"
+        "Parsa Mazaheri",
+        "Kasra Mazaheri"
       ],
-      "institution": "University of North Carolina at Chapel Hill; The University of Texas at Austin",
+      "institution": null,
       "summary": {
-        "zh": "LongMINT 揭示了当前长周期智能体在处理动态、高干扰环境时的严重不足。现有技术在面对信息演变和冲突时，无论是检索还是记忆构建都存在明显缺陷。该研究强调了开发更 robust 的记忆管理系统的重要性，以支持跨领域的动态长周期任务。",
-        "en": "- **Background**: Real-world agents operate over long, evolving horizons where information is repeatedly updated and may interfere across memories, necessitating accurate recall and aggregated reasoning over multiple..."
+        "zh": "AgentAtlas 的重点不是再造一个新榜单，而是把 Agent 评测从单值结果拓展成多维行为诊断框架。它的价值在于帮助理解模型是“真的会”，还是“被 prompt 扶着会”。",
+        "en": "AgentAtlas is valuable less as another benchmark and more as an evaluation diagnosis layer: it helps separate real control competence from prompt-induced measurement artifacts."
       },
       "links": {
-        "abs": "http://arxiv.org/abs/2605.18565v1",
-        "pdf": "https://arxiv.org/pdf/2605.18565v1",
-        "github": "https://github.com/amy-hyunji/LongMINT"
+        "abs": "http://arxiv.org/abs/2605.20530v1",
+        "pdf": "https://arxiv.org/pdf/2605.20530v1",
+        "github": null
       },
       "artifacts": {
-        "summary_zh_path": "summary/2026-05/2605.18565.md",
-        "summary_en_path": "summary_en/2026-05/2605.18565.md",
-        "summary_zh_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary/2026-05/2605.18565.md",
-        "summary_en_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/summary_en/2026-05/2605.18565.md"
+        "summary_zh_path": "summary/2026-05/2605.20530.md",
+        "summary_en_path": "summary_en/2026-05/2605.20530.md",
+        "summary_zh_url": null,
+        "summary_en_url": null
       },
       "signals": {
         "priority_keyword": "Agent"
       },
       "provenance": {
-        "institution": "dashscope|pdf-first-page-hint",
+        "institution": "summary-artifact",
         "category_key": "fixed-v1-agent",
-        "summary_cn": "dashscope",
-        "summary_en": "dashscope",
-        "github": "dashscope|none",
-        "blog": "dashscope|none",
-        "pdf_download": "ok",
-        "pdf_extract": "ok"
+        "summary_cn": "summary-artifact",
+        "summary_en": "summary-artifact",
+        "github": "summary-artifact|none",
+        "blog": "summary-artifact|none"
+      }
+    },
+    {
+      "id": "arxiv:2605.20563",
+      "date": "2026-05-19",
+      "title": "Multi-agent Collaboration with State Management",
+      "topic": "agent",
+      "language": [
+        "zh",
+        "en"
+      ],
+      "authors": [
+        "Mengyang Liu",
+        "Taozhi Chen",
+        "Zhenhua Xu",
+        "Xue Jiang",
+        "Yihong Dong"
+      ],
+      "institution": null,
+      "summary": {
+        "zh": "STORM 说明，多 Agent 编程协作的关键瓶颈不只是分工，而是共享状态管理。相比把冲突推迟到 merge 阶段，写时协调是一条更稳的工程路线。",
+        "en": "STORM makes a strong case that the central systems problem in multi-agent coding is shared state coordination, not just agent decomposition, and that write-time mediation is more effective than deferred merge-time..."
+      },
+      "links": {
+        "abs": "http://arxiv.org/abs/2605.20563v1",
+        "pdf": "https://arxiv.org/pdf/2605.20563v1",
+        "github": null
+      },
+      "artifacts": {
+        "summary_zh_path": "summary/2026-05/2605.20563.md",
+        "summary_en_path": "summary_en/2026-05/2605.20563.md",
+        "summary_zh_url": null,
+        "summary_en_url": null
+      },
+      "signals": {
+        "priority_keyword": "Agent"
+      },
+      "provenance": {
+        "institution": "summary-artifact",
+        "category_key": "fixed-v1-agent",
+        "summary_cn": "summary-artifact",
+        "summary_en": "summary-artifact",
+        "github": "summary-artifact|none",
+        "blog": "summary-artifact|none"
       }
     }
   ]
